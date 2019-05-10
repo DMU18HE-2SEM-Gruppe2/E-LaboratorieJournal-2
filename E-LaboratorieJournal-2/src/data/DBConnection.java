@@ -39,6 +39,7 @@ public class DBConnection {
 	// Connection to the database
 	private static boolean openConnection(String databaseName) {
 
+		
 		String instanceName = "SQLEXPRESS";
 		String integratedSecurity = "true";
 
