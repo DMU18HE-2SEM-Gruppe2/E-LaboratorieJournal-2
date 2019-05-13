@@ -48,4 +48,10 @@ public class ProjectInformation {
 		this.comments = comments;
 	}
 
+	@Override
+	public String toString() {
+		return "ProjectInformation [date=" + date + ", themeName=" + themeName + ", analyzeTitle=" + analyzeTitle
+				+ ", comments=" + comments + "]";
+	}
+
 }

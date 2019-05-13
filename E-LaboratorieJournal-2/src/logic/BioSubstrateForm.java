@@ -19,8 +19,8 @@ public class BioSubstrateForm extends PreparationTable {
 			String endConcentration, String fluidAd, double pHBefore, double pHEnd, String sterilisation,
 			String additionAfter, double pHAfterSteril, boolean steril, String posControl, String negControl) {
 
-		super(date, themeName, analyzeTitle, comments, reagentName, batchNo, lotNo, supplier, signature,
-				chemical, easNo, productNo, weighed, measured, scaleNo, pipetteNo, endConcentration, fluidAd);
+		super(date, themeName, analyzeTitle, comments, reagentName, batchNo, lotNo, supplier, signature, chemical,
+				easNo, productNo, weighed, measured, scaleNo, pipetteNo, endConcentration, fluidAd);
 
 		this.pHBefore = pHBefore;
 		this.pHEnd = pHEnd;
@@ -95,6 +95,18 @@ public class BioSubstrateForm extends PreparationTable {
 
 	public void setNegControl(String negControl) {
 		this.negControl = negControl;
+	}
+
+	@Override
+	public String toString() {
+		return "BioSubstrateForm [pHBefore=" + pHBefore + ", pHEnd=" + pHEnd + ", sterilisation=" + sterilisation
+				+ ", additionAfter=" + additionAfter + ", pHAfterSteril=" + pHAfterSteril + ", steril=" + steril
+				+ ", posControl=" + posControl + ", negControl=" + negControl + ", chemical=" + chemical + ", easNo="
+				+ easNo + ", productNo=" + productNo + ", weighed=" + weighed + ", measured=" + measured + ", scaleNo="
+				+ scaleNo + ", pipetteNo=" + pipetteNo + ", endConcentration=" + endConcentration + ", fluidAd="
+				+ fluidAd + ", reagentName=" + reagentName + ", batchNo=" + batchNo + ", lotNo=" + lotNo + ", supplier="
+				+ supplier + ", signature=" + signature + ", date=" + date + ", themeName=" + themeName
+				+ ", analyzeTitle=" + analyzeTitle + ", comments=" + comments + "]";
 	}
 
 }

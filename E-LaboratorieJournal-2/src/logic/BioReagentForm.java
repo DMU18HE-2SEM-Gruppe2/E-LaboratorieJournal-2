@@ -10,13 +10,12 @@ public class BioReagentForm extends PreparationTable {
 	private String shellLife;
 
 	public BioReagentForm(LocalDate date, String themeName, String analyzeTitle, String comments, String reagentName,
-			int batchNo, int lotNo, String supplier, String signature, String chemical, String easNo,
-			String productNo, String weighed, String measured, String scaleNo, String pipetteNo,
-			String endConcentration, String fluidAd, String adjustpH, String furtherTreatment, String labeling,
-			String shellLife) {
+			int batchNo, int lotNo, String supplier, String signature, String chemical, String easNo, String productNo,
+			String weighed, String measured, String scaleNo, String pipetteNo, String endConcentration, String fluidAd,
+			String adjustpH, String furtherTreatment, String labeling, String shellLife) {
 
-		super(date, themeName, analyzeTitle, comments, reagentName, batchNo, lotNo, supplier, signature,
-				chemical, easNo, productNo, weighed, measured, scaleNo, pipetteNo, endConcentration, fluidAd);
+		super(date, themeName, analyzeTitle, comments, reagentName, batchNo, lotNo, supplier, signature, chemical,
+				easNo, productNo, weighed, measured, scaleNo, pipetteNo, endConcentration, fluidAd);
 
 		this.adjustpH = adjustpH;
 		this.furtherTreatment = furtherTreatment;
@@ -66,7 +65,5 @@ public class BioReagentForm extends PreparationTable {
 				+ supplier + ", signature=" + signature + ", date=" + date + ", themeName=" + themeName
 				+ ", analyzeTitle=" + analyzeTitle + ", comments=" + comments + "]";
 	}
-
-	
 
 }

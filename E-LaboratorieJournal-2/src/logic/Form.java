@@ -62,4 +62,11 @@ public class Form extends ProjectInformation {
 		this.signature = signature;
 	}
 
+	@Override
+	public String toString() {
+		return "Form [reagentName=" + reagentName + ", batchNo=" + batchNo + ", lotNo=" + lotNo + ", supplier="
+				+ supplier + ", signature=" + signature + ", date=" + date + ", themeName=" + themeName
+				+ ", analyzeTitle=" + analyzeTitle + ", comments=" + comments + "]";
+	}
+
 }

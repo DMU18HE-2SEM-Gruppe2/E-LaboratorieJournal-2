@@ -15,9 +15,9 @@ public class PreparationTable extends Form {
 	protected String fluidAd;
 
 	public PreparationTable(LocalDate date, String themeName, String analyzeTitle, String comments, String reagentName,
-			int batchNo, int lotNo, String supplier, String signature, String chemical, String easNo,
-			String productNo, String weighed, String measured, String scaleNo, String pipetteNo,
-			String endConcentration, String fluidAd) {
+			int batchNo, int lotNo, String supplier, String signature, String chemical, String easNo, String productNo,
+			String weighed, String measured, String scaleNo, String pipetteNo, String endConcentration,
+			String fluidAd) {
 
 		super(date, themeName, analyzeTitle, comments, reagentName, batchNo, lotNo, supplier, signature);
 
@@ -102,6 +102,16 @@ public class PreparationTable extends Form {
 
 	public void setFluidAd(String fluidAd) {
 		this.fluidAd = fluidAd;
+	}
+
+	@Override
+	public String toString() {
+		return "PreparationTable [chemical=" + chemical + ", easNo=" + easNo + ", productNo=" + productNo + ", weighed="
+				+ weighed + ", measured=" + measured + ", scaleNo=" + scaleNo + ", pipetteNo=" + pipetteNo
+				+ ", endConcentration=" + endConcentration + ", fluidAd=" + fluidAd + ", reagentName=" + reagentName
+				+ ", batchNo=" + batchNo + ", lotNo=" + lotNo + ", supplier=" + supplier + ", signature=" + signature
+				+ ", date=" + date + ", themeName=" + themeName + ", analyzeTitle=" + analyzeTitle + ", comments="
+				+ comments + "]";
 	}
 
 }

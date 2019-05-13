@@ -54,4 +54,11 @@ public class Journal extends ProjectInformation {
 		this.calculations = calculations;
 	}
 
+	@Override
+	public String toString() {
+		return "Journal [coworker=" + coworker + ", traceability=" + traceability + ", results=" + results
+				+ ", calculations=" + calculations + ", date=" + date + ", themeName=" + themeName + ", analyzeTitle="
+				+ analyzeTitle + ", comments=" + comments + "]";
+	}
+
 }

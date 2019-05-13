@@ -73,5 +73,13 @@ public class ChemReagentForm extends Form {
 		this.storage = storage;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "ChemReagentForm [exerciseName=" + exerciseName + ", weightNo=" + weightNo + ", manufacturedVolume="
+				+ manufacturedVolume + ", concentration=" + concentration + ", shellLife=" + shellLife + ", storage="
+				+ storage + ", reagentName=" + reagentName + ", batchNo=" + batchNo + ", lotNo=" + lotNo + ", supplier="
+				+ supplier + ", signature=" + signature + ", date=" + date + ", themeName=" + themeName
+				+ ", analyzeTitle=" + analyzeTitle + ", comments=" + comments + "]";
+	}
+
 }
