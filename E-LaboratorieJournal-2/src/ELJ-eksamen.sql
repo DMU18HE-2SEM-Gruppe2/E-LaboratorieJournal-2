@@ -28,7 +28,7 @@ primary key(projectID)
 
 create table student(
 studentID int identity NOT NULL,
-studentName nvarchar(max)(max) NOT NULL,
+studentName nvarchar(max) NOT NULL,
 classID int NOT NULL,
 
 primary key(studentID),
@@ -171,4 +171,4 @@ primary key(studentID, formID),
 )
 
 INSERT INTO class VALUES ('DMU');
-INSERT INTO student VALUES ('akasdl', 1)
+INSERT INTO student VALUES ('frank', 1)
