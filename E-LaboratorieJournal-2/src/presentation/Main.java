@@ -8,6 +8,9 @@ public class Main {
 		DBConnection connection = new DBConnection();
 
 		connection.getConnection();
+		
+		System.out.println("test");
 	}
+	
 
 }
