@@ -12,7 +12,7 @@ public class DBConnection {
 			System.exit(1);
 		}
 
-		if (!openConnection("ELJ")) {
+		if (!openConnection("ELJ-DB")) {
 			System.exit(2);
 		}
 		return connection;
