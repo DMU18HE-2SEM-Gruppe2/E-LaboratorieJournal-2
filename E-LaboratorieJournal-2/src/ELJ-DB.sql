@@ -18,7 +18,7 @@ primary key(classID)
 
 create table projectInfo(
 projectID int identity NOT NULL,
-dateCreated int NOT NULL,
+dateCreated bigint NOT NULL,
 themeName nvarchar(max) NOT NULL,
 analyzeTitle nvarchar(max) NOT NULL,
 comment nvarchar(max) NOT NULL,
