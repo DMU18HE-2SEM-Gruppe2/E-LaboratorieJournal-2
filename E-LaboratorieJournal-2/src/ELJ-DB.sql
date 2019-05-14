@@ -16,14 +16,14 @@ primary key(classID)
 )
 
 
-create table projectInfo(
-projectID int identity NOT NULL,
+create table analyzeInformation(
+analyzeID int identity NOT NULL,
 dateCreated bigint NOT NULL,
 themeName nvarchar(max) NOT NULL,
 analyzeTitle nvarchar(max) NOT NULL,
 comment nvarchar(max) NOT NULL,
 
-primary key(projectID)
+primary key(analyzeID)
 )
 
 
@@ -47,7 +47,7 @@ foreign key (classID) REFERENCES class(classID)
 create table journal(
 journalID int identity NOT NULL,
 studentID int NOT NULL,
-projectID int NOT NULL,
+analyzeID int NOT NULL,
 formID int NOT NULL,
 coworker nvarchar(max) NOT NULL,
 traceability nvarchar(max) NOT NULL,
@@ -58,7 +58,7 @@ calcImage image NOT NULL,
 primary key(journalID),
 
 foreign key(studentID) REFERENCES student(studentID),
-foreign key(projectID) REFERENCES projectInfo(projectID)
+foreign key(analyzeID) REFERENCES analyzeInformation(analyzeID)
 )
 
 
@@ -76,10 +76,10 @@ foreign key(journalID) REFERENCES journal(journalID)
 ------------------- Below is left side of Data Diagram -----------------
 
 
-create table form(
+create table formInformation(
 formID int identity NOT NULL,
 studentID int NOT NULL,
-projectID int NOT NULL,
+analyzeID int NOT NULL,
 formTypeID int NOT NULL,
 reagentName nvarchar(max) NOT NULL,
 batchNo int NOT NULL,
@@ -89,13 +89,12 @@ supplier nvarchar(max) NOT NULL,
 primary key(formID),
 
 foreign key(studentID) REFERENCES student(studentID),
-foreign key(projectID) REFERENCES projectInfo(projectID),
+foreign key(analyzeID) REFERENCES AnalyzeInformation(analyzeID),
 )
 
 
 create table preparation(
 preparationID int identity NOT NULL,
-formID int NOT NULL,
 chemical nvarchar(max) NOT NULL,
 casNo nvarchar(max) NOT NULL,
 productNo nvarchar(max) NOT NULL,
@@ -107,8 +106,6 @@ endConcentration bit NOT NULL,
 liquidAd nvarchar(max) NOT NULL,
 
 primary key(preparationID),
-
-foreign key (formID) REFERENCES form(formID),
 )
 
 
@@ -122,7 +119,7 @@ storage nvarchar(max) NOT NULL,
 
 primary key(formTypeID),
 
-foreign key(formID) REFERENCES form(formID)
+foreign key(formID) REFERENCES formInformation(formID)
 )
 
 
@@ -138,7 +135,7 @@ storage nvarchar(max) NOT NULL,
 
 primary key(formID),
 
-foreign key(formID) REFERENCES form(formID)
+foreign key(formID) REFERENCES formInformation(formID)
 )
 
 
@@ -158,7 +155,7 @@ negControl nvarchar(max) NOT NULL,
 
 primary key(formID),
 
-foreign key(formID) REFERENCES form(formID)
+foreign key(formID) REFERENCES formInformation(formID)
 )
 
 
