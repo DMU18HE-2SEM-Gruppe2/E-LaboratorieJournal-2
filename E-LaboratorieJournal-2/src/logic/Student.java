@@ -1,19 +1,43 @@
 package logic;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Student {
 
 	private String name;
-	private int studentID;
+	private int studentID, courseID;
 	
 	// ID for student
-	private static final AtomicInteger studentCounter = new AtomicInteger();
 	
-	public Student(String name, int studentID) {
-		int studentCounterInteger = studentCounter.incrementAndGet();
+	public Student(String name, int courseID) {
 		
+//		this.studentID = studentID;
 		this.name = name;
-		this.studentID = studentCounterInteger;
+		this.courseID = courseID;
 	}
+
+	public int getCourseID() {
+		return courseID;
+	}
+
+	public void setCourseID(int courseID) {
+		this.courseID = courseID;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getStudentID() {
+		return studentID;
+	}
+
+	public void setStudentID(int studentID) {
+		this.studentID = studentID;
+	}
+
+
+	
 }

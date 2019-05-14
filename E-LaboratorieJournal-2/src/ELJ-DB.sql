@@ -8,11 +8,11 @@ go
 use [ELJ-DB];
 
 
-create table class(
-classID int identity NOT NULL,
-className nvarchar(max) NOT NULL,
+create table course(
+courseID int identity (1,1) NOT NULL,
+courseName nvarchar(max) NOT NULL,
 
-primary key(classID)
+primary key(courseID)
 )
 
 
@@ -31,13 +31,13 @@ primary key(analyzeID)
 
 
 create table student(
-studentID int identity NOT NULL,
+studentID int identity (1,1) NOT NULL,
 studentName nvarchar(max) NOT NULL,
-classID int NOT NULL,
+courseID int NOT NULL,
 
 primary key(studentID),
 
-foreign key (classID) REFERENCES class(classID)
+foreign key (courseID) REFERENCES course(courseID)
 )
 
 
@@ -181,5 +181,5 @@ primary key(studentID, formID),
 --Test af indsætning
 
 
---INSERT INTO class VALUES ('DMU');
+INSERT INTO course VALUES ('DMU');
 --INSERT INTO student VALUES ('akasdl', 1)

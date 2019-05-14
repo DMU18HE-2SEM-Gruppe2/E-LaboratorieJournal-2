@@ -1,26 +1,28 @@
 package presentation;
 
-import java.time.LocalDate;
-
 import data.DBConnection;
-import logic.ChemReagentForm;
-import logicFormDB.CreateForms;
+import data.DBOthers;
+import logic.Course;
+import logic.Student;
 
 public class Main {
 
 	public static void main(String[] args) {
 		DBConnection connection = new DBConnection();
-		CreateForms cf = new CreateForms(connection.getConnection());
+		DBOthers dbOthers = new DBOthers();
+//		CreateForms cf = new CreateForms(connection.getConnection());
+//		
+//		ChemReagentForm crf = new ChemReagentForm(LocalDate.now(), "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1");
 		
-		ChemReagentForm crf = new ChemReagentForm(LocalDate.now(), "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1");
+		Course crs = new Course("DMU", 1);
 		
+		int i = crs.getID();
+		Student std = new Student("John", 1);
+		dbOthers.addStudent(std, crs);
 		
-		
-		cf.addForm1(crf);
-		
-		connection.getConnection();
-		
-		System.out.println("test");
+//		cf.addForm1(crf);
+
+//		System.out.println("test");
 	}
 	
 
