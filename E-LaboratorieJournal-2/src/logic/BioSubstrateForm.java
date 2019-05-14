@@ -14,7 +14,7 @@ public class BioSubstrateForm extends PreparationTable {
 	private String negControl;
 
 	public BioSubstrateForm(LocalDate date, String themeName, String analyzeTitle, String comments, String reagentName,
-			int batchNo, int lotNo, String supplier, int pageNo, String signature, String chemical, String easNo,
+			String batchNo, String lotNo, String supplier, int pageNo, String signature, String chemical, String easNo,
 			String productNo, String weighed, String measured, String scaleNo, String pipetteNo,
 			String endConcentration, String fluidAd, double pHBefore, double pHEnd, String sterilisation,
 			String additionAfter, double pHAfterSteril, boolean steril, String posControl, String negControl) {

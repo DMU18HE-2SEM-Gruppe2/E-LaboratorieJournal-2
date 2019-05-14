@@ -2,7 +2,7 @@ package logic;
 
 import java.time.LocalDate;
 
-public class Journal extends ProjectInformation {
+public class Journal extends AnalyzeInformation {
 
 	private String coworker;
 	private String traceability;

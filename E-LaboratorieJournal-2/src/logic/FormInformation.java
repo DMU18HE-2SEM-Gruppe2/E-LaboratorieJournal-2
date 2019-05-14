@@ -5,13 +5,13 @@ import java.time.LocalDate;
 public class FormInformation extends AnalyzeInformation {
 
 	protected String reagentName;
-	protected int batchNo;
-	protected int lotNo;
+	protected String batchNo;
+	protected String lotNo;
 	protected String supplier;
 	protected String signature;
 
-	public FormInformation(LocalDate date, String themeName, String analyzeTitle, String comments, String reagentName, int batchNo,
-			int lotNo, String supplier, String signature) {
+	public FormInformation(LocalDate date, String themeName, String analyzeTitle, String comments, String reagentName, String batchNo,
+			String lotNo, String supplier, String signature) {
 
 		super(date, themeName, analyzeTitle, comments);
 
@@ -30,19 +30,19 @@ public class FormInformation extends AnalyzeInformation {
 		this.reagentName = reagentName;
 	}
 
-	public int getBatchNo() {
+	public String getBatchNo() {
 		return batchNo;
 	}
 
-	public void setBatchNo(int batchNo) {
+	public void setBatchNo(String batchNo) {
 		this.batchNo = batchNo;
 	}
 
-	public int getLotNo() {
+	public String getLotNo() {
 		return lotNo;
 	}
 
-	public void setLotNo(int lotNo) {
+	public void setLotNo(String lotNo) {
 		this.lotNo = lotNo;
 	}
 

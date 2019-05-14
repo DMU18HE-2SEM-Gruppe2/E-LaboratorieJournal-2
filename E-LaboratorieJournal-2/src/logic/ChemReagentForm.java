@@ -2,23 +2,23 @@ package logic;
 
 import java.time.LocalDate;
 
-public class ChemReagentForm extends Form {
+public class ChemReagentForm extends FormInformation {
 
 	private String exerciseName;
 	private String weightNo;
-	private String manufacturedVolume;
+	private String volume;
 	private String concentration;
 	private String shellLife;
 	private String storage;
 
 	public ChemReagentForm(LocalDate date, String themeName, String analyzeTitle, String comments, String reagentName,
-			int batchNo, int lotNo, String supplier, String signature, String exerciseName, String weightNo,
+			String batchNo, String lotNo, String supplier, String signature, String exerciseName, String weightNo,
 			String manufacturedVolume, String concentration, String shellLife, String storage) {
 
 		super(date, themeName, analyzeTitle, comments, reagentName, batchNo, lotNo, supplier, signature);
 		this.exerciseName = exerciseName;
 		this.weightNo = weightNo;
-		this.manufacturedVolume = manufacturedVolume;
+		this.volume = manufacturedVolume;
 		this.concentration = concentration;
 		this.shellLife = shellLife;
 		this.storage = storage;
@@ -41,12 +41,12 @@ public class ChemReagentForm extends Form {
 		this.weightNo = weightNo;
 	}
 
-	public String getManufacturedVolume() {
-		return manufacturedVolume;
+	public String getVolume() {
+		return volume;
 	}
 
-	public void setManufacturedVolume(String manufacturedVolume) {
-		this.manufacturedVolume = manufacturedVolume;
+	public void setVolume(String Volume) {
+		this.volume = Volume;
 	}
 
 	public String getConcentration() {
@@ -76,7 +76,7 @@ public class ChemReagentForm extends Form {
 	@Override
 	public String toString() {
 		return "ChemReagentForm [exerciseName=" + exerciseName + ", weightNo=" + weightNo + ", manufacturedVolume="
-				+ manufacturedVolume + ", concentration=" + concentration + ", shellLife=" + shellLife + ", storage="
+				+ volume + ", concentration=" + concentration + ", shellLife=" + shellLife + ", storage="
 				+ storage + ", reagentName=" + reagentName + ", batchNo=" + batchNo + ", lotNo=" + lotNo + ", supplier="
 				+ supplier + ", signature=" + signature + ", date=" + date + ", themeName=" + themeName
 				+ ", analyzeTitle=" + analyzeTitle + ", comments=" + comments + "]";

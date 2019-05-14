@@ -16,10 +16,4 @@ public class Student {
 		this.name = name;
 		this.studentID = studentCounterInteger;
 	}
-
-	@Override
-	public String toString() {
-		return "Student [name=" + name + ", studentID=" + studentID + "]";
-	}
-
 }

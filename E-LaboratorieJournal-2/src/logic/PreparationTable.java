@@ -2,7 +2,7 @@ package logic;
 
 import java.time.LocalDate;
 
-public class PreparationTable extends Form {
+public class PreparationTable extends FormInformation {
 
 	protected String chemical;
 	protected String easNo;
@@ -15,7 +15,7 @@ public class PreparationTable extends Form {
 	protected String fluidAd;
 
 	public PreparationTable(LocalDate date, String themeName, String analyzeTitle, String comments, String reagentName,
-			int batchNo, int lotNo, String supplier, String signature, String chemical, String easNo, String productNo,
+			String batchNo, String lotNo, String supplier, String signature, String chemical, String easNo, String productNo,
 			String weighed, String measured, String scaleNo, String pipetteNo, String endConcentration,
 			String fluidAd) {
 

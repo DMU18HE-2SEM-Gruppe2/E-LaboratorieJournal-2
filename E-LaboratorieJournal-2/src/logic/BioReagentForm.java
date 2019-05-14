@@ -10,7 +10,7 @@ public class BioReagentForm extends PreparationTable {
 	private String shellLife;
 
 	public BioReagentForm(LocalDate date, String themeName, String analyzeTitle, String comments, String reagentName,
-			int batchNo, int lotNo, String supplier, String signature, String chemical, String easNo, String productNo,
+			String batchNo, String lotNo, String supplier, String signature, String chemical, String easNo, String productNo,
 			String weighed, String measured, String scaleNo, String pipetteNo, String endConcentration, String fluidAd,
 			String adjustpH, String furtherTreatment, String labeling, String shellLife) {
 
