@@ -29,7 +29,7 @@ public class CreateForms {
 			PreparedStatement add = connection.prepareStatement(sql);
 			add.setString(1, chemReagentForm.getVolume());
 			add.setString(2, chemReagentForm.getConcentration());
-			add.setString(3, chemReagentForm.getShellLife());
+			add.setString(3, chemReagentForm.getlifeTimeF());
 			add.setString(4, chemReagentForm.getStorage());
 			
 			int nRows = add.executeUpdate();

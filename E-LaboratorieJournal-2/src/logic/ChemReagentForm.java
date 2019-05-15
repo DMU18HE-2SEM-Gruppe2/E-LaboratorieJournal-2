@@ -8,19 +8,19 @@ public class ChemReagentForm extends FormInformation {
 	private String weightNo;
 	private String volume;
 	private String concentration;
-	private String shellLife;
+	private String lifeTimeF;
 	private String storage;
 
 	public ChemReagentForm(LocalDate date, String themeName, String analyzeTitle, String comments, String reagentName,
 			String batchNo, String lotNo, String supplier, String signature, String exerciseName, String weightNo,
-			String manufacturedVolume, String concentration, String shellLife, String storage) {
+			String manufacturedVolume, String concentration, String lifeTimeF, String storage) {
 
 		super(date, themeName, analyzeTitle, comments, reagentName, batchNo, lotNo, supplier, signature);
 		this.exerciseName = exerciseName;
 		this.weightNo = weightNo;
 		this.volume = manufacturedVolume;
 		this.concentration = concentration;
-		this.shellLife = shellLife;
+		this.lifeTimeF = lifeTimeF;
 		this.storage = storage;
 
 	}
@@ -57,12 +57,12 @@ public class ChemReagentForm extends FormInformation {
 		this.concentration = concentration;
 	}
 
-	public String getShellLife() {
-		return shellLife;
+	public String getlifeTimeF() {
+		return lifeTimeF;
 	}
 
-	public void setShellLife(String shellLife) {
-		this.shellLife = shellLife;
+	public void setlifeTimeF(String lifeTimeF) {
+		this.lifeTimeF = lifeTimeF;
 	}
 
 	public String getStorage() {
@@ -75,8 +75,8 @@ public class ChemReagentForm extends FormInformation {
 
 	@Override
 	public String toString() {
-		return "ChemReagentForm [exerciseName=" + exerciseName + ", weightNo=" + weightNo + ", manufacturedVolume="
-				+ volume + ", concentration=" + concentration + ", shellLife=" + shellLife + ", storage="
+		return "[exerciseName=" + exerciseName + ", weightNo=" + weightNo + ", manufacturedVolume="
+				+ volume + ", concentration=" + concentration + ", lifeTimeF=" + lifeTimeF + ", storage="
 				+ storage + ", reagentName=" + reagentName + ", batchNo=" + batchNo + ", lotNo=" + lotNo + ", supplier="
 				+ supplier + ", signature=" + signature + ", date=" + date + ", themeName=" + themeName
 				+ ", analyzeTitle=" + analyzeTitle + ", comments=" + comments + "]";

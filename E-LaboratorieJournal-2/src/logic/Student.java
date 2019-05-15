@@ -3,7 +3,7 @@ package logic;
 public class Student {
 
 	private String name;
-	private int studentID, courseID;
+	private int courseID;
 	
 	// ID for student
 	
@@ -30,12 +30,9 @@ public class Student {
 		this.name = name;
 	}
 
-	public int getStudentID() {
-		return studentID;
-	}
-
-	public void setStudentID(int studentID) {
-		this.studentID = studentID;
+	@Override
+	public String toString() {
+		return "[name=" + name + ", courseID=" + courseID + "]";
 	}
 
 
