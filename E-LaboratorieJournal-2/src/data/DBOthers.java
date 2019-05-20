@@ -1,7 +1,11 @@
 package data;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import logic.Course;
 import logic.Student;
@@ -36,6 +40,43 @@ public class DBOthers {
 			return false;
 		
 		}
-	// CRUD Courses
 	}
+	
+	public List<Student> getAllStudents() {
+		return getStudentsWhere("1=1");
+	}
+	
+	private List<Student> getStudentsWhere(String whereClause) {
+		ArrayList<Student>list = new ArrayList<Student>();
+		System.out.println("før try");
+		//henter resultset med alle studerende
+		try {
+			String query = "SELECT * FROM student WHERE " + whereClause;
+			System.out.println(query);
+			
+			Statement statement = connection.getConnection().createStatement();
+			ResultSet resultSet = statement.executeQuery(query);
+			//gennemløbe resultset
+			while (resultSet.next()) { //rykker pilen i resultset fra "before first" ned på næste række.
+				
+				String name = resultSet.getString("studentName");
+
+				int courseID = resultSet.getInt("courseID");
+				
+				Student student = new Student(name, courseID);
+				
+				list.add(student);
+
+				
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("Error running SQL statement");
+			System.out.println(e.getMessage());
+		}
+		
+		return list;
+		
+	}
+	// CRUD Courses
 }
