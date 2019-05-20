@@ -5,9 +5,8 @@ public class Course {
 	private String name;
 	private int ID;
 	
-	public Course(String name, int ID) {
+	public Course(String name) {
 		this.name = name;
-		this.ID = ID;
 	}
 
 	public int getID() {
@@ -24,6 +23,11 @@ public class Course {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Course [name=" + name + ", ID=" + ID + "]";
 	}
 	
 	

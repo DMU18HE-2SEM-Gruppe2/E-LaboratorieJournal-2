@@ -17,14 +17,15 @@ public class DBOthers {
 	// CRUD Student
 	// Create Student
 	public boolean addStudent(Student student, Course course) {
+		String select = "SELECT courseID FROM courses WHERE " + "course = course";
 		String query = "INSERT INTO student (" + "studentName," + 
-			"courseID) VALUES (?, ?)";
+			course.getID() + ") VALUES (?, ?)";
 	
 		try {
 			System.out.println(query);
 			PreparedStatement add = connection.getConnection().prepareStatement(query);
+			PreparedStatement g = connection.getConnection().prepareStatement(select);
 			
-//			add.setInt(1, student.getStudentID());
 			add.setString(1, student.getName());
 			add.setInt(2, course.getID());
 			
@@ -42,10 +43,12 @@ public class DBOthers {
 		}
 	}
 	
+	// Read All Students
 	public List<Student> getAllStudents() {
 		return getStudentsWhere("1=1");
 	}
 	
+	// Read Some Students
 	private List<Student> getStudentsWhere(String whereClause) {
 		ArrayList<Student>list = new ArrayList<Student>();
 		System.out.println("før try");
@@ -78,5 +81,66 @@ public class DBOthers {
 		return list;
 		
 	}
+	
 	// CRUD Courses
+	// Create Course
+	public boolean addCourse(Course course) {
+		String query = "INSERT INTO course (" + "courseName" + 
+			") VALUES (?)";
+	
+		try {
+			System.out.println(query);
+			PreparedStatement add = connection.getConnection().prepareStatement(query);
+			
+			add.setString(1, course.getName());
+			
+			int nRows = add.executeUpdate();
+			
+			if (nRows != 1) {
+				return false;
+			}
+		return true;
+		} catch (SQLException e) {
+			System.out.println("Failed to add: " + course);
+			System.out.println(e.getMessage());
+			return false;
+		
+		}
+	}
+	
+	// Read All Courses
+	public List<Course> getAllCourses() {
+		return getCoursesWhere("1=1");
+	}
+	
+	// Read Course
+	private List<Course> getCoursesWhere(String whereClause) {
+		ArrayList<Course>list = new ArrayList<Course>();
+		//henter resultset med alle courses
+		try {
+			String query = "SELECT * FROM course WHERE " + whereClause;
+			System.out.println(query);
+			
+			Statement statement = connection.getConnection().createStatement();
+			ResultSet resultSet = statement.executeQuery(query);
+			//gennemløbe resultset
+			while (resultSet.next()) { //rykker pilen i resultset fra "before first" ned på næste række.
+				
+				String courseName = resultSet.getString("courseName");
+				
+				Course course = new Course(courseName);
+				
+				list.add(course);
+
+				
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("Error running SQL statement");
+			System.out.println(e.getMessage());
+		}
+		
+		return list;
+		
+	}
 }
