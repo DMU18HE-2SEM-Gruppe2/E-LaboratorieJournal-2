@@ -20,12 +20,13 @@ public class Main {
 //		dbOthers.addCourse(crs);
 		
 		// Read Course (Fejl)
-		System.out.println(dbOthers.getAllCourses());
+//		System.out.println(dbOthers.getAllCourses());
 		
 		// Create Student (Skal tilgå CourseID på en eller anden måde)
-//		Student std = new Student("Ove Sprogø", 2);
-//		Course crs = new Course("Programmering");
-//		dbOthers.addStudent(std, crs);
+		Student std = new Student("Ove Sprogø", 2);
+		Course crs = new Course("ProTek");
+		dbOthers.addStudent(std, crs);
+		System.out.println(std);
 //		Course crs = new Course("ProTek2");
 //		Student std = new Student("Peter Pedal", 2);
 //		dbOthers.addStudent(std, crs);
