@@ -182,5 +182,5 @@ primary key(studentID, formID),
 --Test af indsætning
 
 
-INSERT INTO course VALUES ('DMU');
+--INSERT INTO course VALUES ('DMU');
 --INSERT INTO student VALUES ('akasdl', 1)
