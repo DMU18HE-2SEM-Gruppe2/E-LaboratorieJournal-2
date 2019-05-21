@@ -9,7 +9,7 @@ use [ELJ-DB];
 
 
 create table course(
-courseID int identity (1,1) NOT NULL,
+courseID int NOT NULL,
 courseName nvarchar(max) NOT NULL,
 
 primary key(courseID)
@@ -17,7 +17,7 @@ primary key(courseID)
 
 
 create table analyzeInformation(
-analyzeID int identity NOT NULL,
+analyzeID int NOT NULL,
 dateCreated bigint NOT NULL,
 themeName nvarchar(max) NOT NULL,
 analyzeTitle nvarchar(max) NOT NULL,
@@ -31,8 +31,9 @@ primary key(analyzeID)
 
 
 create table student(
-studentID int identity (1,1) NOT NULL,
-studentName nvarchar(max) NOT NULL,
+studentID int NOT NULL,
+firstname nvarchar(max) NOT NULL,
+lastname nvarchar NOT NULL,
 courseID int NOT NULL,
 
 primary key(studentID),
@@ -45,7 +46,7 @@ foreign key (courseID) REFERENCES course(courseID)
 
 
 create table journal(
-journalID int identity NOT NULL,
+journalID int NOT NULL,
 studentID int NOT NULL,
 analyzeID int NOT NULL,
 formID int NOT NULL,
@@ -77,7 +78,7 @@ foreign key(journalID) REFERENCES journal(journalID)
 
 
 create table formInformation(
-formID int identity NOT NULL,
+formID int NOT NULL,
 studentID int NOT NULL,
 analyzeID int NOT NULL,
 formTypeID int NOT NULL,
