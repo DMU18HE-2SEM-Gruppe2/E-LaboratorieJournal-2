@@ -9,7 +9,7 @@ use [ELJ-DB];
 
 
 create table course(
-courseID int NOT NULL,
+courseID int identity(1,1) NOT NULL,
 courseName nvarchar(max) NOT NULL,
 
 primary key(courseID)
@@ -17,7 +17,7 @@ primary key(courseID)
 
 
 create table analyzeInformation(
-analyzeID int NOT NULL,
+analyzeID int identity(1,1) NOT NULL,
 dateCreated bigint NOT NULL,
 themeName nvarchar(max) NOT NULL,
 analyzeTitle nvarchar(max) NOT NULL,
@@ -31,7 +31,7 @@ primary key(analyzeID)
 
 
 create table student(
-studentID int NOT NULL,
+studentID int identity(1,1)  NOT NULL,
 firstname nvarchar(max) NOT NULL,
 lastname nvarchar NOT NULL,
 courseID int NOT NULL,
@@ -46,7 +46,7 @@ foreign key (courseID) REFERENCES course(courseID)
 
 
 create table journal(
-journalID int NOT NULL,
+journalID int identity(1,1) NOT NULL,
 studentID int NOT NULL,
 analyzeID int NOT NULL,
 formID int NOT NULL,
@@ -78,10 +78,9 @@ foreign key(journalID) REFERENCES journal(journalID)
 
 
 create table formInformation(
-formID int NOT NULL,
+formID int identity(1,1)  NOT NULL,
 studentID int NOT NULL,
 analyzeID int NOT NULL,
-formTypeID int NOT NULL,
 reagentName nvarchar(max) NOT NULL,
 batchNo int NOT NULL,
 lotNo nvarchar(max) NOT NULL,
@@ -95,7 +94,8 @@ foreign key(analyzeID) REFERENCES AnalyzeInformation(analyzeID),
 
 
 create table preparation(
-preparationID int identity NOT NULL,
+preparationID int identity(1,1) NOT NULL,
+analyzeID int NOT NULL,
 chemical nvarchar(max) NOT NULL,
 casNo nvarchar(max) NOT NULL,
 productNo nvarchar(max) NOT NULL,
@@ -106,13 +106,15 @@ pipetteNo nvarchar(max) NOT NULL,
 endConcentration bit NOT NULL,
 liquidAd nvarchar(max) NOT NULL,
 
-primary key(preparationID),
+foreign key(analyzeID) REFERENCES analyzeInformation(analyzeID),
+
+primary key(preparationID)
 )
 
 
 create table form1(
 formTypeID int identity NOT NULL,
-formID int NOT NULL,
+analyzeID int NOT NULL,
 volume nvarchar(max) NOT NULL,
 accConcentration nvarchar(max) NOT NULL,
 lifeTimeF nvarchar(max) NOT NULL,
@@ -120,30 +122,28 @@ storage nvarchar(max) NOT NULL,
 
 primary key(formTypeID),
 
-foreign key(formID) REFERENCES formInformation(formID)
+foreign key(analyzeID) REFERENCES analyzeInformation(analyzeID)
 )
 
 
 create table form2(
 formTypeID int identity NOT NULL,
-formID int NOT NULL,
-preparationID int NOT NULL,
+analyzeID int NOT NULL,
 pHSetting nvarchar(max) NOT NULL,
 treatment nvarchar(max) NOT NULL,
 tag nvarchar(max) NOT NULL,
 lifeTimeF nvarchar(max) NOT NULL,
 storage nvarchar(max) NOT NULL,
 
-primary key(formID),
+primary key(formTypeID),
 
-foreign key(formID) REFERENCES formInformation(formID)
+foreign key(analyzeID) REFERENCES analyzeInformation(analyzeID)
 )
 
 
 create table form3(
 formTypeID int identity NOT NULL,
-formID int NOT NULL,
-preparationID int NOT NULL,
+analyzeID int NOT NULL,
 pHSubstrate nvarchar(max) NOT NULL,
 pHSterialized nvarchar(max) NOT NULL,
 sterializeTime nvarchar(max) NOT NULL,
@@ -154,9 +154,9 @@ sterile bit NOT NULL,
 posControl nvarchar(max) NOT NULL,
 negControl nvarchar(max) NOT NULL,
 
-primary key(formID),
+primary key(formTypeID),
 
-foreign key(formID) REFERENCES formInformation(formID)
+foreign key(analyzeID) REFERENCES analyzeInformation(analyzeID)
 )
 
 
@@ -182,5 +182,24 @@ primary key(studentID, formID),
 --Test af indsætning
 
 
---INSERT INTO course VALUES ('DMU');
---INSERT INTO student VALUES ('akasdl', 1)
+INSERT INTO course VALUES ('DMU');
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Student', '1', 1);
