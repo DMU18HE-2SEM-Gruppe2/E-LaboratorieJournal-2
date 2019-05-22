@@ -62,9 +62,22 @@ public class FrontPage {
 		
 		mainPane.setLeft(vBoxMenu);
 		mainPane.setCenter(tabs);
+		
+		// Action
+		crtJrn.setOnAction(e -> createJournal());
+		crtFrm.setOnAction(e -> createForm());
 	
 		mainStage.setScene(mainScene);
 		mainStage.show();		
 	}
 	
+	public void createJournal() {
+		JournalFX journal = new JournalFX();
+		journal.start();
+	}
+	
+	public void createForm() {
+		ChooseFormFX form = new ChooseFormFX();
+		form.start();
+	}
 }

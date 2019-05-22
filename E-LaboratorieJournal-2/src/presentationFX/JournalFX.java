@@ -14,8 +14,10 @@ import javafx.stage.Stage;
 
 public class JournalFX {
 	Scene journalScene;
+	Stage journalStage;
 	
-	public void start(Stage journalStage) {
+	public void start() {
+		journalStage = new Stage();
 		journalStage.setTitle("Opret Journal");
 		journalStage.setWidth(800);
 		journalStage.setHeight(1000);

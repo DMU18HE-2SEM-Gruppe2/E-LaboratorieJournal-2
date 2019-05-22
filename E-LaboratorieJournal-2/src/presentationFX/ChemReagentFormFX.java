@@ -13,8 +13,10 @@ import javafx.stage.Stage;
 
 public class ChemReagentFormFX {
 	Scene chemReagentScene;
+	Stage chemReagentStage;
 	
-	public void start(Stage chemReagentStage) {
+	public void start() {
+		chemReagentStage = new Stage();
 		chemReagentStage.setTitle("Opret Kemi Reagentsfremstillingsblanket");
 		
 		// VBox

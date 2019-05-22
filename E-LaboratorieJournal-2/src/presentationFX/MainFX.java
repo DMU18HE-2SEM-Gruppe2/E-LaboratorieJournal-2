@@ -21,9 +21,9 @@ public class MainFX extends Application {
 //			journal.start(journalStage);
 //		}
 	
-		public void start(Stage chemReagentStage) throws Exception {			
-			ChemReagentFormFX chemReagentForm = new ChemReagentFormFX();
-			chemReagentForm.start(chemReagentStage);
+		public void start(Stage testStage) throws Exception {			
+			FrontPage test = new FrontPage();
+			test.start(testStage);
 		}
 
 }
