@@ -10,18 +10,24 @@ public class ChemReagentForm extends FormInformation {
 	private String concentration;
 	private String lifeTimeF;
 	private String storage;
+	private String batchNo;
+	private String lotNo;
+	private String supplier;
 
-	public ChemReagentForm(LocalDate date, String themeName, String analyzeTitle, String comments, String reagentName,
-			String batchNo, String lotNo, String supplier, String signature, String exerciseName, String weightNo,
-			String manufacturedVolume, String concentration, String lifeTimeF, String storage) {
+	public ChemReagentForm(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
+			int studentID, String exerciseName, String weightNo, String manufacturedVolume, String concentration,
+			String lifeTimeF, String storage, String reagentName, String batchNo, String lotNo, String supplier) {
 
-		super(date, themeName, analyzeTitle, comments, reagentName, batchNo, lotNo, supplier, signature);
+		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName);
 		this.exerciseName = exerciseName;
 		this.weightNo = weightNo;
 		this.volume = manufacturedVolume;
 		this.concentration = concentration;
 		this.lifeTimeF = lifeTimeF;
 		this.storage = storage;
+		this.batchNo = batchNo;
+		this.lotNo = lotNo;
+		this.supplier = supplier;
 
 	}
 
@@ -73,13 +79,37 @@ public class ChemReagentForm extends FormInformation {
 		this.storage = storage;
 	}
 
+	public String getBatchNo() {
+		return batchNo;
+	}
+
+	public void setBatchNo(String batchNo) {
+		this.batchNo = batchNo;
+	}
+
+	public String getLotNo() {
+		return lotNo;
+	}
+
+	public void setLotNo(String lotNo) {
+		this.lotNo = lotNo;
+	}
+
+	public String getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(String supplier) {
+		this.supplier = supplier;
+	}
+
 	@Override
 	public String toString() {
-		return "[exerciseName=" + exerciseName + ", weightNo=" + weightNo + ", manufacturedVolume="
-				+ volume + ", concentration=" + concentration + ", lifeTimeF=" + lifeTimeF + ", storage="
-				+ storage + ", reagentName=" + reagentName + ", batchNo=" + batchNo + ", lotNo=" + lotNo + ", supplier="
-				+ supplier + ", signature=" + signature + ", date=" + date + ", themeName=" + themeName
-				+ ", analyzeTitle=" + analyzeTitle + ", comments=" + comments + "]";
+		return "ChemReagentForm [exerciseName=" + exerciseName + ", weightNo=" + weightNo + ", volume=" + volume
+				+ ", concentration=" + concentration + ", lifeTimeF=" + lifeTimeF + ", storage=" + storage
+				+ ", batchNo=" + batchNo + ", lotNo=" + lotNo + ", supplier=" + supplier + ", reagentName="
+				+ reagentName + ", date=" + date + ", themeName=" + themeName + ", analyzeTitle=" + analyzeTitle
+				+ ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID + "]";
 	}
 
 }

@@ -12,14 +12,16 @@ public class PreparationTable extends FormInformation {
 	protected String scaleNo;
 	protected String pipetteNo;
 	protected String endConcentration;
-	protected String fluidAd;
+	protected String batchNo;
+	protected String lotNo;
+	protected String supplier;
 
-	public PreparationTable(LocalDate date, String themeName, String analyzeTitle, String comments, String reagentName,
-			String batchNo, String lotNo, String supplier, String signature, String chemical, String easNo, String productNo,
-			String weighed, String measured, String scaleNo, String pipetteNo, String endConcentration,
-			String fluidAd) {
+	public PreparationTable(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
+			int studentID, String reagentName, String chemical, String easNo, String productNo, String weighed,
+			String measured, String scaleNo, String pipetteNo, String endConcentration, String batchNo, String lotNo,
+			String supplier) {
 
-		super(date, themeName, analyzeTitle, comments, reagentName, batchNo, lotNo, supplier, signature);
+		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName);
 
 		this.chemical = chemical;
 		this.easNo = easNo;
@@ -29,7 +31,9 @@ public class PreparationTable extends FormInformation {
 		this.scaleNo = scaleNo;
 		this.pipetteNo = pipetteNo;
 		this.endConcentration = endConcentration;
-		this.fluidAd = fluidAd;
+		this.batchNo = batchNo;
+		this.lotNo = lotNo;
+		this.supplier = supplier;
 	}
 
 	public String getChemical() {
@@ -96,22 +100,28 @@ public class PreparationTable extends FormInformation {
 		this.endConcentration = endConcentration;
 	}
 
-	public String getFluidAd() {
-		return fluidAd;
+	public String getBatchNo() {
+		return batchNo;
 	}
 
-	public void setFluidAd(String fluidAd) {
-		this.fluidAd = fluidAd;
+	public void setBatchNo(String batchNo) {
+		this.batchNo = batchNo;
 	}
 
-	@Override
-	public String toString() {
-		return "PreparationTable [chemical=" + chemical + ", easNo=" + easNo + ", productNo=" + productNo + ", weighed="
-				+ weighed + ", measured=" + measured + ", scaleNo=" + scaleNo + ", pipetteNo=" + pipetteNo
-				+ ", endConcentration=" + endConcentration + ", fluidAd=" + fluidAd + ", reagentName=" + reagentName
-				+ ", batchNo=" + batchNo + ", lotNo=" + lotNo + ", supplier=" + supplier + ", signature=" + signature
-				+ ", date=" + date + ", themeName=" + themeName + ", analyzeTitle=" + analyzeTitle + ", comments="
-				+ comments + "]";
+	public String getLotNo() {
+		return lotNo;
+	}
+
+	public void setLotNo(String lotNo) {
+		this.lotNo = lotNo;
+	}
+
+	public String getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(String supplier) {
+		this.supplier = supplier;
 	}
 
 }

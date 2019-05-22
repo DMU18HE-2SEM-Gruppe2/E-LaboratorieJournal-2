@@ -11,10 +11,10 @@ public class Journal extends AnalyzeInformation {
 	// Vend tilbage - enten skal der være et variable for et billede eller en ny
 	// løsning?
 
-	public Journal(LocalDate date, String themeName, String analyzeTitle, String comments, String coworker,
+	public Journal(LocalDate date, String themeName, String analyzeTitle, String comments, int studentID, int analyzeID, String coworker,
 			String traceability, String results, String calculations) {
 
-		super(date, themeName, analyzeTitle, comments);
+		super(date, themeName, analyzeTitle, comments, analyzeID, studentID);
 
 		this.coworker = coworker;
 		this.traceability = traceability;

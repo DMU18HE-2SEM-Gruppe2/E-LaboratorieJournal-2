@@ -2,16 +2,36 @@ package logic;
 
 public class Student {
 
-	private String name;
+	private String firstName;
+	private String lastName;
 	private int courseID;
-	
+	private int studentID;
+
 	// ID for student
-	
-	public Student(String name, int courseID) {
-		
-//		this.studentID = studentID;
-		this.name = name;
+
+	public Student(String firstName, String lastName, int courseID, int studentID) {
+
+		this.studentID = studentID;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.courseID = courseID;
+
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public int getCourseID() {
@@ -22,19 +42,18 @@ public class Student {
 		this.courseID = courseID;
 	}
 
-	public String getName() {
-		return name;
+	public int getStudentID() {
+		return studentID;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setStudentID(int studentID) {
+		this.studentID = studentID;
 	}
 
 	@Override
 	public String toString() {
-		return "[name=" + name + ", courseID=" + courseID + "]";
+		return "Student [firstName=" + firstName + ", lastName=" + lastName + ", courseID=" + courseID + ", studentID="
+				+ studentID + "]";
 	}
 
-
-	
 }

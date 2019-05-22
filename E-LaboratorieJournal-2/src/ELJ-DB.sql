@@ -15,7 +15,6 @@ courseName nvarchar(max) NOT NULL,
 primary key(courseID)
 )
 
-
 create table analyzeInformation(
 analyzeID int identity(1,1) NOT NULL,
 dateCreated bigint NOT NULL,
@@ -33,8 +32,9 @@ primary key(analyzeID)
 create table student(
 studentID int identity(1,1)  NOT NULL,
 firstname nvarchar(max) NOT NULL,
-lastname nvarchar NOT NULL,
+lastname nvarchar(max) NOT NULL,
 courseID int NOT NULL,
+
 
 primary key(studentID),
 
@@ -47,7 +47,6 @@ foreign key (courseID) REFERENCES course(courseID)
 
 create table journal(
 journalID int identity(1,1) NOT NULL,
-studentID int NOT NULL,
 analyzeID int NOT NULL,
 formID int NOT NULL,
 coworker nvarchar(max) NOT NULL,
@@ -58,7 +57,6 @@ calcImage image NOT NULL,
 
 primary key(journalID),
 
-foreign key(studentID) REFERENCES student(studentID),
 foreign key(analyzeID) REFERENCES analyzeInformation(analyzeID)
 )
 
@@ -79,16 +77,12 @@ foreign key(journalID) REFERENCES journal(journalID)
 
 create table formInformation(
 formID int identity(1,1)  NOT NULL,
-studentID int NOT NULL,
 analyzeID int NOT NULL,
 reagentName nvarchar(max) NOT NULL,
-batchNo int NOT NULL,
-lotNo nvarchar(max) NOT NULL,
-supplier nvarchar(max) NOT NULL,
+
 
 primary key(formID),
 
-foreign key(studentID) REFERENCES student(studentID),
 foreign key(analyzeID) REFERENCES AnalyzeInformation(analyzeID),
 )
 
@@ -104,7 +98,9 @@ measured nvarchar(max) NOT NULL,
 scaleNo nvarchar(max) NOT NULL,
 pipetteNo nvarchar(max) NOT NULL,
 endConcentration bit NOT NULL,
-liquidAd nvarchar(max) NOT NULL,
+batchNo nvarchar(max) NOT NULL,
+lotNo nvarchar(max) NOT NULL,
+supplier nvarchar(max) NOT NULL,
 
 foreign key(analyzeID) REFERENCES analyzeInformation(analyzeID),
 
@@ -112,13 +108,16 @@ primary key(preparationID)
 )
 
 
-create table form1(
+create table reagent_Chem(
 formTypeID int identity NOT NULL,
 analyzeID int NOT NULL,
 volume nvarchar(max) NOT NULL,
 accConcentration nvarchar(max) NOT NULL,
 lifeTimeF nvarchar(max) NOT NULL,
 storage nvarchar(max) NOT NULL,
+batchNo nvarchar(max) NOT NULL,
+lotNo nvarchar(max) NOT NULL,
+supplier nvarchar(max) NOT NULL,
 
 primary key(formTypeID),
 
@@ -126,7 +125,7 @@ foreign key(analyzeID) REFERENCES analyzeInformation(analyzeID)
 )
 
 
-create table form2(
+create table reagent_Bio(
 formTypeID int identity NOT NULL,
 analyzeID int NOT NULL,
 pHSetting nvarchar(max) NOT NULL,
@@ -134,6 +133,7 @@ treatment nvarchar(max) NOT NULL,
 tag nvarchar(max) NOT NULL,
 lifeTimeF nvarchar(max) NOT NULL,
 storage nvarchar(max) NOT NULL,
+fluidAd nvarchar(max) NOT NULL,
 
 primary key(formTypeID),
 
@@ -141,7 +141,7 @@ foreign key(analyzeID) REFERENCES analyzeInformation(analyzeID)
 )
 
 
-create table form3(
+create table substrate_Bio(
 formTypeID int identity NOT NULL,
 analyzeID int NOT NULL,
 pHSubstrate nvarchar(max) NOT NULL,
@@ -153,6 +153,7 @@ pHAftSterialize nvarchar(max) NOT NULL,
 sterile bit NOT NULL,
 posControl nvarchar(max) NOT NULL,
 negControl nvarchar(max) NOT NULL,
+fluidAd nvarchar(max) NOT NULL,
 
 primary key(formTypeID),
 
@@ -171,11 +172,11 @@ primary key (journalID, formID),
 )
 
 
-create table studentForm(
+create table student_analyzeInformation(
 studentID int NOT NULL,
-formID int NOT NULL,
+analyzeID int NOT NULL,
 
-primary key(studentID, formID),
+primary key(studentID, analyzeID),
 )
 
 
