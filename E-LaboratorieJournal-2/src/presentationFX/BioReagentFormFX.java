@@ -1,5 +1,6 @@
 package presentationFX;
 
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -36,11 +37,13 @@ public class BioReagentFormFX {
 		// Gridpane
 		GridPane topGrid = new GridPane();
 		GridPane btmGrid = new GridPane();
-//		btmGrid.setHalignment(btmGrid, Pos.CENTER_RIGHT);
+		btmGrid.setHalignment(btmGrid, HPos.RIGHT);
+		btmGrid.setPrefWidth(800);
 		GridPane infoGrid = new GridPane();
 		
 		// Tableview
 		TableView preparationTable = new TableView();
+		preparationTable.setPrefHeight(150);
 		
 		// Labels
 		Label namelbl = new Label("Navn");

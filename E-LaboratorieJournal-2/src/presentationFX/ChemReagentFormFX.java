@@ -22,6 +22,10 @@ public class ChemReagentFormFX {
 		// VBox
 		VBox mainBox = new VBox();
 		chemReagentScene = new Scene(mainBox);
+		mainBox.setPrefWidth(800);
+		mainBox.setPrefHeight(950);
+		mainBox.setPadding(new Insets(10, 10, 10 ,10));
+		mainBox.setSpacing(10);
 		
 		// HBox
 		HBox btnBox = new HBox();
