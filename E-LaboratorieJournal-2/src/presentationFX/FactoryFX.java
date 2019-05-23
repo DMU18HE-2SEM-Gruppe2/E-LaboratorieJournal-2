@@ -4,9 +4,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -27,6 +26,17 @@ public class FactoryFX {
 		template.setPrefWidth(width);
 		template.setFont(Font.font(fontSize));
 
+		return template;
+	}
+	
+	public TextArea textAreaFactory(int height, int width, int fontsize, boolean monospace) {
+		TextArea template = new TextArea();
+		template.setPrefHeight(height);
+		template.setPrefWidth(width);
+		template.setFont(Font.font(fontsize));
+		if (monospace == true) {
+			template.setStyle("-fx-font-family: 'monospaced';");
+		}
 		return template;
 	}
 	

@@ -179,6 +179,7 @@ public class BioSubstrateFormFX {
 		
 		// Action
 		addPreparation.setOnAction(e -> createPreparation());
+		cancel.setOnAction(e -> cancelForm());
 		
 		bioSubstrateStage.setScene(bioSubstrateScene);
 		bioSubstrateStage.show();
@@ -187,5 +188,9 @@ public class BioSubstrateFormFX {
 	public void createPreparation() {
 		PreparationForm preparationForm = new PreparationForm();
 		preparationForm.Start();
+	}
+	
+	public void cancelForm() {
+		bioSubstrateStage.close();
 	}
 }
