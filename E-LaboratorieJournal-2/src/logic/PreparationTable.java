@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class PreparationTable extends FormInformation {
 
 	protected String chemical;
-	protected String easNo;
+	protected String casNo;
 	protected String productNo;
 	protected String weighed;
 	protected String measured;
@@ -17,14 +17,14 @@ public class PreparationTable extends FormInformation {
 	protected String supplier;
 
 	public PreparationTable(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
-			int studentID, String reagentName, String chemical, String easNo, String productNo, String weighed,
+			int studentID, String reagentName, String chemical, String casNo, String productNo, String weighed,
 			String measured, String scaleNo, String pipetteNo, String endConcentration, String batchNo, String lotNo,
 			String supplier) {
 
 		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName);
 
 		this.chemical = chemical;
-		this.easNo = easNo;
+		this.casNo = casNo;
 		this.productNo = productNo;
 		this.weighed = weighed;
 		this.measured = measured;
@@ -44,12 +44,12 @@ public class PreparationTable extends FormInformation {
 		this.chemical = chemical;
 	}
 
-	public String getEasNo() {
-		return easNo;
+	public String getCasNo() {
+		return casNo;
 	}
 
-	public void setEasNo(String easNo) {
-		this.easNo = easNo;
+	public void setCasNo(String casNo) {
+		this.casNo = casNo;
 	}
 
 	public String getProductNo() {

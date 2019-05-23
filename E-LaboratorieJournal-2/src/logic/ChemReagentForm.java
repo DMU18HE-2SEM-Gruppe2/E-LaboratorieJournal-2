@@ -4,8 +4,7 @@ import java.time.LocalDate;
 
 public class ChemReagentForm extends FormInformation {
 
-	private String exerciseName;
-	private String weightNo;
+	private String scaleNo;
 	private String volume;
 	private String concentration;
 	private String lifeTimeF;
@@ -15,12 +14,11 @@ public class ChemReagentForm extends FormInformation {
 	private String supplier;
 
 	public ChemReagentForm(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
-			int studentID, String exerciseName, String weightNo, String manufacturedVolume, String concentration,
-			String lifeTimeF, String storage, String reagentName, String batchNo, String lotNo, String supplier) {
+			int studentID, String scaleNo, String manufacturedVolume, String concentration, String lifeTimeF,
+			String storage, String reagentName, String batchNo, String lotNo, String supplier) {
 
 		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName);
-		this.exerciseName = exerciseName;
-		this.weightNo = weightNo;
+		this.scaleNo = scaleNo;
 		this.volume = manufacturedVolume;
 		this.concentration = concentration;
 		this.lifeTimeF = lifeTimeF;
@@ -31,20 +29,20 @@ public class ChemReagentForm extends FormInformation {
 
 	}
 
-	public String getExerciseName() {
-		return exerciseName;
+	public String getScaleNo() {
+		return scaleNo;
 	}
 
-	public void setExerciseName(String exerciseName) {
-		this.exerciseName = exerciseName;
+	public void setScaleNo(String scaleNo) {
+		this.scaleNo = scaleNo;
 	}
 
-	public String getWeightNo() {
-		return weightNo;
+	public String getLifeTimeF() {
+		return lifeTimeF;
 	}
 
-	public void setWeightNo(String weightNo) {
-		this.weightNo = weightNo;
+	public void setLifeTimeF(String lifeTimeF) {
+		this.lifeTimeF = lifeTimeF;
 	}
 
 	public String getVolume() {
@@ -61,14 +59,6 @@ public class ChemReagentForm extends FormInformation {
 
 	public void setConcentration(String concentration) {
 		this.concentration = concentration;
-	}
-
-	public String getlifeTimeF() {
-		return lifeTimeF;
-	}
-
-	public void setlifeTimeF(String lifeTimeF) {
-		this.lifeTimeF = lifeTimeF;
 	}
 
 	public String getStorage() {
@@ -105,11 +95,11 @@ public class ChemReagentForm extends FormInformation {
 
 	@Override
 	public String toString() {
-		return "ChemReagentForm [exerciseName=" + exerciseName + ", weightNo=" + weightNo + ", volume=" + volume
-				+ ", concentration=" + concentration + ", lifeTimeF=" + lifeTimeF + ", storage=" + storage
-				+ ", batchNo=" + batchNo + ", lotNo=" + lotNo + ", supplier=" + supplier + ", reagentName="
-				+ reagentName + ", date=" + date + ", themeName=" + themeName + ", analyzeTitle=" + analyzeTitle
-				+ ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID + "]";
+		return "ChemReagentForm [scaleNo=" + scaleNo + ", volume=" + volume + ", concentration=" + concentration
+				+ ", lifeTimeF=" + lifeTimeF + ", storage=" + storage + ", batchNo=" + batchNo + ", lotNo=" + lotNo
+				+ ", supplier=" + supplier + ", reagentName=" + reagentName + ", date=" + date + ", themeName="
+				+ themeName + ", analyzeTitle=" + analyzeTitle + ", comments=" + comments + ", analyzeID=" + analyzeID
+				+ ", studentID=" + studentID + "]";
 	}
 
 }
