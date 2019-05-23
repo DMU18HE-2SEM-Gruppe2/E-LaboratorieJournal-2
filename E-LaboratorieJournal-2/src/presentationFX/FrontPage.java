@@ -1,6 +1,7 @@
 package presentationFX;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
@@ -17,13 +18,13 @@ public class FrontPage {
 	public void start(Stage mainStage) {
 		mainStage.setTitle("ELJ v.1");
 		
+		FactoryFX factory = new FactoryFX();
+		
 		BorderPane mainPane = new BorderPane();
 		mainScene = new Scene(mainPane);
 		
-		VBox vBoxMenu = new VBox();
-		vBoxMenu.setPadding(new Insets(10, 10, 10, 10));
-		vBoxMenu.setSpacing(10);
-		vBoxMenu.setPrefWidth(150);
+		VBox vBoxMenu = factory.vBoxFactory(10, 10, 10, 10, 10, Pos.TOP_LEFT);
+
 		
 		TabPane tabs = new TabPane();
 		tabs.setPrefWidth(500);
@@ -36,26 +37,19 @@ public class FrontPage {
 		TableView journalTable = new TableView();
 		TableView formTable = new TableView();
 		
-		// Searchbar
-		TextField searchbar = new TextField();
+		// Searchbar¨
+		TextField tfSearch = factory.textFieldFactory("Search...", 100, 14);
 		
 		// Buttons
-		Button crtFrm = new Button("Opret Form");
+		Button btnForm = factory.buttonFactory("Opret Form", 100, 14, false);
+		Button btnJournal = factory.buttonFactory("Opret Journal", 100, 14, false);
+		Button btnPrint	= factory.buttonFactory("Print", 100, 14, false);
+		Button btnLock = factory.buttonFactory("Afslut", 100, 14, false);
+		Button btnEdit = factory.buttonFactory("Rediger", 100, 14, false);
+		Button btnInvalid = factory.buttonFactory("Ugyldiggør", 100, 14, false);
+		Button btnDelete = factory.buttonFactory("Slet", 100, 14, false);
 		
-		Button crtJrn = new Button("Opret Journal");
-		
-		
-		Button print = new Button("Print");
-		
-		Button lock = new Button("Afslut");
-		
-		Button edit = new Button("Rediget");
-		
-		Button invalid = new Button("Ugyldiggør");
-		
-		Button delete = new Button("Slet");
-		
-		vBoxMenu.getChildren().addAll(searchbar, crtFrm, crtJrn, print, lock, edit, invalid, delete);
+		vBoxMenu.getChildren().addAll(tfSearch, btnForm, btnJournal, btnPrint, btnLock, btnEdit, btnInvalid, btnDelete);
 		
 		journalTab.setContent(journalTable);
 		formTab.setContent(formTable);
@@ -64,8 +58,8 @@ public class FrontPage {
 		mainPane.setCenter(tabs);
 		
 		// Action
-		crtJrn.setOnAction(e -> createJournal());
-		crtFrm.setOnAction(e -> createForm());
+		btnJournal.setOnAction(e -> createJournal());
+		btnForm.setOnAction(e -> createForm());
 	
 		mainStage.setScene(mainScene);
 		mainStage.show();		
