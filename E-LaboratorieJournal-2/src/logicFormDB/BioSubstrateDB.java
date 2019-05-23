@@ -203,7 +203,7 @@ public class BioSubstrateDB {
 					+ "JOIN substrate_Bio ON substrate_Bio.analyzeID = preparation.analyzeID WHERE " + whereClause + "";
 
 			
-			System.out.println();
+			System.out.println(sql);
 			
 			Statement statement = connection.getConnection().createStatement();
 			ResultSet resultSet = statement.executeQuery(sql);

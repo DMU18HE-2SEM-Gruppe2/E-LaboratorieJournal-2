@@ -4,14 +4,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
+import data.BioReagentContainer;
 import data.DBConnection;
 import logic.BioReagentForm;
 import logic.Student;
 
 public class BioReagentDB {
 	private DBConnection connection;
-
 
 	public BioReagentDB(DBConnection connection) {
 		this.connection = connection;
@@ -180,5 +181,65 @@ public class BioReagentDB {
 			System.out.println(e.getMessage());
 			return false;
 		}
+	}
+
+	public BioReagentContainer getAllProducts(BioReagentContainer list) {
+		return getAllProductsWhere("1=1", list);
+	}
+
+	public BioReagentContainer getAllProductsWhere(String whereClause, BioReagentContainer list) {
+
+		try {
+			String sql = "SELECT analyzeInformation.*, formInformation.*, preparation.*, reagent_Bio.*, student.*"
+					+ "FROM course JOIN student ON student.courseID = course.courseID "
+					+ "JOIN student_analyzeInformation ON student_analyzeInformation.studentID = student.studentID "
+					+ "JOIN analyzeInformation ON student_analyzeInformation.analyzeID = analyzeInformation.analyzeID "
+					+ "JOIN formInformation ON formInformation.analyzeID = analyzeInformation.analyzeID "
+					+ "JOIN preparation ON preparation.analyzeID = formInformation.analyzeID "
+					+ "JOIN reagent_Bio ON reagent_Bio.analyzeID = preparation.analyzeID WHERE " + whereClause + "";
+					
+
+			System.out.println(sql);
+
+			Statement statement = connection.getConnection().createStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
+
+			while (resultSet.next()) {
+				LocalDate date = LocalDate.ofEpochDay(resultSet.getLong("dateCreated"));
+				String themeName = resultSet.getString("themeName");
+				String analyzeTitle = resultSet.getString("analyzeTitle");
+				String comment = resultSet.getString("comment");
+				int analyzeID = resultSet.getInt("analyzeID");
+				int studentID = resultSet.getInt("studentID");
+				String reagentName = resultSet.getString("reagentName");
+				String batchNo = resultSet.getString("batchNo");
+				String lotNo = resultSet.getString("lotNo");
+				String supplier = resultSet.getString("supplier");
+				String chemical = resultSet.getString("chemical");
+				String productNo = resultSet.getString("productNo");
+				String weighed = resultSet.getString("weighed");
+				String measured = resultSet.getString("measured");
+				String scaleNo = resultSet.getString("scaleNo");
+				String pipetteNo = resultSet.getString("pipetteNo");
+				String endConcentration = resultSet.getString("endConcentration");
+				String adjustpH = resultSet.getString("pHSetting");
+				String furtherTreatment = resultSet.getString("treatment");
+				String labeling = resultSet.getString("tag");
+				String lifeTimeF = resultSet.getString("lifeTimeF");
+				String storage = resultSet.getString("storage");
+				String fluidAd = resultSet.getString("fluidAd");
+
+				BioReagentForm brf = new BioReagentForm(date, themeName, analyzeTitle, comment, analyzeID, studentID,
+						reagentName, batchNo, lotNo, supplier, chemical, productNo, weighed, measured, scaleNo,
+						pipetteNo, endConcentration, adjustpH, furtherTreatment, labeling, lifeTimeF, storage, fluidAd);
+
+				list.addElement(brf);
+
+			}
+		} catch (SQLException e) {
+			System.out.println("Error executing SQL statement");
+			System.out.println(e.getMessage());
+		}
+		return list;
 	}
 }

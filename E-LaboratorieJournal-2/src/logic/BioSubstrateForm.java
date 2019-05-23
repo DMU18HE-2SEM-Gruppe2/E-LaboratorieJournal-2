@@ -16,14 +16,13 @@ public class BioSubstrateForm extends PreparationTable {
 	private String fluidAd;
 
 	public BioSubstrateForm(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
-			int studentID, String reagentName, String batchNo, String lotNo, String supplier, int pageNo,
-			String signature, String chemical, String easNo, String productNo, String weighed, String measured,
+			int studentID, String reagentName, String batchNo, String lotNo, String supplier, String chemical, String casNo, String productNo, String weighed, String measured,
 			String scaleNo, String pipetteNo, String endConcentration, String pHBefore, String pHEnd,
 			String sterializeTime, String sterializeC, String addAftSterialize, String pHAftSterialize, boolean sterile,
 			String posControl, String negControl, String fluidAd) {
 
 		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName, batchNo, lotNo, supplier,
-				signature, chemical, easNo, productNo, weighed, measured, scaleNo, pipetteNo);
+				 chemical, casNo, productNo, weighed, measured, scaleNo, pipetteNo, fluidAd);
 
 		this.pHSubstrate = pHBefore;
 		this.pHSterialized = pHEnd;
