@@ -2,14 +2,17 @@ package presentationFX;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -22,122 +25,162 @@ public class ChemReagentFormFX {
 	public void start() {
 		chemReagentStage = new Stage();
 		chemReagentStage.setTitle("Opret Kemi Reagentsfremstillingsblanket");
+		chemReagentStage.setResizable(false);
+		
+		FactoryFX factory = new FactoryFX();
 		
 		// VBox
 		VBox mainBox = new VBox();
-		chemReagentScene = new Scene(mainBox);
 		mainBox.setPrefWidth(800);
-		mainBox.setPrefHeight(950);
-		mainBox.setPadding(new Insets(10, 10, 10 ,10));
-		mainBox.setSpacing(10);
+		mainBox.setPrefHeight(835);
+		mainBox.setPadding(new Insets(15, 15, 15 ,15));
+		mainBox.setSpacing(15);
+		
+		chemReagentScene = new Scene(mainBox);
 		
 		// HBox
-		HBox btnBox = new HBox();
+		HBox btnBox = new HBox(15);
+		HBox btnRightBox = new HBox(15);
+		btnRightBox.setAlignment(Pos.CENTER_RIGHT);
+		btnRightBox.setPrefWidth(800);
 		
 		// Gridpane
 		GridPane mainGrid = new GridPane();
-		mainGrid.setPadding(new Insets(10, 10, 10, 10));
+		mainGrid.setVgap(15);
+		mainGrid.getColumnConstraints().add(new ColumnConstraints(275));
+		mainGrid.getColumnConstraints().add(new ColumnConstraints(500));
+		GridPane topGrid = new GridPane();
+		topGrid.setVgap(15);
+		topGrid.getColumnConstraints().add(new ColumnConstraints(275));
+		topGrid.getColumnConstraints().add(new ColumnConstraints(500));
 		GridPane infoGrid = new GridPane();
-		GridPane deliverlblGrid = new GridPane();
-		GridPane delivertxtGrid = new GridPane();
+		infoGrid.setVgap(10);
+		infoGrid.getColumnConstraints().add(new ColumnConstraints(75));
+		infoGrid.getColumnConstraints().add(new ColumnConstraints(200));
+		GridPane nameGrid = new GridPane();
+		nameGrid.setVgap(15);
+		nameGrid.getColumnConstraints().add(new ColumnConstraints(275));
+		nameGrid.getColumnConstraints().add(new ColumnConstraints(500));
+		GridPane batchGrid = new GridPane();
+		batchGrid.setVgap(15);
+		batchGrid.getColumnConstraints().add(new ColumnConstraints(275));
+		batchGrid.getColumnConstraints().add(new ColumnConstraints(500));
 		
 		// Logo Imag
-//		Image image = new Image("EAMV_Logo.png");
-//		ImageView imageView = new ImageView(image);
-//		imageView.setImage(image);
-//		imageView.setFitHeight(90); 
-//	    imageView.setFitWidth(420);
-//	    topGrid.setHalignment(imageView, HPos.RIGHT);
-//	    topGrid.setValignment(imageView, VPos.TOP);
+		Image image = new Image("EAMV_Logo.png");
+		ImageView imageView = new ImageView(image);
+		imageView.setImage(image);
+		imageView.setFitHeight(90); 
+	    imageView.setFitWidth(420);
+	    topGrid.setHalignment(imageView, HPos.RIGHT);
+	    topGrid.setValignment(imageView, VPos.TOP);
 		
 		// Labels
-		Label namelbl = new Label("Navn");
-		Label courselbl = new Label("Klasse");
-		Label datelbl = new Label("Dato");
-		Label themelbl = new Label("Tema");
-		Label analyzeTitlelbl = new Label("Analyse Titel");
-		Label reagentNamelbl = new Label("Reagensnavn og koncentration");
-		Label batchNolbl = new Label("Batch Nr.");
-		Label lotNolbl = new Label("Lot Nr.");
-		Label supplierlbl = new Label("Leverandør");
-		Label measurementslbl = new Label("Afvejninger/afmålinger");
-		Label weigthNolbl = new Label("Vægtnr./pipettenr. mm.");
-		Label volumelbl = new Label("Fremstillet volumen");
-		Label concentrationlbl = new Label("Angiv nøjagtig koncentration");
-		Label shelfLifelbl = new Label("Holdbarhed");
-		Label storagelbl = new Label("Opbevaring");
-		Label noteslbl = new Label("Bemærkninger");
+		Label lName = factory.labelFactory("Navn", 0, 0, 0, 0, 14, false);
+	    Label lCourse = factory.labelFactory("Klasse", 0, 0, 0, 0, 14, false);
+	    Label lDate = factory.labelFactory("Dato", 0, 0, 0, 0, 14, false);
+	    Label lTheme = factory.labelFactory("Tema", 0, 0, 0, 0, 14, false);
+	    Label lAnalyzeTitle = factory.labelFactory("Analysetitel", 0, 0, 0, 0, 14, false);
+	    Label lReagentName = factory.labelFactory("Reagensnavn og eventuel koncentration", 0, 0, 0, 0, 14, false);
+	    Label lBatchNo = factory.labelFactory("Bathc Nr.", 0, 0, 0, 0, 14, false);
+	    Label lLotNo = factory.labelFactory("Lot Nr.", 0, 0, 0, 0, 14, false);
+	    Label lSupplier = factory.labelFactory("Leverandør", 0, 0, 0, 0, 14, false);
+	    Label lMeasurements = factory.labelFactory("Afvejninger / Afmålinger", 0, 0, 0, 0, 14, false);
+	    Label lWeightNo = factory.labelFactory("Vægt Nr. / Pipette Nr.", 0, 0, 0, 0, 14, false);
+	    Label lVolume = factory.labelFactory("Fremstillet Volumen", 0, 0, 0, 0, 14, false);
+	    Label lConcentration = factory.labelFactory("Angiv nøjagtig koncentration", 0, 0, 0, 0, 14, false);
+	    Label lShelfLife = factory.labelFactory("Holdbarhed", 0, 0, 0, 0, 14, false);
+	    Label lStorage = factory.labelFactory("Opvevaring", 0, 0, 0, 0, 14, false);
+	    Label lComment = factory.labelFactory("Bemærkninger", 0, 0, 0, 0, 14, false);
 		
 		// Textfields
-		TextField nametxt = new TextField();
-		TextField coursetxt = new TextField();
-		TextField datetxt = new TextField();
-		TextField themetxt = new TextField();
-		TextField analyzeTitleTxt = new TextField();
-		TextField reagentNametxt = new TextField();
-		TextField batchNotxt = new TextField();
-		TextField lotNotxt = new TextField();
-		TextField suppliertxt = new TextField();
-		TextField weigthNotxt = new TextField();
-		TextField volumetxt = new TextField();
-		TextField concentrationtxt = new TextField();
-		TextField shelfLifetxt = new TextField();
-		TextField storagetxt = new TextField();
-		
+	    TextField tfName = factory.textFieldFactory("", 500, 14);
+	    TextField tfCourse = factory.textFieldFactory("", 500, 14);
+	    TextField tfDate = factory.textFieldFactory("", 500, 14);
+	    TextField tfTheme = factory.textFieldFactory("", 500, 14);
+	    TextField tfAnalyzeTitle = factory.textFieldFactory("", 500, 14);
+	    TextField tfReagentName = factory.textFieldFactory("", 500, 14);
+	    TextField tfBatchNo = factory.textFieldFactory("", 500, 14);
+	    TextField tfLotNo = factory.textFieldFactory("", 500, 14);
+	    TextField tfSupplier = factory.textFieldFactory("", 500, 14);
+	    TextField tfWeightNo = factory.textFieldFactory("", 500, 14);
+	    TextField tfVolume = factory.textFieldFactory("", 500, 14);
+	    TextField tfConcentration = factory.textFieldFactory("", 500, 14);
+	    TextField tfShelfLife = factory.textFieldFactory("", 500, 14);
+	    TextField tfStorage = factory.textFieldFactory("", 500, 14);
+	    TextField tfComment = factory.textFieldFactory("", 500, 14);
+	    TextField tfMeasurements = factory.textFieldFactory("", 500, 14);
+
+	    // Separators
+	    Separator sepName = new Separator();
+		Separator sepTop = new Separator();
+		Separator sepBatch = new Separator();
+		Separator sepButton = new Separator();
+	    
 		// Textareas
 		TextArea measurementstxt = new TextArea();
 		TextArea notextxt = new TextArea();
 		
 		// Buttons
-		Button invalid = new Button("Ugyldiggør");
-		Button print = new Button("Print");
-		Button saveLock = new Button("Gem og Lås");
-		Button save = new Button("Gem");
+		Button cancel = factory.buttonFactory("Annuller", 90, 14, false);
+		Button invalid = factory.buttonFactory("Ugyldiggør", 90, 14, false);
+		Button print = factory.buttonFactory("Print", 90, 14, false);
+		Button saveLock = factory.buttonFactory("Gem og Lås", 90, 14, false);
+		Button save = factory.buttonFactory("Gem", 90, 14, false);
+		Button addPreparation = factory.buttonFactory("Tilføj Resultat", 90, 14, false);
+				
+		topGrid.add(infoGrid, 0, 0);
+		topGrid.add(imageView, 1, 0);
 		
-		mainBox.getChildren().addAll(mainGrid, btnBox);
-		mainGrid.add(infoGrid, 0, 0);
-		mainGrid.add(analyzeTitlelbl, 0, 1);
-		mainGrid.add(analyzeTitleTxt, 1, 1);
-		mainGrid.add(reagentNamelbl, 0, 2);
-		mainGrid.add(reagentNametxt, 1, 2);
-		mainGrid.add(deliverlblGrid, 0, 4);
-		mainGrid.add(delivertxtGrid, 1, 4);
-		mainGrid.add(measurementslbl, 0, 5);
-		mainGrid.add(measurementstxt, 1, 5);
-		mainGrid.add(weigthNolbl, 0, 6);
-		mainGrid.add(weigthNotxt, 1, 6);
-		mainGrid.add(volumelbl, 0, 7);
-		mainGrid.add(volumetxt, 1, 7);
-		mainGrid.add(concentrationlbl, 0, 8);
-		mainGrid.add(concentrationtxt, 1, 8);
-		mainGrid.add(shelfLifelbl, 0, 9);
-		mainGrid.add(shelfLifetxt, 1, 9);
-		mainGrid.add(storagelbl, 0, 10);
-		mainGrid.add(storagetxt, 1, 10);
-		mainGrid.add(noteslbl, 0, 11);
-		mainGrid.add(notextxt, 1, 11);
+		nameGrid.add(lAnalyzeTitle, 0, 0);
+		nameGrid.add(tfAnalyzeTitle, 1, 0);
+		nameGrid.add(lReagentName, 0, 1);
+		nameGrid.add(tfReagentName, 1, 1);
 		
-		infoGrid.add(namelbl, 0, 0);
-		infoGrid.add(nametxt, 1, 0);
-		infoGrid.add(courselbl, 0, 1);
-		infoGrid.add(coursetxt, 1, 1);
-		infoGrid.add(datelbl, 0, 2);
-		infoGrid.add(datetxt, 1, 2);
-		infoGrid.add(themelbl, 0, 3);
-		infoGrid.add(themetxt, 1, 3);
+		batchGrid.add(lBatchNo, 0, 0);
+		batchGrid.add(tfBatchNo, 1, 0);
+		batchGrid.add(lLotNo, 0, 1);
+		batchGrid.add(tfLotNo, 1, 1);
+		batchGrid.add(lSupplier, 0, 2);
+		batchGrid.add(tfSupplier, 1, 2);
+
+		mainGrid.add(lMeasurements, 0, 0);
+		mainGrid.add(tfMeasurements, 1, 0);
+		mainGrid.add(lWeightNo, 0, 1);
+		mainGrid.add(tfWeightNo, 1, 1);
+		mainGrid.add(lVolume, 0, 2);
+		mainGrid.add(tfVolume, 1, 2);
+		mainGrid.add(lConcentration, 0, 3);
+		mainGrid.add(tfConcentration, 1, 3);
+		mainGrid.add(lShelfLife, 0, 4);
+		mainGrid.add(tfShelfLife, 1, 4);
+		mainGrid.add(lStorage, 0, 5);
+		mainGrid.add(tfStorage, 1, 5);
+		mainGrid.add(lComment, 0, 6);
+		mainGrid.add(tfComment, 1, 6);
 		
-		deliverlblGrid.add(batchNolbl, 0, 0);
-		deliverlblGrid.add(lotNolbl, 0, 1);
-		deliverlblGrid.add(supplierlbl, 0, 2);
+		infoGrid.add(lName, 0, 0);
+		infoGrid.add(tfName, 1, 0);
+		infoGrid.add(lCourse, 0, 1);
+		infoGrid.add(tfCourse, 1, 1);
+		infoGrid.add(lDate, 0, 2);
+		infoGrid.add(tfDate, 1, 2);
+		infoGrid.add(lTheme, 0, 3);
+		infoGrid.add(tfTheme, 1, 3);
 		
-		delivertxtGrid.add(batchNotxt, 0, 0);
-		delivertxtGrid.add(lotNotxt, 0, 1);
-		delivertxtGrid.add(suppliertxt, 0, 2);
-		
-		btnBox.getChildren().addAll(invalid, print, saveLock, save);
+		btnRightBox.getChildren().addAll(print, saveLock, save);
+		btnBox.getChildren().addAll(cancel, invalid, btnRightBox);
+		mainBox.getChildren().addAll(topGrid, sepTop, nameGrid, sepName, batchGrid, sepBatch, mainGrid, sepButton, btnBox);
+
+		// Action
+		cancel.setOnAction(e -> cancelForm());
 		
 		chemReagentStage.setScene(chemReagentScene);
 		chemReagentStage.show();
+	}
+	
+	public void cancelForm() {
+		chemReagentStage.close();
 	}
 	
 }

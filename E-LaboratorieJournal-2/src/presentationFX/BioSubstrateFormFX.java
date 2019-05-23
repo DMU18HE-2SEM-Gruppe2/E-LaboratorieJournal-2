@@ -2,14 +2,17 @@ package presentationFX;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -22,27 +25,50 @@ public class BioSubstrateFormFX {
 	public void start() {
 		bioSubstrateStage = new Stage();
 		bioSubstrateStage.setTitle("Opret Biologi Substratfremstillingsblanket");
+		bioSubstrateStage.setResizable(false);
+		
+		FactoryFX factory = new FactoryFX();
 		
 		// VBox
 		VBox mainBox = new VBox();
-		bioSubstrateScene = new Scene(mainBox);
-		mainBox.setPrefWidth(800);
+		mainBox.setPrefWidth(400);
 		mainBox.setPrefHeight(950);
-		mainBox.setPadding(new Insets(10, 10, 10 ,10));
-		mainBox.setSpacing(10);
+		mainBox.setPadding(new Insets(15, 15, 15 ,15));
+		mainBox.setSpacing(15);
+		
+		bioSubstrateScene = new Scene(mainBox);
 		
 		// HBox
-		HBox btnBox = new HBox();
-		HBox btnRightBox = new HBox();
+		HBox btnBox = new HBox(15);
+		HBox btnRightBox = new HBox(15);
+		btnRightBox.setAlignment(Pos.CENTER_RIGHT);
+		btnRightBox.setPrefWidth(800);
 		
 		// Gridpane
 		GridPane topGrid = new GridPane();
-		GridPane btmGrid = new GridPane();
+		topGrid.setVgap(15);
+		topGrid.getColumnConstraints().add(new ColumnConstraints(275));
+		topGrid.getColumnConstraints().add(new ColumnConstraints(500));
+		GridPane nameGrid = new GridPane();
+		nameGrid.setVgap(15);
+		nameGrid.getColumnConstraints().add(new ColumnConstraints(275));
+		nameGrid.getColumnConstraints().add(new ColumnConstraints(500));
+		GridPane mainGrid = new GridPane();
+		mainGrid.setVgap(15);
+		mainGrid.getColumnConstraints().add(new ColumnConstraints(275));
+		mainGrid.getColumnConstraints().add(new ColumnConstraints(500));
 		GridPane infoGrid = new GridPane();
-		GridPane sterileGrid = new GridPane();
+		infoGrid.setVgap(10);
+		infoGrid.getColumnConstraints().add(new ColumnConstraints(75));
+		infoGrid.getColumnConstraints().add(new ColumnConstraints(200));
+		GridPane controlGrid = new GridPane();
+		controlGrid.setVgap(15);
+		controlGrid.getColumnConstraints().add(new ColumnConstraints(275));
+		controlGrid.getColumnConstraints().add(new ColumnConstraints(500));
 		
 		// Tableview
 		TableView preparationTable = new TableView();
+		preparationTable.setPrefHeight(150);
 		
 		// Logo Imag
 		Image image = new Image("EAMV_Logo.png");
@@ -54,91 +80,102 @@ public class BioSubstrateFormFX {
 	    topGrid.setValignment(imageView, VPos.TOP);
 		
 		// Labels
-		Label namelbl = new Label("Navn");
-		Label courselbl = new Label("Klasse");
-		Label datelbl = new Label("Dato");
-		Label themelbl = new Label("Tema");
-		Label analyzeTitlelbl = new Label("Analyse Titel");
-		Label substrateNamelbl = new Label("Substratnavn og eventuel forkortelse");
-		Label phSubstrateLbl = new Label("pH i det færdige substrat skal være");
-		Label phSterializedLbl = new Label("pH målt inden sterilisation");
-		Label liquidLbl = new Label("Væske ad");
-		Label sterializeTimeLbl = new Label("Sterilisationstid");
-		Label sterializeCLbl = new Label("Sterilisationstemperatur");
-		Label addAftSterializeLbl = new Label("Eventuel tilsætning efter sterilisation");
-		Label phAftSterializeLbl = new Label("pH efter sterilisation");
-		Label sterilLbl = new Label("Sterilt");
-		Label posControlLbl = new Label("Positiv Kontrol");
-		Label negControlLbl = new Label("Negativ Kontrol");
-		Label commentLbl = new Label("Bemærkninnger");
+	    Label lName = factory.labelFactory("Navn", 0, 0, 0, 0, 14, false);
+	    Label lCourse = factory.labelFactory("Klasse", 0, 0, 0, 0, 14, false);
+	    Label lDate = factory.labelFactory("Dato", 0, 0, 0, 0, 14, false);
+	    Label lTheme = factory.labelFactory("Tema", 0, 0, 0, 0, 14, false);
+	    Label lAnalyzeTitle = factory.labelFactory("Analysetitel", 0, 0, 0, 0, 14, false);
+	    Label lSubstrateName = factory.labelFactory("Substratnavn og eventuel forkortelse", 0, 0, 0, 0, 14, false);
+	    Label lPreparationTable = factory.labelFactory("Henvisninger", 0, 0, 0, 0, 14, true);
+	    Label lPhSubstrate = factory.labelFactory("pH i det færdige substrat skal være", 0, 0, 0, 0, 14, false);
+	    Label lPhSterialized = factory.labelFactory("pH målt inden sterilisation", 0, 0, 0, 0, 14, false);
+	    Label lLiquid = factory.labelFactory("Væske ad", 0, 0, 0, 0, 14, false);
+	    Label lSterializedTime = factory.labelFactory("Sterilisationstid", 0, 0, 0, 0, 14, false);
+	    Label lSterializedC = factory.labelFactory("Sterilisationstemperatur", 0, 0, 0, 0, 14, false);
+	    Label lAddAftSterialize = factory.labelFactory("Eventuel tilsætning efter sterilisation", 0, 0, 0, 0, 14, false);
+	    Label lPhAftSterialize = factory.labelFactory("pH efter sterilisation", 0, 0, 0, 0, 14, false);
+	    Label lSterile = factory.labelFactory("Sterilt", 0, 0, 0, 0, 14, false);
+	    Label lPosControl = factory.labelFactory("Positiv Kontrol", 0, 0, 0, 0, 14, false);
+	    Label lNegControl = factory.labelFactory("Negativ Kontrol", 0, 0, 0, 0, 14, false);
+	    Label lComment = factory.labelFactory("Bemærkninger", 0, 0, 0, 0, 14, false);
 		
 		// Textfields / Textarea
-		TextField nametxt = new TextField();
-		TextField coursetxt = new TextField();
-		TextField datetxt = new TextField();
-		TextField themetxt = new TextField();
-		TextField analyzeTitleTxt = new TextField();
-		TextField substrateNameTxt = new TextField();
-		TextField phSubstrateTxt = new TextField();
-		TextField phSterializedTxt = new TextField();
-		TextField liquidTxt = new TextField();
-		TextField sterializeTimeTxt = new TextField();
-		TextField sterializeCTxt = new TextField();
-		TextField addAftSterializeTxt = new TextField();
-		TextField phAftSterializeTxt = new TextField();
-		TextField posControlTxt = new TextField();
-		TextField negControlTxt = new TextField();
-		TextField commentTxt = new TextField();
+	    TextField tfName = factory.textFieldFactory("", 500, 14);
+	    TextField tfCourse = factory.textFieldFactory("", 500, 14);
+	    TextField tfDate = factory.textFieldFactory("", 500, 14);
+	    TextField tfTheme = factory.textFieldFactory("", 500, 14);
+	    TextField tfAnalyzeTitle = factory.textFieldFactory("", 500, 14);
+	    TextField tfSubstrateName = factory.textFieldFactory("", 500, 14);
+	    TextField tfPhSubstrate = factory.textFieldFactory("", 500, 14);
+	    TextField tfPhSterialized = factory.textFieldFactory("", 500, 14);
+	    TextField tfLiquid = factory.textFieldFactory("", 500, 14);
+	    TextField tfSterializedTime = factory.textFieldFactory("", 500, 14);
+	    TextField tfSterializedC = factory.textFieldFactory("", 500, 14);
+	    TextField tfAddAftSterialize = factory.textFieldFactory("", 500, 14);
+	    TextField tfPhAftSterialize = factory.textFieldFactory("", 500, 14);
+	    TextField tfPosControl = factory.textFieldFactory("", 500, 14);
+	    TextField tfNegControl = factory.textFieldFactory("", 500, 14);
+	    TextField tfComment = factory.textFieldFactory("", 500, 14);
+		
+	    // Separators
+	    Separator sepName = new Separator();
+		Separator sepTop = new Separator();
+		Separator sepPreparation = new Separator();
+		Separator sepMain = new Separator();
+		Separator sepButton = new Separator();
 		
 		// Buttons
-		Button invalid = new Button("Ugyldiggør");
-		Button print = new Button("Print");
-		Button saveLock = new Button("Gem og Lås");
-		Button save = new Button("Gem");
-		Button addPreparation = new Button("Tilføj resultat");
+		Button cancel = factory.buttonFactory("Annuller", 90, 14, false);
+		Button invalid = factory.buttonFactory("Ugyldiggør", 90, 14, false);
+		Button print = factory.buttonFactory("Print", 90, 14, false);
+		Button saveLock = factory.buttonFactory("Gem og Lås", 90, 14, false);
+		Button save = factory.buttonFactory("Gem", 90, 14, false);
+		Button addPreparation = factory.buttonFactory("Tilføj Resultat", 90, 14, false);
 		
 		// Setup
 		topGrid.add(infoGrid, 0, 0);
-		topGrid.add(analyzeTitlelbl, 0, 1);
-		topGrid.add(analyzeTitleTxt, 1, 1);
-		topGrid.add(substrateNamelbl, 0, 2);
-		topGrid.add(substrateNameTxt, 1, 2);
+		topGrid.add(imageView, 1, 0);
 		
-		infoGrid.add(namelbl, 0, 0);
-		infoGrid.add(nametxt, 1, 0);
-		infoGrid.add(courselbl, 0, 1);
-		infoGrid.add(coursetxt, 1, 1);
-		infoGrid.add(datelbl, 0, 2);
-		infoGrid.add(datetxt, 1, 2);
-		infoGrid.add(themelbl, 0, 3);
-		infoGrid.add(themetxt, 1, 3);
+		infoGrid.add(lName, 0, 0);
+		infoGrid.add(tfName, 1, 0);
+		infoGrid.add(lCourse, 0, 1);
+		infoGrid.add(tfCourse, 1, 1);
+		infoGrid.add(lDate, 0, 2);
+		infoGrid.add(tfDate, 1, 2);
+		infoGrid.add(lTheme, 0, 3);
+		infoGrid.add(tfTheme, 1, 3);
 		
-		btmGrid.add(phSubstrateLbl, 0, 0);
-		btmGrid.add(phSubstrateTxt, 1, 0);
-		btmGrid.add(phSterializedLbl, 0, 1);
-		btmGrid.add(phSterializedTxt, 1, 1);
-		btmGrid.add(liquidLbl, 0, 2);
-		btmGrid.add(liquidTxt, 1, 2);
-		btmGrid.add(sterializeTimeLbl, 0, 3);
-		btmGrid.add(sterializeTimeTxt, 1, 3);
-		btmGrid.add(sterializeCLbl, 0, 4);
-		btmGrid.add(sterializeCTxt, 1, 4);
-		btmGrid.add(addAftSterializeLbl, 0, 5);
-		btmGrid.add(addAftSterializeTxt, 1, 5);
-		btmGrid.add(phAftSterializeLbl, 0, 6);
-		btmGrid.add(phAftSterializeTxt, 1, 6);
-		btmGrid.add(sterilLbl, 0, 7);
-		btmGrid.add(sterileGrid, 1, 7);
-		btmGrid.add(posControlLbl, 0, 8);
-		btmGrid.add(posControlTxt, 1, 8);
-		btmGrid.add(negControlLbl, 0, 9);
-		btmGrid.add(negControlTxt, 1, 9);
-		btmGrid.add(commentLbl, 0, 10);
-		btmGrid.add(commentTxt, 1, 10);
+		nameGrid.add(lAnalyzeTitle, 0, 1);
+		nameGrid.add(tfAnalyzeTitle, 1, 1);
+		nameGrid.add(lSubstrateName, 0, 2);
+		nameGrid.add(tfSubstrateName, 1, 2);
+		
+		mainGrid.add(lPhSubstrate, 0, 0);
+		mainGrid.add(tfPhSubstrate, 1, 0);
+		mainGrid.add(lPhSterialized, 0, 1);
+		mainGrid.add(tfPhSterialized, 1, 1);
+		mainGrid.add(lLiquid, 0, 2);
+		mainGrid.add(tfLiquid, 1, 2);
+		mainGrid.add(lSterializedTime, 0, 3);
+		mainGrid.add(tfSterializedTime, 1, 3);
+		mainGrid.add(lSterializedC, 0, 4);
+		mainGrid.add(tfSterializedC, 1, 4);
+		mainGrid.add(lAddAftSterialize, 0, 5);
+		mainGrid.add(tfAddAftSterialize, 1, 5);
+		
+		controlGrid.add(lPhAftSterialize, 0, 0);
+		controlGrid.add(tfPhAftSterialize, 1, 0);
+		controlGrid.add(lSterile, 0, 1);
+		controlGrid.add(lPosControl, 0, 2);
+		controlGrid.add(tfPosControl, 1, 2);
+		controlGrid.add(lNegControl, 0, 3);
+		controlGrid.add(tfNegControl, 1, 3);
+		controlGrid.add(lComment, 0, 4);
+		controlGrid.add(tfComment, 1, 4);
 		
 		btnRightBox.getChildren().addAll(print, saveLock, save);
-		btnBox.getChildren().addAll(invalid, btnRightBox);
-		mainBox.getChildren().addAll(topGrid, preparationTable, addPreparation, btmGrid, btnBox);
+		btnBox.getChildren().addAll(cancel, invalid, btnRightBox);
+		mainBox.getChildren().addAll(topGrid, sepTop, nameGrid, sepName, lPreparationTable, preparationTable, addPreparation, sepPreparation, mainGrid, sepMain, controlGrid, sepButton, btnBox);
 		
 		// Action
 		addPreparation.setOnAction(e -> createPreparation());
