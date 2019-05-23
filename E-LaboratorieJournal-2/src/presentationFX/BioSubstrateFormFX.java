@@ -1,12 +1,15 @@
 package presentationFX;
 
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -30,6 +33,7 @@ public class BioSubstrateFormFX {
 		
 		// HBox
 		HBox btnBox = new HBox();
+		HBox btnRightBox = new HBox();
 		
 		// Gridpane
 		GridPane topGrid = new GridPane();
@@ -39,6 +43,15 @@ public class BioSubstrateFormFX {
 		
 		// Tableview
 		TableView preparationTable = new TableView();
+		
+		// Logo Imag
+		Image image = new Image("EAMV_Logo.png");
+		ImageView imageView = new ImageView(image);
+		imageView.setImage(image);
+		imageView.setFitHeight(90); 
+	    imageView.setFitWidth(420);
+	    topGrid.setHalignment(imageView, HPos.RIGHT);
+	    topGrid.setValignment(imageView, VPos.TOP);
 		
 		// Labels
 		Label namelbl = new Label("Navn");
@@ -123,6 +136,8 @@ public class BioSubstrateFormFX {
 		btmGrid.add(commentLbl, 0, 10);
 		btmGrid.add(commentTxt, 1, 10);
 		
+		btnRightBox.getChildren().addAll(print, saveLock, save);
+		btnBox.getChildren().addAll(invalid, btnRightBox);
 		mainBox.getChildren().addAll(topGrid, preparationTable, addPreparation, btmGrid, btnBox);
 		
 		// Action

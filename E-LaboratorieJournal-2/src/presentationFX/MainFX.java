@@ -9,18 +9,6 @@ public class MainFX extends Application {
 		launch(args);
 
 	}
-	
-//		public void start(Stage mainStage) throws Exception {			
-//			FrontPage frontpage = new FrontPage();
-//			frontpage.start(mainStage);
-//		}
-
-	
-//		public void start(Stage journalStage) throws Exception {			
-//			JournalFX journal = new JournalFX();
-//			journal.start(journalStage);
-//		}
-	
 		public void start(Stage testStage) throws Exception {			
 			FrontPage test = new FrontPage();
 			test.start(testStage);
