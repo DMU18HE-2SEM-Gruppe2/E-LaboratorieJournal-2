@@ -13,5 +13,4 @@ public class MainFX extends Application {
 			FrontPage test = new FrontPage();
 			test.start(testStage);
 		}
-
 }
