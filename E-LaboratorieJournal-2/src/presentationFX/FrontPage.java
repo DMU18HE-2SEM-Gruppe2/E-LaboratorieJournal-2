@@ -27,7 +27,7 @@ public class FrontPage {
 	
 	DBConnection connection = new DBConnection();
 	
-	ChemReagentDB crDB = new ChemReagentDB(connection);
+	ChemReagentDB crDB = new ChemReagentDB();
 	
 	ObservableList<FormPresentation> formList;
 	

@@ -14,11 +14,8 @@ import logic.FormPresentation;
 import logic.Student;
 
 public class ChemReagentDB {
-	private DBConnection connection;
 
-	public ChemReagentDB(DBConnection connection) {
-		this.connection = connection;
-	}
+	DBConnection connection = new DBConnection();
 
 	private boolean addAnalyzeInfo(ChemReagentForm chemReagentForm) {
 

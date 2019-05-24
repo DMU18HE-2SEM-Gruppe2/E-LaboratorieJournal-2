@@ -15,11 +15,8 @@ import logic.FormPresentation;
 import logic.Student;
 
 public class BioReagentDB {
-	private DBConnection connection;
 
-	public BioReagentDB(DBConnection connection) {
-		this.connection = connection;
-	}
+	DBConnection connection = new DBConnection();
 
 	private boolean addAnalyzeInfo(BioReagentForm bioReagentForm) {
 

@@ -16,9 +16,9 @@ public class ImplDB implements InterfaceDB {
 	DBConnection connection = new DBConnection();
 
 	DBOthers oDB = new DBOthers();
-	ChemReagentDB crDB = new ChemReagentDB(connection);
-	BioReagentDB brDB = new BioReagentDB(connection);
-	BioSubstrateDB bsDB = new BioSubstrateDB(connection);
+	ChemReagentDB crDB = new ChemReagentDB();
+	BioReagentDB brDB = new BioReagentDB();
+	BioSubstrateDB bsDB = new BioSubstrateDB();
 
 	// Student
 	@Override

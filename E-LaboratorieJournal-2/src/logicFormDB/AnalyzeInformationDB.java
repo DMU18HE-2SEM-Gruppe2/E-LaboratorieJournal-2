@@ -11,11 +11,7 @@ import logic.Student;
 
 public class AnalyzeInformationDB {
 
-	private DBConnection connection;
-
-	public AnalyzeInformationDB(DBConnection connection) {
-		this.connection = connection;
-	}
+	DBConnection connection = new DBConnection();
 
 	public boolean addAnalyzeInfo(ChemReagentForm chemReagentForm) {
 

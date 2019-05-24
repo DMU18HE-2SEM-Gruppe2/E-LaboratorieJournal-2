@@ -15,11 +15,8 @@ import logic.FormPresentation;
 import logic.Student;
 
 public class BioSubstrateDB {
-	private DBConnection connection;
 
-	public BioSubstrateDB(DBConnection connection) {
-		this.connection = connection;
-	}
+	DBConnection connection = new DBConnection();
 
 	private boolean addAnalyzeInfo(BioSubstrateForm bioSubstrateForm) {
 

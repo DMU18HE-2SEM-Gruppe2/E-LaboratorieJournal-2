@@ -1,11 +1,15 @@
 package presentationFX;
 
+import java.time.LocalDate;
+
+import data.DBOthers;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
@@ -19,10 +23,28 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import logic.ChemReagentForm;
+import logic.Student;
+import logicFormDB.ChemReagentDB;
 
 public class ChemReagentFormFX {
 	Scene chemReagentScene;
 	Stage chemReagentStage;
+	
+	TextField tfName, tfCourse, tfDate, tfTheme, tfAnalyzeTitle, tfReagentName, tfBatchNo, tfLotNo, tfSupplier, tfScaleNo, tfVolume, tfConcentration, tfShelfLife,
+	tfStorage, tfComment, tfMeasurements; 
+	
+	int analyzeID, studentID, courseID;
+	LocalDate date;
+	String firstName, lastName;
+	
+	ComboBox cbStudent, cbCourse;
+	
+	Student student = new Student(firstName, lastName, courseID, studentID);
+	DBOthers dbo = new DBOthers();
+	
+	
+
 	
 	public void start() {
 		chemReagentStage = new Stage();
@@ -43,7 +65,7 @@ public class ChemReagentFormFX {
 		
 		// VBox
 		VBox mainBox = new VBox();
-		mainBox.setMaxWidth(820);
+		mainBox.setPrefWidth(800);
 		mainBox.setPrefHeight(835);
 		mainBox.setPadding(new Insets(15, 15, 15 ,15));
 		mainBox.setSpacing(15);
@@ -98,7 +120,7 @@ public class ChemReagentFormFX {
 	    Label lLotNo = factory.labelFactory("Lot Nr.", 0, 0, 0, 0, 14, false);
 	    Label lSupplier = factory.labelFactory("Leverandør", 0, 0, 0, 0, 14, false);
 	    Label lMeasurements = factory.labelFactory("Afvejninger / Afmålinger", 0, 0, 0, 0, 14, false);
-	    Label lWeightNo = factory.labelFactory("Vægt Nr. / Pipette Nr.", 0, 0, 0, 0, 14, false);
+	    Label lScaleNo = factory.labelFactory("Vægt Nr. / Pipette Nr.", 0, 0, 0, 0, 14, false);
 	    Label lVolume = factory.labelFactory("Fremstillet Volumen", 0, 0, 0, 0, 14, false);
 	    Label lConcentration = factory.labelFactory("Angiv nøjagtig koncentration", 0, 0, 0, 0, 14, false);
 	    Label lShelfLife = factory.labelFactory("Holdbarhed", 0, 0, 0, 0, 14, false);
@@ -106,22 +128,29 @@ public class ChemReagentFormFX {
 	    Label lComment = factory.labelFactory("Bemærkninger", 0, 0, 0, 0, 14, false);
 		
 		// Textfields
-	    TextField tfName = factory.textFieldFactory("", 500, 14);
-	    TextField tfCourse = factory.textFieldFactory("", 500, 14);
-	    TextField tfDate = factory.textFieldFactory("", 500, 14);
-	    TextField tfTheme = factory.textFieldFactory("", 500, 14);
-	    TextField tfAnalyzeTitle = factory.textFieldFactory("", 500, 14);
-	    TextField tfReagentName = factory.textFieldFactory("", 500, 14);
-	    TextField tfBatchNo = factory.textFieldFactory("", 500, 14);
-	    TextField tfLotNo = factory.textFieldFactory("", 500, 14);
-	    TextField tfSupplier = factory.textFieldFactory("", 500, 14);
-	    TextField tfWeightNo = factory.textFieldFactory("", 500, 14);
-	    TextField tfVolume = factory.textFieldFactory("", 500, 14);
-	    TextField tfConcentration = factory.textFieldFactory("", 500, 14);
-	    TextField tfShelfLife = factory.textFieldFactory("", 500, 14);
-	    TextField tfStorage = factory.textFieldFactory("", 500, 14);
-	    TextField tfComment = factory.textFieldFactory("", 500, 14);
-	    TextField tfMeasurements = factory.textFieldFactory("", 500, 14);
+	    tfName = factory.textFieldFactory("", 500, 14);
+	    tfCourse = factory.textFieldFactory("", 500, 14);
+	    tfDate = factory.textFieldFactory("", 500, 14);
+	    tfDate.setText(LocalDate.now().toString());
+	    tfTheme = factory.textFieldFactory("", 500, 14);
+	    tfAnalyzeTitle = factory.textFieldFactory("", 500, 14);
+	    tfReagentName = factory.textFieldFactory("", 500, 14);
+	    tfBatchNo = factory.textFieldFactory("", 500, 14);
+	    tfLotNo = factory.textFieldFactory("", 500, 14);
+	    tfSupplier = factory.textFieldFactory("", 500, 14);
+	    tfScaleNo = factory.textFieldFactory("", 500, 14);
+	    tfVolume = factory.textFieldFactory("", 500, 14);
+	    tfConcentration = factory.textFieldFactory("", 500, 14);
+	    tfShelfLife = factory.textFieldFactory("", 500, 14);
+	    tfStorage = factory.textFieldFactory("", 500, 14);
+	    tfComment = factory.textFieldFactory("", 500, 14);
+	    tfMeasurements = factory.textFieldFactory("", 500, 14);
+	    
+	    // ChoiceBox
+	    cbStudent = new ComboBox();
+	    cbStudent.getItems().setAll(dbo.getAllStudents());
+	    cbCourse = new ComboBox();
+	    cbCourse.getItems().setAll(dbo.getAllCourses());
 
 	    // Separators
 	    Separator sepName = new Separator();
@@ -158,8 +187,8 @@ public class ChemReagentFormFX {
 
 		mainGrid.add(lMeasurements, 0, 0);
 		mainGrid.add(tfMeasurements, 1, 0);
-		mainGrid.add(lWeightNo, 0, 1);
-		mainGrid.add(tfWeightNo, 1, 1);
+		mainGrid.add(lScaleNo, 0, 1);
+		mainGrid.add(tfScaleNo, 1, 1);
 		mainGrid.add(lVolume, 0, 2);
 		mainGrid.add(tfVolume, 1, 2);
 		mainGrid.add(lConcentration, 0, 3);
@@ -172,9 +201,9 @@ public class ChemReagentFormFX {
 		mainGrid.add(tfComment, 1, 6);
 		
 		infoGrid.add(lName, 0, 0);
-		infoGrid.add(tfName, 1, 0);
+		infoGrid.add(cbStudent, 1, 0);
 		infoGrid.add(lCourse, 0, 1);
-		infoGrid.add(tfCourse, 1, 1);
+		infoGrid.add(cbCourse, 1, 1);
 		infoGrid.add(lDate, 0, 2);
 		infoGrid.add(tfDate, 1, 2);
 		infoGrid.add(lTheme, 0, 3);
@@ -188,6 +217,7 @@ public class ChemReagentFormFX {
 		
 		// Action
 		cancel.setOnAction(e -> cancelForm());
+		save.setOnAction(e -> createForm());
 		
 		chemReagentStage.setScene(chemReagentScene);
 		chemReagentStage.show();
@@ -195,6 +225,15 @@ public class ChemReagentFormFX {
 	
 	public void cancelForm() {
 		chemReagentStage.close();
+	}
+	
+	public void createForm() {
+		ChemReagentForm crf = new ChemReagentForm(date, tfTheme.getText(), tfAnalyzeTitle.getText(), tfComment.getText(), analyzeID, cbStudent.getSelectionModel().getSelectedIndex(), tfScaleNo.getText(), tfVolume.getText(), tfConcentration.getText(), tfShelfLife.getText(), tfStorage.getText(), tfReagentName.getText(), tfBatchNo.getText(), tfLotNo.getText(), tfSupplier.getText());
+		ChemReagentDB crb = new ChemReagentDB();
+
+		
+		crb.addChemReagent(crf, student);
+		
 	}
 	
 }

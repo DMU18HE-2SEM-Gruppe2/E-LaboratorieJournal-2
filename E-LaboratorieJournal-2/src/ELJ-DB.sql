@@ -184,24 +184,8 @@ primary key(studentID, analyzeID),
 --Test af indsætning
 
 
-INSERT INTO course VALUES ('DMU');
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO course VALUES ('DMU18');
+INSERT INTO student VALUES ('Johan', 'Gaardbo', 1);
+INSERT INTO student VALUES ('Casper', 'Jakobsen', 1);
+INSERT INTO student VALUES ('Rasmus', 'Gyldenløv', 1);
+INSERT INTO student VALUES ('Frank', 'Christensen', 1);
