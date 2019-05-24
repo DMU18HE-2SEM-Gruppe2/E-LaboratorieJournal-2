@@ -35,11 +35,27 @@ public class ImplDB implements InterfaceDB {
 	public List<Student> getStudentsWhere(String whereClause) {
 		return oDB.getStudentsWhere(whereClause);
 	}
+	
+	@Override
+	public int getStudentById(int id) {
+		return oDB.getStudentById(id);
+	}
 
 	// Course
 	@Override
 	public boolean addCourse(Course course) {
 		return oDB.addCourse(course);
+	}
+	
+	@Override
+	public List<Course> getCoursesWhere(String whereClause) {
+
+		return oDB.getCoursesWhere(whereClause);
+	}
+	
+	@Override
+	public List<Course> getAllCourses() {
+		return oDB.getAllCourses();
 	}
 
 	// Chem Reagent Form

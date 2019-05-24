@@ -2,7 +2,6 @@ package presentationFX;
 
 import java.time.LocalDate;
 
-import data.DBOthers;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,6 +25,7 @@ import javafx.stage.Stage;
 import logic.ChemReagentForm;
 import logic.Student;
 import logicFormDB.ChemReagentDB;
+import logicFormDB.DBFactory;
 
 public class ChemReagentFormFX {
 	Scene chemReagentScene;
@@ -34,14 +34,16 @@ public class ChemReagentFormFX {
 	TextField tfName, tfCourse, tfDate, tfTheme, tfAnalyzeTitle, tfReagentName, tfBatchNo, tfLotNo, tfSupplier, tfScaleNo, tfVolume, tfConcentration, tfShelfLife,
 	tfStorage, tfComment, tfMeasurements; 
 	
-	int analyzeID, studentID, courseID;
+	int analyzeID, studentID, courseID, id;
 	LocalDate date;
-	String firstName, lastName;
+	String firstName, lastName, test;
 	
 	ComboBox cbStudent, cbCourse;
 	
-	Student student = new Student(firstName, lastName, courseID, studentID);
-	DBOthers dbo = new DBOthers();
+
+
+	DBFactory dbf = new DBFactory();
+	
 	
 	
 
@@ -148,9 +150,9 @@ public class ChemReagentFormFX {
 	    
 	    // ChoiceBox
 	    cbStudent = new ComboBox();
-	    cbStudent.getItems().setAll(dbo.getAllStudents());
+	    cbStudent.getItems().setAll(dbf.makeInterfaceDB().getAllStudents());
 	    cbCourse = new ComboBox();
-	    cbCourse.getItems().setAll(dbo.getAllCourses());
+	    cbCourse.getItems().setAll(dbf.makeInterfaceDB().getAllCourses());
 
 	    // Separators
 	    Separator sepName = new Separator();
@@ -219,6 +221,10 @@ public class ChemReagentFormFX {
 		cancel.setOnAction(e -> cancelForm());
 		save.setOnAction(e -> createForm());
 		
+	    cbStudent.getValue();
+	    System.out.println("getvalue: " + cbStudent);
+
+
 		chemReagentStage.setScene(chemReagentScene);
 		chemReagentStage.show();
 	}
@@ -228,10 +234,23 @@ public class ChemReagentFormFX {
 	}
 	
 	public void createForm() {
-		ChemReagentForm crf = new ChemReagentForm(date, tfTheme.getText(), tfAnalyzeTitle.getText(), tfComment.getText(), analyzeID, cbStudent.getSelectionModel().getSelectedIndex(), tfScaleNo.getText(), tfVolume.getText(), tfConcentration.getText(), tfShelfLife.getText(), tfStorage.getText(), tfReagentName.getText(), tfBatchNo.getText(), tfLotNo.getText(), tfSupplier.getText());
+		int selectedIndex = cbStudent.getSelectionModel().getSelectedIndex();
+		if (selectedIndex >= 0) {
+			Student student = (Student) cbStudent.getSelectionModel().getSelectedItem();
+			id = student.getStudentID();
+			System.out.println("id: " + id);
+			studentID = dbf.makeInterfaceDB().getStudentById(id);
+			
+			
+			
+		}
+
+		ChemReagentForm crf = new ChemReagentForm(date.now(), tfTheme.getText(), tfAnalyzeTitle.getText(), tfComment.getText(), analyzeID, studentID, tfScaleNo.getText(), tfVolume.getText(), tfConcentration.getText(), tfShelfLife.getText(), tfStorage.getText(), tfReagentName.getText(), tfBatchNo.getText(), tfLotNo.getText(), tfSupplier.getText());
+//		ChemReagentForm crf = new ChemReagentForm(date.now(), tfTheme.getText(), tfAnalyzeTitle.getText(), tfComment.getText(), analyzeID, cbStudent.getSelectionModel().selectedItemProperty(), tfScaleNo.getText(), tfVolume.getText(), tfConcentration.getText(), tfShelfLife.getText(), tfStorage.getText(), tfReagentName.getText(), tfBatchNo.getText(), tfLotNo.getText(), tfSupplier.getText());
+//System.out.println(cbStudent.getSelectionModel().getSelectedIndex());
 		ChemReagentDB crb = new ChemReagentDB();
 
-		
+		Student student = new Student(firstName, lastName, courseID, studentID);
 		crb.addChemReagent(crf, student);
 		
 	}

@@ -44,4 +44,10 @@ public interface InterfaceDB {
 
 	public List<FormPresentation> getAllForms();
 
+	int getStudentById(int id);
+
+	List<Course> getCoursesWhere(String whereClause);
+
+	List<Course> getAllCourses();
+
 }

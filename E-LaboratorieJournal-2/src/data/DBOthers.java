@@ -95,6 +95,29 @@ public class DBOthers {
 //		}
 //	}
 
+	public int getStudentById(int id) {
+		int studentID = 0;
+		try {
+			String query = "SELECT * FROM student WHERE studentID=" + id;
+			System.out.println(query);
+
+			Statement statement = connection.getConnection().createStatement();
+			ResultSet resultSet = statement.executeQuery(query);
+			// gennemløbe resultset
+			while (resultSet.next()) { // rykker pilen i resultset fra "before first" ned på næste række.
+
+				studentID = resultSet.getInt("studentID");
+				
+				
+			}
+		} catch (SQLException e) {
+			System.out.println("Error running SQL statement");
+			System.out.println(e.getMessage());
+		}
+
+		return studentID;
+
+	}
 	// Read All Students
 	public List<Student> getAllStudents() {
 		return getStudentsWhere("1=1");
@@ -167,7 +190,7 @@ public class DBOthers {
 	}
 
 	// Read Course
-	private List<Course> getCoursesWhere(String whereClause) {
+	public List<Course> getCoursesWhere(String whereClause) {
 		ArrayList<Course> list = new ArrayList<Course>();
 		// henter resultset med alle courses
 		try {
