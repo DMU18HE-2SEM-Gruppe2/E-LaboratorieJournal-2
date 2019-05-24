@@ -43,7 +43,7 @@ public class ChemReagentFormFX {
 		
 		// VBox
 		VBox mainBox = new VBox();
-		mainBox.setPrefWidth(800);
+		mainBox.setMaxWidth(820);
 		mainBox.setPrefHeight(835);
 		mainBox.setPadding(new Insets(15, 15, 15 ,15));
 		mainBox.setSpacing(15);
