@@ -7,11 +7,13 @@ import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -25,18 +27,28 @@ public class BioSubstrateFormFX {
 	public void start() {
 		bioSubstrateStage = new Stage();
 		bioSubstrateStage.setTitle("Opret Biologi Substratfremstillingsblanket");
-		bioSubstrateStage.setResizable(false);
+		bioSubstrateStage.setWidth(840);
+		bioSubstrateStage.setHeight(700);
+		bioSubstrateStage.setResizable(true);
 		
 		FactoryFX factory = new FactoryFX();
 		
+		// Scrollpane
+		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setFitToWidth(true);
+		scrollPane.setPannable(true);
+		
+		// BorderPane
+		BorderPane borderPane = new BorderPane();
+		
 		// VBox
 		VBox mainBox = new VBox();
-		mainBox.setPrefWidth(400);
+		mainBox.setMaxWidth(820);
 		mainBox.setPrefHeight(950);
 		mainBox.setPadding(new Insets(15, 15, 15 ,15));
 		mainBox.setSpacing(15);
 		
-		bioSubstrateScene = new Scene(mainBox);
+		bioSubstrateScene = new Scene(scrollPane);
 		
 		// HBox
 		HBox btnBox = new HBox(15);
@@ -68,7 +80,7 @@ public class BioSubstrateFormFX {
 		
 		// Tableview
 		TableView preparationTable = new TableView();
-		preparationTable.setPrefHeight(150);
+		preparationTable.setMinHeight(150);
 		
 		// Logo Imag
 		Image image = new Image("EAMV_Logo.png");
@@ -176,6 +188,8 @@ public class BioSubstrateFormFX {
 		btnRightBox.getChildren().addAll(print, saveLock, save);
 		btnBox.getChildren().addAll(cancel, invalid, btnRightBox);
 		mainBox.getChildren().addAll(topGrid, sepTop, nameGrid, sepName, lPreparationTable, preparationTable, addPreparation, sepPreparation, mainGrid, sepMain, controlGrid, sepButton, btnBox);
+		borderPane.setCenter(mainBox);
+		scrollPane.setContent(borderPane);
 		
 		// Action
 		addPreparation.setOnAction(e -> createPreparation());

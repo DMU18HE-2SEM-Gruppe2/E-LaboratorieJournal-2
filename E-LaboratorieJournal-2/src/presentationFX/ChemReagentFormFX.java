@@ -7,11 +7,13 @@ import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -25,9 +27,19 @@ public class ChemReagentFormFX {
 	public void start() {
 		chemReagentStage = new Stage();
 		chemReagentStage.setTitle("Opret Kemi Reagentsfremstillingsblanket");
-		chemReagentStage.setResizable(false);
+		chemReagentStage.setWidth(840);
+		chemReagentStage.setHeight(700);
+		chemReagentStage.setResizable(true);
 		
 		FactoryFX factory = new FactoryFX();
+		
+		// Scrollpane
+		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setFitToWidth(true);
+		scrollPane.setPannable(true);
+		
+		// BorderPane
+		BorderPane borderPane = new BorderPane();
 		
 		// VBox
 		VBox mainBox = new VBox();
@@ -36,7 +48,7 @@ public class ChemReagentFormFX {
 		mainBox.setPadding(new Insets(15, 15, 15 ,15));
 		mainBox.setSpacing(15);
 		
-		chemReagentScene = new Scene(mainBox);
+		chemReagentScene = new Scene(scrollPane);
 		
 		// HBox
 		HBox btnBox = new HBox(15);
@@ -171,7 +183,9 @@ public class ChemReagentFormFX {
 		btnRightBox.getChildren().addAll(print, saveLock, save);
 		btnBox.getChildren().addAll(cancel, invalid, btnRightBox);
 		mainBox.getChildren().addAll(topGrid, sepTop, nameGrid, sepName, batchGrid, sepBatch, mainGrid, sepButton, btnBox);
-
+		borderPane.setCenter(mainBox);
+		scrollPane.setContent(borderPane);
+		
 		// Action
 		cancel.setOnAction(e -> cancelForm());
 		

@@ -7,11 +7,13 @@ import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -25,18 +27,28 @@ public class BioReagentFormFX {
 	public void start() {
 		bioReagentStage = new Stage();
 		bioReagentStage.setTitle("Opret Biologi Reagensfremstillingsblanket");
-		bioReagentStage.setResizable(false);
+		bioReagentStage.setWidth(840);
+		bioReagentStage.setHeight(700);
+		bioReagentStage.setResizable(true);
 		
 		FactoryFX factory = new FactoryFX();
 		
+		// Scrollpane
+		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setFitToWidth(true);
+		scrollPane.setPannable(true);
+		
+		// BorderPane
+		BorderPane borderPane = new BorderPane();
+		
 		// VBox
 		VBox mainBox = new VBox();
-		mainBox.setPrefWidth(400);
+		mainBox.setMaxWidth(820);
 		mainBox.setPrefHeight(950);
 		mainBox.setPadding(new Insets(15, 15, 15 ,15));
 		mainBox.setSpacing(15);
 		
-		bioReagentScene = new Scene(mainBox);
+		bioReagentScene = new Scene(scrollPane);
 		
 		// HBox
 		HBox btnBox = new HBox(15);
@@ -154,6 +166,8 @@ public class BioReagentFormFX {
 		btnRightBox.getChildren().addAll(print, saveLock, save);
 		btnBox.getChildren().addAll(cancel, invalid, btnRightBox);
 		mainBox.getChildren().addAll(topGrid, sepTop, lReference, preparationTable, addPreparation, sepTable, btmGrid, sepButtons, btnBox);
+		borderPane.setCenter(mainBox);
+		scrollPane.setContent(borderPane);
 		
 		// Action
 		addPreparation.setOnAction(e -> createPreparation());

@@ -7,12 +7,14 @@ import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -26,18 +28,27 @@ public class JournalFX {
 	public void start() {
 		journalStage = new Stage();
 		journalStage.setTitle("Opret Journal");
-		journalStage.setWidth(820);
-		journalStage.setHeight(1000);
-		journalStage.setResizable(false);
+		journalStage.setWidth(840);
+		journalStage.setHeight(700);
+		journalStage.setResizable(true);
 		
 		FactoryFX factory = new FactoryFX();
+		
+		// Scrollpane
+		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setFitToWidth(true);
+		scrollPane.setPannable(true);
+		
+		// BorderPane
+		BorderPane borderPane = new BorderPane();
 		
 		// VBox 
 		VBox mainBox = new VBox();
 		mainBox.setPadding(new Insets(15, 15, 15, 15));
 		mainBox.setSpacing(15);
+		mainBox.setMaxWidth(820);
 		
-		journalScene = new Scene(mainBox);
+		journalScene = new Scene(scrollPane);
 		
 		// HBox 
 		HBox calcImgBox = new HBox();
@@ -65,6 +76,7 @@ public class JournalFX {
 		// Tableview
 		TableView refTable = new TableView();
 		refTable.setPrefHeight(150);
+		refTable.setMaxWidth(775);
 		
 		// Logo Imag
 		Image image = new Image("EAMV_Logo.png");
@@ -140,6 +152,8 @@ public class JournalFX {
 		btnRightBox.getChildren().addAll(print, saveLock, save);
 		btnBox.getChildren().addAll(cancel, invalid, btnRightBox);
 		mainBox.getChildren().addAll(topGrid, sepTop, nameGrid, sepInfo, lReferences, refTable, addForm, sepName, lResult, taResults, sepCal, lCal, taCal, addCalcPics, sepObs, lObs, taObs, addObsPics, sepButton, btnBox);
+		borderPane.setCenter(mainBox);
+		scrollPane.setContent(borderPane);
 		
 		// Action
 		cancel.setOnAction(e -> cancelForm());
