@@ -5,10 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import data.BioSubstrateContainer;
 import data.DBConnection;
 import logic.BioSubstrateForm;
+import logic.FormPresentation;
 import logic.Student;
 
 public class BioSubstrateDB {
@@ -154,8 +157,9 @@ public class BioSubstrateDB {
 		addStudentForm(student, bioSubstrateForm);
 		System.out.println("StudentForm");
 
-		String sql = "INSERT INTO substrate_Bio (" + "analyzeID," + "pHSubstrate," + "pHSterialized," + "sterializeTime," + "sterializeC,"
-				+ "addAftSterialize," + "pHAftSterialize," + "sterile," + "posControl," + "negControl," + "fluidAd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO substrate_Bio (" + "analyzeID," + "pHSubstrate," + "pHSterialized,"
+				+ "sterializeTime," + "sterializeC," + "addAftSterialize," + "pHAftSterialize," + "sterile,"
+				+ "posControl," + "negControl," + "fluidAd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		System.out.println(sql);
 
 		try {
@@ -186,13 +190,13 @@ public class BioSubstrateDB {
 			return false;
 		}
 	}
-	
-	public BioSubstrateContainer getAllProducts(BioSubstrateContainer list) {
-		return getAllProductsWhere("1=1", list);
+
+	public List<BioSubstrateForm> getAllProducts() {
+		return getAllProductsWhere("1=1");
 	}
-	
-	public BioSubstrateContainer getAllProductsWhere(String whereClause, BioSubstrateContainer list) {
-		
+
+	public List<BioSubstrateForm> getAllProductsWhere(String whereClause) {
+		List<BioSubstrateForm> list = new ArrayList<>();
 		try {
 			String sql = "SELECT analyzeInformation.*, formInformation.*, preparation.*, substrate_Bio.*, student.*"
 					+ "FROM course JOIN student ON student.courseID = course.courseID "
@@ -202,12 +206,11 @@ public class BioSubstrateDB {
 					+ "JOIN preparation ON preparation.analyzeID = formInformation.analyzeID "
 					+ "JOIN substrate_Bio ON substrate_Bio.analyzeID = preparation.analyzeID WHERE " + whereClause + "";
 
-			
 			System.out.println(sql);
-			
+
 			Statement statement = connection.getConnection().createStatement();
 			ResultSet resultSet = statement.executeQuery(sql);
-			
+
 			while (resultSet.next()) {
 				LocalDate date = LocalDate.ofEpochDay(resultSet.getLong("dateCreated"));
 				String themeName = resultSet.getString("themeName");
@@ -221,7 +224,7 @@ public class BioSubstrateDB {
 				String supplier = resultSet.getString("supplier");
 				String chemical = resultSet.getString("chemical");
 				String casNo = resultSet.getString("casNo");
-				String productNo =resultSet.getString("productNo");
+				String productNo = resultSet.getString("productNo");
 				String weighed = resultSet.getString("weighed");
 				String measured = resultSet.getString("measured");
 				String scaleNo = resultSet.getString("scaleNo");
@@ -237,18 +240,21 @@ public class BioSubstrateDB {
 				String posControle = resultSet.getString("posControl");
 				String negControle = resultSet.getString("negControl");
 				String fluidAd = resultSet.getString("fluidAd");
-				
-				BioSubstrateForm BSF = new BioSubstrateForm(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName, batchNo, lotNo, supplier, chemical, casNo, productNo, weighed,
-						measured, scaleNo, pipetteNo, endConcentration, pHSubstrate, pHSterialized, sterializeTime, sterializeC, addAftSterialize, pHAftSterialize, sterile, posControle, negControle, fluidAd);
-				
-				list.addElement(BSF);
-				
+
+				BioSubstrateForm BSF = new BioSubstrateForm(date, themeName, analyzeTitle, comments, analyzeID,
+						studentID, reagentName, batchNo, lotNo, supplier, chemical, casNo, productNo, weighed, measured,
+						scaleNo, pipetteNo, endConcentration, pHSubstrate, pHSterialized, sterializeTime, sterializeC,
+						addAftSterialize, pHAftSterialize, sterile, posControle, negControle, fluidAd);
+
+				list.add(BSF);
+
 			}
-			
+
 		} catch (SQLException e) {
 			System.out.println("Error executing SQL statement");
 			System.out.println(e.getMessage());
 		}
 		return list;
 	}
+
 }

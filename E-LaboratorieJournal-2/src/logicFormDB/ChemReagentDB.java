@@ -5,10 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-import data.ChemReagentContainer;
 import data.DBConnection;
 import logic.ChemReagentForm;
+import logic.FormPresentation;
 import logic.Student;
 
 public class ChemReagentDB {
@@ -143,20 +145,20 @@ public class ChemReagentDB {
 		}
 	}
 
-	public ChemReagentContainer getAllProducts(ChemReagentContainer list) {
-		return getAllProductsWhere("1=1", list);
+	public List<ChemReagentForm> getAllProducts() {
+		return getAllProductsWhere("1=1");
 	}
 
-	public ChemReagentContainer getAllProductsWhere(String whereClause, ChemReagentContainer list) {
-//		ChemReagentContainer list = new ChemReagentContainer();
-
+	public List<ChemReagentForm> getAllProductsWhere(String whereClause) {
+		List<ChemReagentForm> list = new ArrayList<>();
 		try {
 			String sql = "SELECT analyzeInformation.*, formInformation.*, reagent_Chem.*, student.*"
 					+ " FROM course JOIN student ON student.courseID = course.courseID "
 					+ "JOIN student_analyzeInformation ON student_analyzeInformation.studentID = student.studentID "
 					+ "JOIN analyzeInformation ON student_analyzeInformation.analyzeID = analyzeInformation.analyzeID "
 					+ "JOIN formInformation ON formInformation.analyzeID = analyzeInformation.analyzeID "
-					+ "JOIN reagent_Chem ON reagent_Chem.analyzeID = formInformation.analyzeID WHERE " + whereClause;
+					+ "JOIN reagent_Chem ON reagent_Chem.analyzeID = formInformation.analyzeID WHERE " + whereClause
+					+ "";
 			System.out.println(sql);
 
 			Statement statement = connection.getConnection().createStatement();
@@ -182,7 +184,46 @@ public class ChemReagentDB {
 				ChemReagentForm CRF = new ChemReagentForm(date, themeName, analyzeTitle, comment, analyzeID, studentID,
 						scaleNo, volume, accConcentration, lifeTimeF, storage, reagentName, batchNo, lotNo, supplier);
 
-				list.addElement(CRF);
+				list.add(CRF);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Error executin SQL statement");
+			System.out.println(e.getMessage());
+		}
+		return list;
+	}
+
+	public List<FormPresentation> getAllProductsToPresentation() {
+		return getAllProductsWhereToPresentation("1=1");
+	}
+	
+	public List<FormPresentation> getAllProductsWhereToPresentation(String whereClause) {
+		List<FormPresentation> list = new ArrayList<>();
+		try {
+			String sql = "SELECT analyzeInformation.dateCreated, analyzeInformation.themeName, analyzeInformation.analyzeTitle, formInformation.reagentName, student.firstname, student.lastname"
+					+ " FROM course JOIN student ON student.courseID = course.courseID "
+					+ "JOIN student_analyzeInformation ON student_analyzeInformation.studentID = student.studentID "
+					+ "JOIN analyzeInformation ON student_analyzeInformation.analyzeID = analyzeInformation.analyzeID "
+					+ "JOIN formInformation ON formInformation.analyzeID = analyzeInformation.analyzeID WHERE " + whereClause
+					+ " ";
+			System.out.println(sql);
+
+			Statement statement = connection.getConnection().createStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
+
+			while (resultSet.next()) {
+				LocalDate date = LocalDate.ofEpochDay(resultSet.getLong("dateCreated"));
+				String themeName = resultSet.getString("themeName");
+				String analyzeTitle = resultSet.getString("analyzeTitle");
+				String reagentName = resultSet.getString("reagentName");
+				String firstName = resultSet.getString("firstname");
+				String lastName = resultSet.getString("lastname");
+				String fullName = firstName + " " + lastName;
+
+				FormPresentation fp = new FormPresentation(analyzeTitle, date, fullName, themeName, reagentName);
+
+				list.add(fp);
 			}
 
 		} catch (SQLException e) {

@@ -2,14 +2,10 @@ package logic;
 
 import java.time.LocalDate;
 
-import data.BioReagentContainer;
-import data.BioSubstrateContainer;
-import data.ChemReagentContainer;
 import data.DBConnection;
-import data.DBOthers;
 import logicFormDB.BioReagentDB;
-import logicFormDB.BioSubstrateDB;
 import logicFormDB.ChemReagentDB;
+import logicFormDB.DBFactory;
 
 public class Main {
 
@@ -18,7 +14,9 @@ public class Main {
 //				"1", "1", "1", "1", "1", "1", "1", "1", "1", "1");
 //		System.out.println(BRFTest);
 		DBConnection connection = new DBConnection();
-		DBOthers DBO = new DBOthers();
+//		DBOthers DBO = new DBOthers();
+
+		DBFactory dbf = new DBFactory();
 
 		Student std = new Student("Fornavn", "Efternavn", 0, 0);
 
@@ -27,32 +25,33 @@ public class Main {
 		// -----------------CHEM REAGENT TEST-----------------
 
 		ChemReagentDB cfDB = new ChemReagentDB(connection);
-		
-		
-//		ChemReagentForm crfTest = new ChemReagentForm(LocalDate.now(), "Test2", "Brun Sæbe test2", "", 0, 0,
-//				"Grisefedttest2", "1", "12ab3", "GH Kemi", "Køleskab", "sæbe test 2 ", "vægt med udluft nr. 5", "500mL",
-//				"40%");
+
+//		ChemReagentContainer crc = new ChemReagentContainer();
 //
-//		ChemReagentForm crfTest2 = new ChemReagentForm(LocalDate.now(), "Sæbe", "Brun Sæbe test", "", 0, 0, "Grisefedt",
-//				"1", "12ab3", "GH Kemi", "Køleskab", "Sæbe test", "vægt med udluft nr. 3", "300mL", "20%");
-//		
-//		ChemReagentForm crfT = new ChemReagentForm(LocalDate.now(), "ThemeName", "AnalyzeTitel", "Comment", 0, 0,
-//				"scaleNo", "Volume", "Concentration", "LifeTimeF", "Storage", "ReagentName", "BatchNo", "LotNo",
-//				"Supplier");
-		
-		ChemReagentContainer crc = new ChemReagentContainer();
-		
 		ChemReagentForm crfT = new ChemReagentForm(LocalDate.now(), "ThemeName", "AnalyzeTitel", "Comment", 0, 0,
 				"scaleNo", "Volume", "Concentration", "LifeTimeF", "Storage", "ReagentName", "BatchNo", "LotNo",
 				"Supplier");
-		ChemReagentForm crfT2 = new ChemReagentForm(LocalDate.now(), "ThemeName1", "AnalyzeTitel1", "Comment1", 0, 0,
-				"scaleNo1", "Volume1", "Concentration1", "LifeTimeF1", "Storage1", "ReagentName1", "BatchNo1", "LotNo1",
-				"Supplie1r");
-		DBO.addStudent(std, crs);
-		cfDB.addChemReagent(crfT, std);
-		
-		cfDB.getAllProducts(crc);
-		System.out.println(crc.getSize());
+//		ChemReagentForm crfT2 = new ChemReagentForm(LocalDate.now(), "ThemeName1", "AnalyzeTitel1", "Comment1", 0, 0,
+//				"scaleNo1", "Volume1", "Concentration1", "LifeTimeF1", "Storage1", "ReagentName1", "BatchNo1", "LotNo1",
+//				"Supplie1r");
+		dbf.makeInterfaceDB().addStudent(std, crs);
+//
+		dbf.makeInterfaceDB().createChemReagent(crfT, std);
+		System.out.println();
+		System.out.println();
+		dbf.makeInterfaceDB().getAllChemReagent();
+		System.out.println(dbf.makeInterfaceDB().getAllChemReagent().size());
+//		System.out.println(crc.getSize());
+//		dbf.makeInterfaceDB().getAllForms();
+//		for(int i = 0; i < dbf.makeInterfaceDB().getAllForms().size(); i++) {
+//		System.out.println(dbf.makeInterfaceDB().getAllForms().get(i));
+//		}
+//		System.out.println(fpc.getSize());
+//		for (int i = 0; i < fpc.getSize(); i++) {
+//			System.out.println(fpc.getElement(i));
+//		}
+		// cfDB.getAllProducts(crc);
+//		System.out.println(crc.getSize());
 ////		
 ////
 ////		
@@ -62,34 +61,51 @@ public class Main {
 
 		// -----------------BIO REAGENT CREATE TEST-----------------
 
-		BioReagentDB brDB = new BioReagentDB(connection);
-
-		BioReagentContainer brc = new BioReagentContainer();
-		
+//		BioReagentDB brDB = new BioReagentDB(connection);
+//
+//		BioReagentContainer brc = new BioReagentContainer();
+	
 		BioReagentForm brf = new BioReagentForm(LocalDate.now(), "1", "1", "1", 0, 0, "1", "1", "1", "1", "1", "1", "1",
 				"1", "1", "1", "1", "1", "1", "1", "1", "1", "1");
-		DBO.addStudent(std, crs);
-		brDB.addBioReagent(brf, std);
-		brDB.getAllProducts(brc);
-		System.out.println(brc.getSize());
+//		
+		dbf.makeInterfaceDB().addStudent(std, crs);
+		dbf.makeInterfaceDB().createBioReagent(brf, std);
+		dbf.makeInterfaceDB().getAllBioReagent();
+		System.out.println();
+		System.out.println();
+		System.out.println(dbf.makeInterfaceDB().getAllBioReagent().size());
+//		dbf.makeInterfaceDB().addStudent(std, crs);
+//		dbf.makeInterfaceDB().createBioReagent(brf, std);
+//		System.out.println();
+//		System.out.println();
+//		dbf.makeInterfaceDB().getAllBioReagent(brc);
+//		System.out.println(dbf.makeInterfaceDB().getAllBioReagent(brc).getSize());
+//		DBO.addStudent(std, crs);
+//		brDB.addBioReagent(brf, std);
+//		brDB.getAllProducts(brc);
+//		System.out.println(brc.getSize());
 
 		// -----------------BIO SUBSTRATE CREATE TEST-----------------
 
-		BioSubstrateDB bsDB = new BioSubstrateDB(connection);
-
-		BioSubstrateContainer bsc = new BioSubstrateContainer();
-		
+//		BioSubstrateDB bsDB = new BioSubstrateDB(connection);
+//
+//		BioSubstrateContainer bsc = new BioSubstrateContainer();
+////		
 		BioSubstrateForm bsf = new BioSubstrateForm(LocalDate.now(), "2", "2", "2", 0, 0, "2", "2", "2", "2", "2",
 				"2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", false, "2", "2", "2");
-
-		DBO.addStudent(std, crs);
-		bsDB.addBioSubstrate(bsf, std);
-		bsDB.getAllProducts(bsc);
-		System.out.println(bsc.getSize());
-
-
+//
+		dbf.makeInterfaceDB().addStudent(std, crs);
+		dbf.makeInterfaceDB().createBioSubstrate(bsf, std);
+		dbf.makeInterfaceDB().getAllBioSubstrate();
+		System.out.println();
+		System.out.println();
+		System.out.println(dbf.makeInterfaceDB().getAllBioSubstrate().size());
 		
-	
+//		DBO.addStudent(std, crs);
+//		bsDB.addBioSubstrate(bsf, std);
+//		bsDB.getAllProducts(bsc);
+//		System.out.println(bsc.getSize());
+
 	}
 
 }

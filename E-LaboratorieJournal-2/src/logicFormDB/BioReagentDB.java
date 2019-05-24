@@ -5,10 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import data.BioReagentContainer;
 import data.DBConnection;
 import logic.BioReagentForm;
+import logic.FormPresentation;
 import logic.Student;
 
 public class BioReagentDB {
@@ -183,12 +186,12 @@ public class BioReagentDB {
 		}
 	}
 
-	public BioReagentContainer getAllProducts(BioReagentContainer list) {
-		return getAllProductsWhere("1=1", list);
+	public List<BioReagentForm> getAllProducts() {
+		return getAllProductsWhere("1=1");
 	}
 
-	public BioReagentContainer getAllProductsWhere(String whereClause, BioReagentContainer list) {
-
+	public List<BioReagentForm> getAllProductsWhere(String whereClause) {
+		List<BioReagentForm> list = new ArrayList<>();
 		try {
 			String sql = "SELECT analyzeInformation.*, formInformation.*, preparation.*, reagent_Bio.*, student.*"
 					+ "FROM course JOIN student ON student.courseID = course.courseID "
@@ -197,7 +200,6 @@ public class BioReagentDB {
 					+ "JOIN formInformation ON formInformation.analyzeID = analyzeInformation.analyzeID "
 					+ "JOIN preparation ON preparation.analyzeID = formInformation.analyzeID "
 					+ "JOIN reagent_Bio ON reagent_Bio.analyzeID = preparation.analyzeID WHERE " + whereClause + "";
-					
 
 			System.out.println(sql);
 
@@ -233,7 +235,7 @@ public class BioReagentDB {
 						reagentName, batchNo, lotNo, supplier, chemical, productNo, weighed, measured, scaleNo,
 						pipetteNo, endConcentration, adjustpH, furtherTreatment, labeling, lifeTimeF, storage, fluidAd);
 
-				list.addElement(brf);
+				list.add(brf);
 
 			}
 		} catch (SQLException e) {
@@ -242,4 +244,5 @@ public class BioReagentDB {
 		}
 		return list;
 	}
+
 }

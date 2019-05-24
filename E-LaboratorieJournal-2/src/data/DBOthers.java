@@ -101,7 +101,7 @@ public class DBOthers {
 	}
 
 	// Read Some Students
-	private List<Student> getStudentsWhere(String whereClause) {
+	public List<Student> getStudentsWhere(String whereClause) {
 		ArrayList<Student> list = new ArrayList<Student>();
 		System.out.println("før try");
 		// henter resultset med alle studerende

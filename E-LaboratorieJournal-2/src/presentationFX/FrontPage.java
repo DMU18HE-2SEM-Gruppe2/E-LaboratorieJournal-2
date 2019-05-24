@@ -1,21 +1,35 @@
 package presentationFX;
 
+import java.time.format.DateTimeFormatter;
+
+import data.DBConnection;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import logic.FormPresentation;
+import logicFormDB.ChemReagentDB;
 
 public class FrontPage {
 	Scene mainScene;
+	
+	DBConnection connection = new DBConnection();
+	
+	ChemReagentDB crDB = new ChemReagentDB(connection);
+	
+	ObservableList<FormPresentation> formList;
 	
 	public void start(Stage mainStage) {
 		mainStage.setTitle("ELJ v.1");
@@ -40,8 +54,48 @@ public class FrontPage {
 		formTab.setClosable(false);
 		tabs.getTabs().addAll(journalTab, formTab);
 		
+		// Table view
 		TableView journalTable = new TableView();
 		TableView formTable = new TableView();
+		
+		// Table columns
+		TableColumn<FormPresentation, String> analyzeTitle = new TableColumn("Titel");
+		TableColumn<FormPresentation, String> themeName = new TableColumn("Tema");
+		TableColumn<FormPresentation, String> formName = new TableColumn("Blanket navn");
+		TableColumn<FormPresentation, String> studentName = new TableColumn("Studerende");
+		TableColumn<FormPresentation, String> date = new TableColumn("Dato");
+		
+		analyzeTitle.setCellValueFactory(e -> {
+			FormPresentation fp = e.getValue();
+			return new SimpleStringProperty(fp.getTitle());
+		});
+		
+		themeName.setCellValueFactory(e -> {
+			FormPresentation fp = e.getValue();
+			return new SimpleStringProperty(fp.getThemeName());
+		});
+		
+		formName.setCellValueFactory(e -> {
+			FormPresentation fp = e.getValue();
+			return new SimpleStringProperty(fp.getReagentName());
+		});
+		
+		studentName.setCellValueFactory(e -> {
+			FormPresentation fp = e.getValue();
+			return new SimpleStringProperty(fp.getStudentName());
+		});
+		
+		date.setCellValueFactory(e -> {
+			FormPresentation fp = e.getValue();
+			return new SimpleStringProperty(fp.getDate().format(DateTimeFormatter.ofPattern("dd MMMM - yyyy")));
+		});
+		
+		formTable.getColumns().addAll(analyzeTitle, themeName, formName, studentName, date);
+		
+		formList = FXCollections.observableList(crDB.getAllProductsToPresentation());
+		formTable.setItems(formList);
+		
+		
 		
 		// Logo Imag
 		Image image = new Image("EAMV_Logo.png");
