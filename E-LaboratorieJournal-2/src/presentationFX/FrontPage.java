@@ -131,6 +131,8 @@ public class FrontPage {
 		});
 
 		formTable.getColumns().addAll(analyzeTitle, themeName, formName, studentName, date);
+		formTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		journalTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
 		formList = FXCollections.observableList(crDB.getAllProductsToPresentation());
 		formTable.setItems(formList);
@@ -146,7 +148,7 @@ public class FrontPage {
 					return true;
 				}
 
-				// Compares the textfield to the object (the input) med the filter from above
+				// Compares the textfield to the object (the input) with the filter from above
 				String lowerCaseFilter = newValue.toLowerCase();
 
 				// Filter matches with Analyze Title

@@ -126,7 +126,7 @@ public class ChemReagentFormFX {
 	    Label lVolume = factory.labelFactory("Fremstillet Volumen", 0, 0, 0, 0, 14, false);
 	    Label lConcentration = factory.labelFactory("Angiv nøjagtig koncentration", 0, 0, 0, 0, 14, false);
 	    Label lShelfLife = factory.labelFactory("Holdbarhed", 0, 0, 0, 0, 14, false);
-	    Label lStorage = factory.labelFactory("Opvevaring", 0, 0, 0, 0, 14, false);
+	    Label lStorage = factory.labelFactory("Opbevaring", 0, 0, 0, 0, 14, false);
 	    Label lComment = factory.labelFactory("Bemærkninger", 0, 0, 0, 0, 14, false);
 		
 		// Textfields
