@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
@@ -19,10 +20,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import logicFormDB.DBFactory;
 
 public class BioSubstrateFormFX {
-	Scene bioSubstrateScene;
+	private Scene bioSubstrateScene;
 	private Stage bioSubstrateStage;
+	private ComboBox cbStudent, cbCourse;
+	
+	DBFactory dbf = new DBFactory();
 	
 	public void start() {
 		bioSubstrateStage = new Stage();
@@ -80,6 +85,7 @@ public class BioSubstrateFormFX {
 		
 		// Tableview
 		TableView preparationTable = new TableView();
+		preparationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		preparationTable.setMinHeight(150);
 		
 		// Logo Imag
@@ -129,6 +135,14 @@ public class BioSubstrateFormFX {
 	    TextField tfNegControl = factory.textFieldFactory("", 500, 14);
 	    TextField tfComment = factory.textFieldFactory("", 500, 14);
 		
+	    // ChoiceBox
+	    cbStudent = new ComboBox();
+	    cbStudent.setPrefWidth(350);
+	    cbStudent.getItems().setAll(dbf.makeInterfaceDB().getAllStudents());
+	    cbCourse = new ComboBox();
+	    cbCourse.setPrefWidth(350);
+	    cbCourse.getItems().setAll(dbf.makeInterfaceDB().getAllCourses());
+	    
 	    // Separators
 	    Separator sepName = new Separator();
 		Separator sepTop = new Separator();
@@ -149,9 +163,9 @@ public class BioSubstrateFormFX {
 		topGrid.add(imageView, 1, 0);
 		
 		infoGrid.add(lName, 0, 0);
-		infoGrid.add(tfName, 1, 0);
+		infoGrid.add(cbStudent, 1, 0);
 		infoGrid.add(lCourse, 0, 1);
-		infoGrid.add(tfCourse, 1, 1);
+		infoGrid.add(cbCourse, 1, 1);
 		infoGrid.add(lDate, 0, 2);
 		infoGrid.add(tfDate, 1, 2);
 		infoGrid.add(lTheme, 0, 3);

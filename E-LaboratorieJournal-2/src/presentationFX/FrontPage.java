@@ -56,7 +56,9 @@ public class FrontPage {
 		
 		// Table view
 		TableView journalTable = new TableView();
+		journalTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		TableView formTable = new TableView();
+		formTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		
 		// Table columns
 		TableColumn<FormPresentation, String> analyzeTitle = new TableColumn("Titel");

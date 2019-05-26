@@ -1,11 +1,14 @@
 package presentationFX;
 
+import java.time.LocalDate;
+
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
@@ -19,10 +22,19 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import logicFormDB.DBFactory;
 
 public class BioReagentFormFX {
 	private Scene bioReagentScene;
 	private Stage bioReagentStage;
+	private ComboBox cbStudent, cbCourse;
+	private TextField tfName, tfCourse, tfDate, tfTheme, tfAnalyzeTitle, tfReagentName, tfPhSetting, tfLiquid, tfTreatment, tfTag, tfDurability,
+	tfStorage, tfComment;
+	private int analyzeID, studentID, courseID, id;
+	private LocalDate date;
+	private String firstName, lastName, test;
+	
+	DBFactory dbf = new DBFactory();
 	
 	public void start() {
 		bioReagentStage = new Stage();
@@ -72,6 +84,7 @@ public class BioReagentFormFX {
 		
 		// Tableview
 		TableView preparationTable = new TableView();
+		preparationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		preparationTable.setPrefHeight(150);
 		
 		// Logo Imag
@@ -102,17 +115,17 @@ public class BioReagentFormFX {
 		// Textfields
 	    TextField tfName = factory.textFieldFactory("", 500, 14);
 	    TextField tfCourse = factory.textFieldFactory("", 500, 14);
-	    TextField tfDate = factory.textFieldFactory("", 500, 14);
-	    TextField tfTheme = factory.textFieldFactory("", 500, 14);
-	    TextField tfAnalyzeTitle = factory.textFieldFactory("", 500, 14);
-	    TextField tfReagentName = factory.textFieldFactory("", 500, 14);
-	    TextField tfPhSetting = factory.textFieldFactory("", 500, 14);
-	    TextField tfLiquid = factory.textFieldFactory("", 500, 14);
-	    TextField tfTreatment = factory.textFieldFactory("", 500, 14);
-	    TextField tfTag = factory.textFieldFactory("", 500, 14);
-	    TextField tfDurability = factory.textFieldFactory("", 500, 14);
-	    TextField tfStorage = factory.textFieldFactory("", 500, 14);
-	    TextField tfComment = factory.textFieldFactory("", 500, 14);
+	    tfDate = factory.textFieldFactory("", 500, 14);
+	    tfTheme = factory.textFieldFactory("", 500, 14);
+	    tfAnalyzeTitle = factory.textFieldFactory("", 500, 14);
+	    tfReagentName = factory.textFieldFactory("", 500, 14);
+	    tfPhSetting = factory.textFieldFactory("", 500, 14);
+	    tfLiquid = factory.textFieldFactory("", 500, 14);
+	    tfTreatment = factory.textFieldFactory("", 500, 14);
+	    tfTag = factory.textFieldFactory("", 500, 14);
+	    tfDurability = factory.textFieldFactory("", 500, 14);
+	    tfStorage = factory.textFieldFactory("", 500, 14);
+	    tfComment = factory.textFieldFactory("", 500, 14);
 		
 		// Buttons
 		Button cancel = factory.buttonFactory("Annuller", 90, 14, false);
@@ -122,6 +135,14 @@ public class BioReagentFormFX {
 		Button save = factory.buttonFactory("Gem", 90, 14, false);
 		Button addPreparation = factory.buttonFactory("Tilføj Resultat", 90, 14, false);
 
+	    // ChoiceBox
+	    cbStudent = new ComboBox();
+	    cbStudent.setPrefWidth(350);
+	    cbStudent.getItems().setAll(dbf.makeInterfaceDB().getAllStudents());
+	    cbCourse = new ComboBox();
+	    cbCourse.setPrefWidth(350);
+	    cbCourse.getItems().setAll(dbf.makeInterfaceDB().getAllCourses());
+		
 		// Separators
 		Separator sepTable = new Separator();
 		Separator sepTop = new Separator();
@@ -140,9 +161,9 @@ public class BioReagentFormFX {
 		topGrid.add(sepInfo2, 1, 1);
 
 		infoGrid.add(lName, 0, 0);
-		infoGrid.add(tfName, 1, 0);
+		infoGrid.add(cbStudent, 1, 0);
 		infoGrid.add(lCourse, 0, 1);
-		infoGrid.add(tfCourse, 1, 1);
+		infoGrid.add(cbCourse, 1, 1);
 		infoGrid.add(lDate, 0, 2);
 		infoGrid.add(tfDate, 1, 2);
 		infoGrid.add(lTheme, 0, 3);
