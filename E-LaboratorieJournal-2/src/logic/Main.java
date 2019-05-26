@@ -24,7 +24,7 @@ public class Main {
 
 		// -----------------CHEM REAGENT TEST-----------------
 
-		ChemReagentDB cfDB = new ChemReagentDB(connection);
+		ChemReagentDB cfDB = new ChemReagentDB();
 
 //		ChemReagentContainer crc = new ChemReagentContainer();
 //
