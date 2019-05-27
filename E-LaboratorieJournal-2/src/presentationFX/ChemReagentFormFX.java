@@ -46,6 +46,7 @@ public class ChemReagentFormFX {
 	private Alert cancelAlert, saveAndLockAlert;
 	
 	DBFactory dbf = new DBFactory();
+	JavaWorldPrint jvPrint = new JavaWorldPrint();
 	
 	public void start() {
 		chemReagentStage = new Stage();
@@ -169,7 +170,7 @@ public class ChemReagentFormFX {
 		// Buttons
 		cancel = factory.buttonFactory("Annuller", 90, 14, false);
 		invalid = factory.buttonFactory("Ugyldiggør", 90, 14, true);
-		print = factory.buttonFactory("Print", 90, 14, true);
+		print = factory.buttonFactory("Print", 90, 14, false);
 		saveLock = factory.buttonFactory("Gem og Lås", 90, 14, true);
 		save = factory.buttonFactory("Gem", 90, 14, true);
 		Button addPreparation = factory.buttonFactory("Tilføj Resultat", 90, 14, false);
@@ -277,6 +278,7 @@ public class ChemReagentFormFX {
 		cancel.setOnAction(e -> cancelForm());
 		save.setOnAction(e -> createForm());
 		saveLock.setOnAction(e -> lockForm());
+		print.setOnAction(e -> print());
 		
 	    cbStudent.getValue();
 	    System.out.println("getvalue: " + cbStudent);
@@ -355,6 +357,11 @@ public class ChemReagentFormFX {
 		Student student = new Student(firstName, lastName, courseID, studentID);
 		crb.addChemReagent(crf, student);
 		chemReagentStage.close();
+	}
+	public void print() {
+		createForm();
+		
+		jvPrint.JavaWorldPrint();
 	}
 	
 }
