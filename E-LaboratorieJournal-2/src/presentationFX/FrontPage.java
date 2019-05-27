@@ -11,6 +11,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
@@ -19,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.FormPresentation;
@@ -27,6 +29,8 @@ import logicFormDB.ChemReagentDB;
 
 public class FrontPage {
 	Scene mainScene;
+	public Label lStatus;
+	public Button btnForm;
 
 	DBConnection connection = new DBConnection();
 
@@ -39,11 +43,16 @@ public class FrontPage {
 
 	public void start(Stage mainStage) {
 		mainStage.setTitle("ELJ v.1");
-
+		
 		FactoryFX factory = new FactoryFX();
+
+		lStatus = factory.labelFactory("", 6, 6, 6, 6, 12, false);
 
 		BorderPane mainPane = new BorderPane();
 		mainScene = new Scene(mainPane);
+		
+		StackPane stackPane = new StackPane();
+		stackPane.setAlignment(lStatus, Pos.TOP_RIGHT);
 
 		VBox vBoxMenu = factory.vBoxFactory(15, 15, 15, 15, 15, Pos.TOP_CENTER);
 		vBoxMenu.setMinWidth(200);
@@ -56,9 +65,11 @@ public class FrontPage {
 		tabs.setPrefHeight(700);
 		Tab journalTab = new Tab("Journaler");
 		Tab formTab = new Tab("Blanketter");
+		Tab invalidTab = new Tab("Ugyldige");
 		journalTab.setClosable(false);
 		formTab.setClosable(false);
-		tabs.getTabs().addAll(journalTab, formTab);
+		invalidTab.setClosable(false);
+		tabs.getTabs().addAll(journalTab, formTab, invalidTab);
 
 		// Table view
 
@@ -73,7 +84,7 @@ public class FrontPage {
 		TextField tfSearch = factory.textFieldFactory("Søg...", 100, 14);
 
 		// Buttons
-		Button btnForm = factory.buttonFactory("Opret Blanket", 200, 14, false);
+		btnForm = factory.buttonFactory("Opret Blanket", 200, 14, false);
 		Button btnJournal = factory.buttonFactory("Opret Journal", 200, 14, false);
 		Button btnPrint = factory.buttonFactory("Print", 200, 14, false);
 		Button btnLock = factory.buttonFactory("Afslut", 200, 14, false);
@@ -89,14 +100,17 @@ public class FrontPage {
 		btnInvalid.setPrefHeight(50);
 		btnDelete.setPrefHeight(50);
 
+		
 		btnBox.getChildren().addAll(btnInvalid, btnDelete);
+		stackPane.getChildren().addAll(tabs, lStatus);
 		vBoxMenu.getChildren().addAll(imageView, tfSearch, btnForm, btnJournal, btnPrint, btnLock, btnEdit, btnBox);
 
 		journalTab.setContent(journalTable);
 		formTab.setContent(formTable);
+		
 
 		mainPane.setLeft(vBoxMenu);
-		mainPane.setCenter(tabs);
+		mainPane.setCenter(stackPane);
 
 		// Table columns
 		TableColumn<FormPresentation, String> analyzeTitle = new TableColumn<FormPresentation, String>("Titel");

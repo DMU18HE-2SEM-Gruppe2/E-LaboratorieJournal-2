@@ -2,6 +2,8 @@ package presentationFX;
 
 import java.time.LocalDate;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,6 +23,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import logicFormDB.DBFactory;
 
@@ -35,6 +38,7 @@ public class BioReagentFormFX {
 	private String firstName, lastName, test;
 	
 	DBFactory dbf = new DBFactory();
+	PopupFX popup = new PopupFX();
 	
 	public void start() {
 		bioReagentStage = new Stage();
@@ -191,8 +195,21 @@ public class BioReagentFormFX {
 		scrollPane.setContent(borderPane);
 		
 		// Action
+		PopupFX popup = new PopupFX();
 		addPreparation.setOnAction(e -> createPreparation());
-		cancel.setOnAction(e -> cancelForm());
+//		cancel.setOnAction(e -> cancelForm(popup));
+		cancel.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent actionEvent) {
+				cancelForm();
+			}
+		});
+		
+//		popup.btnYes.onActionProperty().addListener((observable, oldValue, newValue) -> {
+//			if (newValue != oldValue) {
+//				bioReagentStage.close();
+//			}
+//		});
 		
 		bioReagentStage.setScene(bioReagentScene);
 		bioReagentStage.show();
@@ -204,6 +221,12 @@ public class BioReagentFormFX {
 	}
 	
 	public void cancelForm() {
-		bioReagentStage.close();
+		popup.startCancel();
+	}
+	
+	public void checkCancel() {
+		if (popup.cancelClick == true) {
+			bioReagentStage.close();
+		}
 	}
 }

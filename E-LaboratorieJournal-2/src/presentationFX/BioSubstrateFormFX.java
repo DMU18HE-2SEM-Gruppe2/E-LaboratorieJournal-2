@@ -28,6 +28,7 @@ public class BioSubstrateFormFX {
 	private ComboBox cbStudent, cbCourse;
 	
 	DBFactory dbf = new DBFactory();
+	PopupFX popup = new PopupFX();
 	
 	public void start() {
 		bioSubstrateStage = new Stage();
@@ -219,6 +220,6 @@ public class BioSubstrateFormFX {
 	}
 	
 	public void cancelForm() {
-		bioSubstrateStage.close();
+		popup.startCancel();
 	}
 }
