@@ -119,6 +119,7 @@ batchNo nvarchar(max) NOT NULL,
 lotNo nvarchar(max) NOT NULL,
 supplier nvarchar(max) NOT NULL,
 scaleNo nvarchar(max) NOT NULL,
+measurements nvarchar(max) NOT NULL,
 
 primary key(formTypeID),
 
@@ -185,23 +186,7 @@ primary key(studentID, analyzeID),
 
 
 INSERT INTO course VALUES ('DMU');
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
-INSERT INTO student VALUES ('Student', '1', 1);
+INSERT INTO student VALUES ('Frank', 'Christensen', 1);
+INSERT INTO student VALUES ('Jóhan', 'Gaardbo', 1);
+INSERT INTO student VALUES ('Rasmus', 'Gyldenløv', 1);
+INSERT INTO student VALUES ('Casper', 'Jacobsen', 1);

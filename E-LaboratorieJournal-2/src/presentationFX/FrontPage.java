@@ -310,6 +310,7 @@ public class FrontPage extends Application {
 			lotNo = l.getLotNo().toString();
 			supplier = l.getSupplier().toString();
 			measurements = l.getMeasured().toString();
+			System.out.println("hej");
 		}
 		
 		chemForm.start();
@@ -329,6 +330,8 @@ public class FrontPage extends Application {
 		chemForm.tfSupplier.setText(supplier);
 		chemForm.tfMeasurements.setText(measurements);
 		
+		chemForm.tfVolume.setDisable(true);
+		chemForm.tfMeasurements.setDisable(true);		
 	}
 
 	public TableView<FormPresentation> getTable() {
@@ -338,9 +341,11 @@ public class FrontPage extends Application {
 
 	public void updateList() {
 
-		formList = FXCollections.observableList(dbf.makeInterfaceDB().getAllFormsToPresentation());
-		formList.removeAll(formList);
-		formTable.setItems(formList);
+		formTable.refresh();
+		
+//		formList = FXCollections.observableList(dbf.makeInterfaceDB().getAllFormsToPresentation());
+//		formList.removeAll(formList);
+//		formTable.setItems(formList);
 
 	}
 }

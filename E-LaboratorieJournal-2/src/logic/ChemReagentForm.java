@@ -112,7 +112,4 @@ public class ChemReagentForm extends FormInformation {
 				+ formID + ", date=" + date + ", themeName=" + themeName + ", analyzeTitle=" + analyzeTitle
 				+ ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID + "]";
 	}
-
-	
-
 }

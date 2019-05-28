@@ -1,6 +1,7 @@
 package presentationFX;
 
 import java.time.LocalDate;
+
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -27,7 +28,6 @@ import javafx.stage.Stage;
 import logic.ChemReagentForm;
 import logic.FormPresentation;
 import logic.Student;
-import logicFormDB.ChemReagentDB;
 import logicFormDB.DBFactory;
 
 public class ChemReagentFormFX {
@@ -340,6 +340,8 @@ public class ChemReagentFormFX {
 	
 	public void createForm() {
 		
+		FrontPage front = new FrontPage();
+		
 		int analyzeID = 0, studentID = 0, courseID = 0, formID = 0, id = 0;
 
 		String firstName = "", lastName = "";
@@ -369,6 +371,8 @@ public class ChemReagentFormFX {
 		Student student = new Student(firstName, lastName, courseID, studentID);
 
 		dbf.makeInterfaceDB().createChemReagent(crf, student);
+		
+		front.updateList();
 	}
 	public void print() {
 		createForm();
