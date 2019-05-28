@@ -9,16 +9,19 @@ import logic.BioSubstrateForm;
 import logic.ChemReagentForm;
 import logic.Course;
 import logic.FormPresentation;
+import logic.Journal;
 import logic.Student;
 
-public class ImplDB implements InterfaceDB {
+public class ImplDB implements DBInterface {
 
 	DBConnection connection = new DBConnection();
 
+	MutualDB mDB = new MutualDB();
 	DBOthers oDB = new DBOthers();
 	ChemReagentDB crDB = new ChemReagentDB();
 	BioReagentDB brDB = new BioReagentDB();
 	BioSubstrateDB bsDB = new BioSubstrateDB();
+	JournalDB jDB = new JournalDB();
 
 	// Student
 	@Override
@@ -35,7 +38,7 @@ public class ImplDB implements InterfaceDB {
 	public List<Student> getStudentsWhere(String whereClause) {
 		return oDB.getStudentsWhere(whereClause);
 	}
-	
+
 	@Override
 	public int getStudentById(int id) {
 		return oDB.getStudentById(id);
@@ -46,13 +49,13 @@ public class ImplDB implements InterfaceDB {
 	public boolean addCourse(Course course) {
 		return oDB.addCourse(course);
 	}
-	
+
 	@Override
 	public List<Course> getCoursesWhere(String whereClause) {
 
 		return oDB.getCoursesWhere(whereClause);
 	}
-	
+
 	@Override
 	public List<Course> getAllCourses() {
 		return oDB.getAllCourses();
@@ -96,7 +99,7 @@ public class ImplDB implements InterfaceDB {
 	public boolean createBioSubstrate(BioSubstrateForm bioSubstrateForm, Student student) {
 		return bsDB.addBioSubstrate(bioSubstrateForm, student);
 	}
-	
+
 	@Override
 	public List<BioSubstrateForm> getAllBioSubstrate() {
 		return bsDB.getAllProducts();
@@ -107,19 +110,52 @@ public class ImplDB implements InterfaceDB {
 		return bsDB.getAllProductsWhere(whereClause);
 	}
 
+	// Journal
+
+	@Override
+	public boolean addAnalyzeInfo(Journal journal) {
+		return jDB.addAnalyzeInfo(journal);
+	}
+
+	@Override
+	public boolean addJournal(Journal journal) {
+		return jDB.addJournal(journal);
+	}
+
+	@Override
+	public boolean addJournalForm(Journal journal, Student student) {
+		return jDB.addJournalForm(journal, student);
+	}
+
 	// Read all forms and add to list
 	@Override
 	public List<FormPresentation> getAllFormsWhere(String whereClause) {
-		return crDB.getAllProductsWhereToPresentation(whereClause);
+		return mDB.getAllProductsWhereToPresentation(whereClause);
 	}
 
 	@Override
 	public List<FormPresentation> getAllForms() {
-		return crDB.getAllProductsToPresentation();
+		return mDB.getAllProductsToPresentation();
 	}
 
-	
+	@Override
+	public int getFormIDByID(int id) {
+		return mDB.getFormIDByID(id);
+	}
 
+	@Override
+	public int getAnalyzeIDByID(int id) {
+		return mDB.getAnalyzeIDByID(id);
+	}
 
+	@Override
+	public List<FormPresentation> getAllFormsWhereToPresentation(String whereClause) {
+		return mDB.getAllProductsWhereToPresentation(whereClause);
+	}
+
+	@Override
+	public List<FormPresentation> getAllFormsToPresentation() {
+		return mDB.getAllProductsToPresentation();
+	}
 
 }

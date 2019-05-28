@@ -1,7 +1,7 @@
 package logicFormDB;
 
 public class DBFactory {
-	public InterfaceDB makeInterfaceDB() {
+	public DBInterface makeInterfaceDB() {
 		return new ImplDB();
 	}
 

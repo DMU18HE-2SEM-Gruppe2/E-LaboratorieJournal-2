@@ -25,6 +25,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.ChemReagentForm;
+import logic.FormPresentation;
 import logic.Student;
 import logicFormDB.ChemReagentDB;
 import logicFormDB.DBFactory;
@@ -339,24 +340,36 @@ public class ChemReagentFormFX {
 	}
 	
 	public void createForm() {
+		
+		int analyzeID = 0, studentID = 0, courseID = 0, formID = 0, id = 0;
+
+		String firstName = "", lastName = "";
+
+		String fullName = "";
+
 		int selectedIndex = cbStudent.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
 			Student student = (Student) cbStudent.getSelectionModel().getSelectedItem();
 			id = student.getStudentID();
+			firstName = student.getFirstName();
+			lastName = student.getLastName();
+			fullName = firstName + " " + lastName;
 			System.out.println("id: " + id);
-			studentID = dbf.makeInterfaceDB().getStudentById(id);	
+			studentID = dbf.makeInterfaceDB().getStudentById(id);
+
 		}
 
-//		frontpage.status.setText("hej");
+		ChemReagentForm crf = new ChemReagentForm(LocalDate.now(), tfTheme.getText(), tfAnalyzeTitle.getText(),
+				tfComment.getText(), analyzeID, studentID, tfScaleNo.getText(), tfVolume.getText(),
+				tfConcentration.getText(), tfShelfLife.getText(), tfStorage.getText(), tfReagentName.getText(), formID,
+				tfBatchNo.getText(), tfLotNo.getText(), tfSupplier.getText());
 
-		ChemReagentForm crf = new ChemReagentForm(date.now(), tfTheme.getText(), tfAnalyzeTitle.getText(), tfComment.getText(), 
-				analyzeID, studentID, tfScaleNo.getText(), tfVolume.getText(), tfConcentration.getText(), tfShelfLife.getText(), 
-				tfStorage.getText(), tfReagentName.getText(), tfBatchNo.getText(), tfLotNo.getText(), tfSupplier.getText());
-		ChemReagentDB crb = new ChemReagentDB();
+		FormPresentation fp = new FormPresentation(tfAnalyzeTitle.getText(), LocalDate.now(), fullName,
+				tfTheme.getText(), tfReagentName.getText(), analyzeID);
 
 		Student student = new Student(firstName, lastName, courseID, studentID);
-		crb.addChemReagent(crf, student);
-		chemReagentStage.close();
+
+		dbf.makeInterfaceDB().createChemReagent(crf, student);
 	}
 	public void print() {
 		createForm();

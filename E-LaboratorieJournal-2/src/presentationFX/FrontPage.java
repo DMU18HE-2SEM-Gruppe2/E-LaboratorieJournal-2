@@ -25,7 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.FormPresentation;
 import logic.JournalPresentation;
-import logicFormDB.ChemReagentDB;
+import logicFormDB.DBFactory;
 
 public class FrontPage {
 	Scene mainScene;
@@ -34,7 +34,7 @@ public class FrontPage {
 
 	DBConnection connection = new DBConnection();
 
-	ChemReagentDB crDB = new ChemReagentDB();
+	DBFactory dbf = new DBFactory();
 
 	ObservableList<FormPresentation> formList;
 
@@ -148,7 +148,7 @@ public class FrontPage {
 		formTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		journalTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-		formList = FXCollections.observableList(crDB.getAllProductsToPresentation());
+		formList = FXCollections.observableList(dbf.makeInterfaceDB().getAllFormsToPresentation());
 		formTable.setItems(formList);
 
 		// Search function
@@ -221,7 +221,7 @@ public class FrontPage {
 
 	public void updateList() {
 
-		formList = FXCollections.observableList(crDB.getAllProductsToPresentation());
+		formList = FXCollections.observableList(dbf.makeInterfaceDB().getAllFormsToPresentation());
 		formList.removeAll(formList);
 		formTable.setItems(formList);
 

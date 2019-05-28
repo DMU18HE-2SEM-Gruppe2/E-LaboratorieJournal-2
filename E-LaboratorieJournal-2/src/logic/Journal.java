@@ -8,11 +8,13 @@ public class Journal extends AnalyzeInformation {
 	private String traceability;
 	private String results;
 	private String calculations;
-	// Vend tilbage - enten skal der være et variable for et billede eller en ny
-	// løsning?
+	private String image;
+	private int journalID;
+	private int formID;
 
-	public Journal(LocalDate date, String themeName, String analyzeTitle, String comments, int studentID, int analyzeID, String coworker,
-			String traceability, String results, String calculations) {
+	public Journal(LocalDate date, String themeName, String analyzeTitle, String comments, int studentID, int analyzeID,
+			String coworker, String traceability, String results, String calculations, String image, int journalID,
+			int formID) {
 
 		super(date, themeName, analyzeTitle, comments, analyzeID, studentID);
 
@@ -20,6 +22,9 @@ public class Journal extends AnalyzeInformation {
 		this.traceability = traceability;
 		this.results = results;
 		this.calculations = calculations;
+		this.image = image;
+		this.journalID = journalID;
+		this.formID = formID;
 	}
 
 	public String getCoworker() {
@@ -54,11 +59,36 @@ public class Journal extends AnalyzeInformation {
 		this.calculations = calculations;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public int getJournalID() {
+		return journalID;
+	}
+
+	public void setJournalID(int journalID) {
+		this.journalID = journalID;
+	}
+
+	public int getFormID() {
+		return formID;
+	}
+
+	public void setFormID(int formID) {
+		this.formID = formID;
+	}
+
 	@Override
 	public String toString() {
 		return "Journal [coworker=" + coworker + ", traceability=" + traceability + ", results=" + results
-				+ ", calculations=" + calculations + ", date=" + date + ", themeName=" + themeName + ", analyzeTitle="
-				+ analyzeTitle + ", comments=" + comments + "]";
+				+ ", calculations=" + calculations + ", image=" + image + ", journalID=" + journalID + ", date=" + date
+				+ ", themeName=" + themeName + ", analyzeTitle=" + analyzeTitle + ", comments=" + comments
+				+ ", analyzeID=" + analyzeID + ", studentID=" + studentID + "]";
 	}
 
 }

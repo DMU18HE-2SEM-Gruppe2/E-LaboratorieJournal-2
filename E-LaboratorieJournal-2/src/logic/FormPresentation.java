@@ -9,13 +9,16 @@ public class FormPresentation {
 	private String studentName;
 	private String themeName;
 	private String reagentName;
-	
-	public FormPresentation(String title, LocalDate date, String studentName, String themeName, String reagentName) {
+	private int analyzeID;
+
+	public FormPresentation(String title, LocalDate date, String studentName, String themeName, String reagentName,
+			int analyzeID) {
 		this.title = title;
 		this.date = date;
 		this.studentName = studentName;
 		this.themeName = themeName;
 		this.reagentName = reagentName;
+		this.analyzeID = analyzeID;
 	}
 
 	public String getTitle() {
@@ -58,11 +61,18 @@ public class FormPresentation {
 		this.reagentName = reagentName;
 	}
 
+	public int getAnalyzeID() {
+		return analyzeID;
+	}
+
+	public void setAnalyzeID(int analyzeID) {
+		this.analyzeID = analyzeID;
+	}
+
 	@Override
 	public String toString() {
 		return "FormPresentation [title=" + title + ", date=" + date + ", studentName=" + studentName + ", themeName="
-				+ themeName + ", reagentName=" + reagentName + "]";
+				+ themeName + ", reagentName=" + reagentName + ", analyzeID=" + analyzeID + "]";
 	}
-	
-	
+
 }

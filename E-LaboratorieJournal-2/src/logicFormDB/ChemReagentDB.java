@@ -78,7 +78,7 @@ public class ChemReagentDB {
 
 	}
 
-	public boolean addStudentForm(Student student, ChemReagentForm chemReagentForm) {
+	private boolean addStudentForm(Student student, ChemReagentForm chemReagentForm) {
 
 		String sql = "INSERT INTO student_analyzeInformation (" + "studentID," + "analyzeID) VALUES (?, ?)";
 		System.out.println(sql);
@@ -174,12 +174,14 @@ public class ChemReagentDB {
 				String lifeTimeF = resultSet.getString("lifeTimeF");
 				String storage = resultSet.getString("storage");
 				String reagentName = resultSet.getString("reagentName");
+				int formID = resultSet.getInt("formID");
 				String batchNo = resultSet.getString("batchNo");
 				String lotNo = resultSet.getString("lotNo");
 				String supplier = resultSet.getString("supplier");
 
 				ChemReagentForm CRF = new ChemReagentForm(date, themeName, analyzeTitle, comment, analyzeID, studentID,
-						scaleNo, volume, accConcentration, lifeTimeF, storage, reagentName, batchNo, lotNo, supplier);
+						scaleNo, volume, accConcentration, lifeTimeF, storage, reagentName, formID, batchNo, lotNo,
+						supplier);
 
 				list.add(CRF);
 			}
@@ -191,43 +193,41 @@ public class ChemReagentDB {
 		return list;
 	}
 
-	public List<FormPresentation> getAllProductsToPresentation() {
-		return getAllProductsWhereToPresentation("1=1");
-	}
-	
-	public List<FormPresentation> getAllProductsWhereToPresentation(String whereClause) {
-		List<FormPresentation> list = new ArrayList<>();
+	public boolean addChemReagentToPresentation(ChemReagentForm chemReagentForm, Student student) {
+		addAnalyzeInfo(chemReagentForm);
+		addFormInformation(chemReagentForm);
+		addStudentForm(student, chemReagentForm);
+		System.out.println("StudentForm");
+
+		String sql = "INSERT INTO reagent_Chem (" + "analyzeID," + "volume," + "accConcentration," + "lifeTimeF,"
+				+ "storage," + "batchNo," + "lotNo," + "supplier," + "scaleNo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		System.out.println(sql);
+
 		try {
-			String sql = "SELECT analyzeInformation.dateCreated, analyzeInformation.themeName, analyzeInformation.analyzeTitle, formInformation.reagentName, student.firstname, student.lastname"
-					+ " FROM course JOIN student ON student.courseID = course.courseID "
-					+ "JOIN student_analyzeInformation ON student_analyzeInformation.studentID = student.studentID "
-					+ "JOIN analyzeInformation ON student_analyzeInformation.analyzeID = analyzeInformation.analyzeID "
-					+ "JOIN formInformation ON formInformation.analyzeID = analyzeInformation.analyzeID WHERE " + whereClause
-					+ " ";
-			System.out.println(sql);
+			PreparedStatement add = connection.getConnection().prepareStatement(sql);
 
-			Statement statement = connection.getConnection().createStatement();
-			ResultSet resultSet = statement.executeQuery(sql);
+			add.setInt(1, chemReagentForm.getAnalyzeID());
+			add.setString(2, chemReagentForm.getVolume());
+			add.setString(3, chemReagentForm.getConcentration());
+			add.setString(4, chemReagentForm.getLifeTimeF());
+			add.setString(5, chemReagentForm.getStorage());
+			add.setString(6, chemReagentForm.getBatchNo());
+			add.setString(7, chemReagentForm.getLotNo());
+			add.setString(8, chemReagentForm.getSupplier());
+			add.setString(9, chemReagentForm.getScaleNo());
 
-			while (resultSet.next()) {
-				LocalDate date = LocalDate.ofEpochDay(resultSet.getLong("dateCreated"));
-				String themeName = resultSet.getString("themeName");
-				String analyzeTitle = resultSet.getString("analyzeTitle");
-				String reagentName = resultSet.getString("reagentName");
-				String firstName = resultSet.getString("firstname");
-				String lastName = resultSet.getString("lastname");
-				String fullName = firstName + " " + lastName;
-
-				FormPresentation fp = new FormPresentation(analyzeTitle, date, fullName, themeName, reagentName);
-
-				list.add(fp);
+			int nRows = add.executeUpdate();
+			System.out.println(chemReagentForm);
+			if (nRows != 1) {
+				return false;
 			}
+			return true;
 
 		} catch (SQLException e) {
-			System.out.println("Error executin SQL statement");
+			System.out.println("Failed to add: " + chemReagentForm);
 			System.out.println(e.getMessage());
+			return false;
 		}
-		return list;
 	}
 
 }

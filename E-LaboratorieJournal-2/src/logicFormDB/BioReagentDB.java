@@ -80,7 +80,7 @@ public class BioReagentDB {
 
 	}
 
-	public boolean addPreparation(BioReagentForm bioReagentForm) {
+	private boolean addPreparation(BioReagentForm bioReagentForm) {
 
 		String sql = "INSERT INTO preparation (" + "analyzeID," + "chemical," + "casNo," + "productNo," + "weighed,"
 				+ "measured," + "scaleNo," + "pipetteNo," + "endConcentration," + "batchNo," + "lotNo," + "supplier"
@@ -120,7 +120,7 @@ public class BioReagentDB {
 
 	}
 
-	public boolean addStudentForm(Student student, BioReagentForm bioReagentForm) {
+	private boolean addStudentForm(Student student, BioReagentForm bioReagentForm) {
 
 		String sql = "INSERT INTO student_analyzeInformation (" + "studentID," + "analyzeID) VALUES (?, ?)";
 		System.out.println(sql);
@@ -211,6 +211,7 @@ public class BioReagentDB {
 				int analyzeID = resultSet.getInt("analyzeID");
 				int studentID = resultSet.getInt("studentID");
 				String reagentName = resultSet.getString("reagentName");
+				int formID = resultSet.getInt("formID");
 				String batchNo = resultSet.getString("batchNo");
 				String lotNo = resultSet.getString("lotNo");
 				String supplier = resultSet.getString("supplier");
@@ -229,7 +230,7 @@ public class BioReagentDB {
 				String fluidAd = resultSet.getString("fluidAd");
 
 				BioReagentForm brf = new BioReagentForm(date, themeName, analyzeTitle, comment, analyzeID, studentID,
-						reagentName, batchNo, lotNo, supplier, chemical, productNo, weighed, measured, scaleNo,
+						reagentName, formID, batchNo, lotNo, supplier, chemical, productNo, weighed, measured, scaleNo,
 						pipetteNo, endConcentration, adjustpH, furtherTreatment, labeling, lifeTimeF, storage, fluidAd);
 
 				list.add(brf);

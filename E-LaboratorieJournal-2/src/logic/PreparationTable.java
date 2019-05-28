@@ -17,11 +17,11 @@ public class PreparationTable extends FormInformation {
 	protected String supplier;
 
 	public PreparationTable(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
-			int studentID, String reagentName, String chemical, String casNo, String productNo, String weighed,
-			String measured, String scaleNo, String pipetteNo, String endConcentration, String batchNo, String lotNo,
-			String supplier) {
+			int studentID, String reagentName, int formID, String chemical, String casNo, String productNo,
+			String weighed, String measured, String scaleNo, String pipetteNo, String endConcentration, String batchNo,
+			String lotNo, String supplier) {
 
-		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName);
+		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName, formID);
 
 		this.chemical = chemical;
 		this.casNo = casNo;
@@ -122,6 +122,16 @@ public class PreparationTable extends FormInformation {
 
 	public void setSupplier(String supplier) {
 		this.supplier = supplier;
+	}
+
+	@Override
+	public String toString() {
+		return "PreparationTable [chemical=" + chemical + ", casNo=" + casNo + ", productNo=" + productNo + ", weighed="
+				+ weighed + ", measured=" + measured + ", scaleNo=" + scaleNo + ", pipetteNo=" + pipetteNo
+				+ ", endConcentration=" + endConcentration + ", batchNo=" + batchNo + ", lotNo=" + lotNo + ", supplier="
+				+ supplier + ", reagentName=" + reagentName + ", formID=" + formID + ", date=" + date + ", themeName="
+				+ themeName + ", analyzeTitle=" + analyzeTitle + ", comments=" + comments + ", analyzeID=" + analyzeID
+				+ ", studentID=" + studentID + "]";
 	}
 
 }

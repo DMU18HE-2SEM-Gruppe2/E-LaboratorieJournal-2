@@ -16,13 +16,14 @@ public class BioSubstrateForm extends PreparationTable {
 	private String fluidAd;
 
 	public BioSubstrateForm(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
-			int studentID, String reagentName, String batchNo, String lotNo, String supplier, String chemical, String casNo, String productNo, String weighed, String measured,
-			String scaleNo, String pipetteNo, String endConcentration, String pHBefore, String pHEnd,
-			String sterializeTime, String sterializeC, String addAftSterialize, String pHAftSterialize, boolean sterile,
-			String posControl, String negControl, String fluidAd) {
+			int studentID, String reagentName, int formID, String batchNo, String lotNo, String supplier,
+			String chemical, String casNo, String productNo, String weighed, String measured, String scaleNo,
+			String pipetteNo, String endConcentration, String pHBefore, String pHEnd, String sterializeTime,
+			String sterializeC, String addAftSterialize, String pHAftSterialize, boolean sterile, String posControl,
+			String negControl, String fluidAd) {
 
-		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName, batchNo, lotNo, supplier,
-				 chemical, casNo, productNo, weighed, measured, scaleNo, pipetteNo, fluidAd);
+		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName, formID, batchNo, lotNo,
+				supplier, chemical, casNo, productNo, weighed, measured, scaleNo, pipetteNo, fluidAd);
 
 		this.pHSubstrate = pHBefore;
 		this.pHSterialized = pHEnd;
@@ -125,9 +126,9 @@ public class BioSubstrateForm extends PreparationTable {
 				+ ", negControl=" + negControl + ", fluidAd=" + fluidAd + ", chemical=" + chemical + ", casNo=" + casNo
 				+ ", productNo=" + productNo + ", weighed=" + weighed + ", measured=" + measured + ", scaleNo="
 				+ scaleNo + ", pipetteNo=" + pipetteNo + ", endConcentration=" + endConcentration + ", batchNo="
-				+ batchNo + ", lotNo=" + lotNo + ", supplier=" + supplier + ", reagentName=" + reagentName + ", date="
-				+ date + ", themeName=" + themeName + ", analyzeTitle=" + analyzeTitle + ", comments=" + comments
-				+ ", analyzeID=" + analyzeID + ", studentID=" + studentID + "]";
+				+ batchNo + ", lotNo=" + lotNo + ", supplier=" + supplier + ", reagentName=" + reagentName + ", formID="
+				+ formID + ", date=" + date + ", themeName=" + themeName + ", analyzeTitle=" + analyzeTitle
+				+ ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID + "]";
 	}
 
 }

@@ -80,7 +80,7 @@ public class BioSubstrateDB {
 
 	}
 
-	public boolean addPreparation(BioSubstrateForm bioSubstrateForm) {
+	private boolean addPreparation(BioSubstrateForm bioSubstrateForm) {
 
 		String sql = "INSERT INTO preparation (" + "analyzeID," + "chemical," + "casNo," + "productNo," + "weighed,"
 				+ "measured," + "scaleNo," + "pipetteNo," + "endConcentration," + "batchNo," + "lotNo," + "supplier"
@@ -120,7 +120,7 @@ public class BioSubstrateDB {
 
 	}
 
-	public boolean addStudentForm(Student student, BioSubstrateForm bioSubstrateForm) {
+	private boolean addStudentForm(Student student, BioSubstrateForm bioSubstrateForm) {
 
 		String sql = "INSERT INTO student_analyzeInformation (" + "studentID," + "analyzeID) VALUES (?, ?)";
 		System.out.println(sql);
@@ -216,6 +216,7 @@ public class BioSubstrateDB {
 				int analyzeID = resultSet.getInt("analyzeID");
 				int studentID = resultSet.getInt("studentID");
 				String reagentName = resultSet.getString("reagentName");
+				int formID = resultSet.getInt("formID");
 				String batchNo = resultSet.getString("batchNo");
 				String lotNo = resultSet.getString("lotNo");
 				String supplier = resultSet.getString("supplier");
@@ -239,7 +240,7 @@ public class BioSubstrateDB {
 				String fluidAd = resultSet.getString("fluidAd");
 
 				BioSubstrateForm BSF = new BioSubstrateForm(date, themeName, analyzeTitle, comments, analyzeID,
-						studentID, reagentName, batchNo, lotNo, supplier, chemical, casNo, productNo, weighed, measured,
+						studentID, reagentName, formID, batchNo, lotNo, supplier, chemical, casNo, productNo, weighed, measured,
 						scaleNo, pipetteNo, endConcentration, pHSubstrate, pHSterialized, sterializeTime, sterializeC,
 						addAftSterialize, pHAftSterialize, sterile, posControle, negControle, fluidAd);
 

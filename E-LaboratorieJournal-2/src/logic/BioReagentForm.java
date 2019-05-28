@@ -12,13 +12,13 @@ public class BioReagentForm extends PreparationTable {
 	private String fluidAd;
 
 	public BioReagentForm(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
-			int studentID, String reagentName, String batchNo, String lotNo, String supplier, String chemical,
-			String productNo, String weighed, String measured, String scaleNo, String pipetteNo,
+			int studentID, String reagentName, int formID, String batchNo, String lotNo, String supplier,
+			String chemical, String productNo, String weighed, String measured, String scaleNo, String pipetteNo,
 			String endConcentration, String adjustpH, String furtherTreatment, String labeling, String lifeTimeF,
 			String storage, String fluidAd) {
 
-		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName, batchNo, lotNo, supplier,
-				chemical, productNo, weighed, measured, scaleNo, pipetteNo, fluidAd, fluidAd);
+		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName, formID, batchNo, lotNo,
+				supplier, chemical, productNo, weighed, measured, scaleNo, pipetteNo, fluidAd, fluidAd);
 
 		this.adjustpH = adjustpH;
 		this.furtherTreatment = furtherTreatment;
@@ -83,9 +83,9 @@ public class BioReagentForm extends PreparationTable {
 				+ ", chemical=" + chemical + ", casNo=" + casNo + ", productNo=" + productNo + ", weighed=" + weighed
 				+ ", measured=" + measured + ", scaleNo=" + scaleNo + ", pipetteNo=" + pipetteNo + ", endConcentration="
 				+ endConcentration + ", batchNo=" + batchNo + ", lotNo=" + lotNo + ", supplier=" + supplier
-				+ ", reagentName=" + reagentName + ", date=" + date + ", themeName=" + themeName + ", analyzeTitle="
-				+ analyzeTitle + ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID
-				+ "]";
+				+ ", reagentName=" + reagentName + ", formID=" + formID + ", date=" + date + ", themeName=" + themeName
+				+ ", analyzeTitle=" + analyzeTitle + ", comments=" + comments + ", analyzeID=" + analyzeID
+				+ ", studentID=" + studentID + "]";
 	}
 
 }
