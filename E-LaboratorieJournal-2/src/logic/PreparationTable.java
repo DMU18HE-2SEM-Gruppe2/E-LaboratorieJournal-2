@@ -19,9 +19,9 @@ public class PreparationTable extends FormInformation {
 	public PreparationTable(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
 			int studentID, String reagentName, int formID, String chemical, String casNo, String productNo,
 			String weighed, String measured, String scaleNo, String pipetteNo, String endConcentration, String batchNo,
-			String lotNo, String supplier) {
+			String lotNo, String supplier, String condition) {
 
-		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName, formID);
+		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName, formID, condition);
 
 		this.chemical = chemical;
 		this.casNo = casNo;
@@ -131,7 +131,9 @@ public class PreparationTable extends FormInformation {
 				+ ", endConcentration=" + endConcentration + ", batchNo=" + batchNo + ", lotNo=" + lotNo + ", supplier="
 				+ supplier + ", reagentName=" + reagentName + ", formID=" + formID + ", date=" + date + ", themeName="
 				+ themeName + ", analyzeTitle=" + analyzeTitle + ", comments=" + comments + ", analyzeID=" + analyzeID
-				+ ", studentID=" + studentID + "]";
+				+ ", studentID=" + studentID + ", condition=" + condition + "]";
 	}
+
+
 
 }

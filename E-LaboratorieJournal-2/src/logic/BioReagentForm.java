@@ -15,10 +15,10 @@ public class BioReagentForm extends PreparationTable {
 			int studentID, String reagentName, int formID, String batchNo, String lotNo, String supplier,
 			String chemical, String productNo, String weighed, String measured, String scaleNo, String pipetteNo,
 			String endConcentration, String adjustpH, String furtherTreatment, String labeling, String lifeTimeF,
-			String storage, String fluidAd) {
+			String storage, String fluidAd, String condition) {
 
 		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName, formID, batchNo, lotNo,
-				supplier, chemical, productNo, weighed, measured, scaleNo, pipetteNo, fluidAd, fluidAd);
+				supplier, chemical, productNo, weighed, measured, scaleNo, pipetteNo, fluidAd, fluidAd, condition);
 
 		this.adjustpH = adjustpH;
 		this.furtherTreatment = furtherTreatment;
@@ -85,7 +85,9 @@ public class BioReagentForm extends PreparationTable {
 				+ endConcentration + ", batchNo=" + batchNo + ", lotNo=" + lotNo + ", supplier=" + supplier
 				+ ", reagentName=" + reagentName + ", formID=" + formID + ", date=" + date + ", themeName=" + themeName
 				+ ", analyzeTitle=" + analyzeTitle + ", comments=" + comments + ", analyzeID=" + analyzeID
-				+ ", studentID=" + studentID + "]";
+				+ ", studentID=" + studentID + ", condition=" + condition + "]";
 	}
+
+
 
 }

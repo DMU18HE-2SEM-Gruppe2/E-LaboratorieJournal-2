@@ -47,6 +47,7 @@ public class ChemReagentFormFX {
 	private Alert cancelAlert, saveAndLockAlert;
 	
 	DBFactory dbf = new DBFactory();
+	ChemReagentForm chemReagentForm;
 	JavaWorldPrint jvPrint = new JavaWorldPrint();
 	
 	public void start() {
@@ -277,7 +278,7 @@ public class ChemReagentFormFX {
 		
 		// Action
 		cancel.setOnAction(e -> cancelForm());
-		save.setOnAction(e -> createForm());
+		save.setOnAction(e -> saveForm(chemReagentForm));
 		saveLock.setOnAction(e -> lockForm());
 		print.setOnAction(e -> print());
 		
@@ -317,8 +318,9 @@ public class ChemReagentFormFX {
 			saveLock.setDisable(false);
 			
 		} else {
-			save.setDisable(true);
-			saveLock.setDisable(true);
+			// TODO fix her - skal være disabled
+			save.setDisable(false);
+			saveLock.setDisable(false);
 		}
 	}
 	
@@ -363,7 +365,7 @@ public class ChemReagentFormFX {
 		ChemReagentForm crf = new ChemReagentForm(LocalDate.now(), tfTheme.getText(), tfAnalyzeTitle.getText(),
 				tfComment.getText(), analyzeID, studentID, tfScaleNo.getText(), tfVolume.getText(),
 				tfConcentration.getText(), tfShelfLife.getText(), tfStorage.getText(), tfReagentName.getText(), formID,
-				tfBatchNo.getText(), tfLotNo.getText(), tfSupplier.getText(), tfMeasurements.getText());
+				tfBatchNo.getText(), tfLotNo.getText(), tfSupplier.getText(), tfMeasurements.getText(), "Gemt");
 
 		FormPresentation fp = new FormPresentation(tfAnalyzeTitle.getText(), LocalDate.now(), fullName,
 				tfTheme.getText(), tfReagentName.getText(), analyzeID);
@@ -374,6 +376,24 @@ public class ChemReagentFormFX {
 		
 		front.updateList();
 	}
+	
+	public void updateForm() {
+		
+	}
+	
+	public void saveForm(ChemReagentForm chemReagentForm) {
+		FrontPage frontpage = new FrontPage();
+		String id = frontpage.selectForm();
+		
+		if(!(id == "")) {
+			createForm();
+			System.out.println("Createform Test");
+		} else {
+			updateForm();
+			System.out.println("UpdateForm Test");
+		}
+	}
+	
 	public void print() {
 		createForm();
 		

@@ -20,10 +20,10 @@ public class BioSubstrateForm extends PreparationTable {
 			String chemical, String casNo, String productNo, String weighed, String measured, String scaleNo,
 			String pipetteNo, String endConcentration, String pHBefore, String pHEnd, String sterializeTime,
 			String sterializeC, String addAftSterialize, String pHAftSterialize, boolean sterile, String posControl,
-			String negControl, String fluidAd) {
+			String negControl, String fluidAd, String condition) {
 
 		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName, formID, batchNo, lotNo,
-				supplier, chemical, casNo, productNo, weighed, measured, scaleNo, pipetteNo, fluidAd);
+				supplier, chemical, casNo, productNo, weighed, measured, scaleNo, pipetteNo, fluidAd, condition);
 
 		this.pHSubstrate = pHBefore;
 		this.pHSterialized = pHEnd;
@@ -128,7 +128,9 @@ public class BioSubstrateForm extends PreparationTable {
 				+ scaleNo + ", pipetteNo=" + pipetteNo + ", endConcentration=" + endConcentration + ", batchNo="
 				+ batchNo + ", lotNo=" + lotNo + ", supplier=" + supplier + ", reagentName=" + reagentName + ", formID="
 				+ formID + ", date=" + date + ", themeName=" + themeName + ", analyzeTitle=" + analyzeTitle
-				+ ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID + "]";
+				+ ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID + ", condition="
+				+ condition + "]";
 	}
+
 
 }

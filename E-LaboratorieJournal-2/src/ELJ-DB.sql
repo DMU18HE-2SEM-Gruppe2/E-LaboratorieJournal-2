@@ -21,6 +21,7 @@ dateCreated bigint NOT NULL,
 themeName nvarchar(max) NOT NULL,
 analyzeTitle nvarchar(max) NOT NULL,
 comment nvarchar(max) NOT NULL,
+condition nvarchar(max) NOT NULL,
 
 primary key(analyzeID)
 )
@@ -185,8 +186,8 @@ primary key(studentID, analyzeID),
 --Test af indsætning
 
 
-INSERT INTO course VALUES ('DMU18');
-INSERT INTO student VALUES ('Johan', 'Gaardbo', 1);
-INSERT INTO student VALUES ('Casper', 'Jakobsen', 1);
-INSERT INTO student VALUES ('Rasmus', 'Gyldenløv', 1);
+INSERT INTO course VALUES ('DMU');
 INSERT INTO student VALUES ('Frank', 'Christensen', 1);
+INSERT INTO student VALUES ('Jóhan', 'Gaardbo', 1);
+INSERT INTO student VALUES ('Rasmus', 'Gyldenløv', 1);
+INSERT INTO student VALUES ('Casper', 'Jacobsen', 1);

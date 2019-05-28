@@ -17,9 +17,9 @@ public class ChemReagentForm extends FormInformation {
 	public ChemReagentForm(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
 			int studentID, String scaleNo, String manufacturedVolume, String concentration, String lifeTimeF,
 			String storage, String reagentName, int formID, String batchNo, String lotNo, String supplier,
-			String measured) {
+			String measured, String condition) {
 
-		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName, formID);
+		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName, formID, condition);
 		this.scaleNo = scaleNo;
 		this.volume = manufacturedVolume;
 		this.concentration = concentration;
@@ -110,6 +110,9 @@ public class ChemReagentForm extends FormInformation {
 				+ ", lifeTimeF=" + lifeTimeF + ", storage=" + storage + ", batchNo=" + batchNo + ", lotNo=" + lotNo
 				+ ", supplier=" + supplier + ", measured=" + measured + ", reagentName=" + reagentName + ", formID="
 				+ formID + ", date=" + date + ", themeName=" + themeName + ", analyzeTitle=" + analyzeTitle
-				+ ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID + "]";
+				+ ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID + ", condition="
+				+ condition + "]";
 	}
+
+
 }

@@ -21,7 +21,7 @@ public class BioSubstrateDB {
 	private boolean addAnalyzeInfo(BioSubstrateForm bioSubstrateForm) {
 
 		String sql = "INSERT INTO analyzeInformation (" + "dateCreated," + "themeName," + "analyzeTitle,"
-				+ "comment) VALUES (?, ?, ?, ?)";
+				+ "comment," + "condition) VALUES (?, ?, ?, ?, ?)";
 
 		try (PreparedStatement add = connection.getConnection().prepareStatement(sql,
 				Statement.RETURN_GENERATED_KEYS)) {
@@ -31,6 +31,7 @@ public class BioSubstrateDB {
 			add.setString(2, bioSubstrateForm.getThemeName());
 			add.setString(3, bioSubstrateForm.getAnalyzeTitle());
 			add.setString(4, bioSubstrateForm.getComments());
+			add.setString(5, bioSubstrateForm.getCondition());
 
 			System.out.println(sql);
 			int nRows = add.executeUpdate();
@@ -238,11 +239,12 @@ public class BioSubstrateDB {
 				String posControle = resultSet.getString("posControl");
 				String negControle = resultSet.getString("negControl");
 				String fluidAd = resultSet.getString("fluidAd");
+				String condition = resultSet.getString("condition");
 
 				BioSubstrateForm BSF = new BioSubstrateForm(date, themeName, analyzeTitle, comments, analyzeID,
 						studentID, reagentName, formID, batchNo, lotNo, supplier, chemical, casNo, productNo, weighed, measured,
 						scaleNo, pipetteNo, endConcentration, pHSubstrate, pHSterialized, sterializeTime, sterializeC,
-						addAftSterialize, pHAftSterialize, sterile, posControle, negControle, fluidAd);
+						addAftSterialize, pHAftSterialize, sterile, posControle, negControle, fluidAd, condition);
 
 				list.add(BSF);
 

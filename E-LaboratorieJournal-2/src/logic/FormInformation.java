@@ -8,9 +8,9 @@ public class FormInformation extends AnalyzeInformation {
 	protected int formID;
 
 	public FormInformation(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
-			int studentID, String reagentName, int formID) {
+			int studentID, String reagentName, int formID, String condition) {
 
-		super(date, themeName, analyzeTitle, comments, analyzeID, studentID);
+		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, condition);
 
 		this.reagentName = reagentName;
 		this.formID = formID;
@@ -36,7 +36,9 @@ public class FormInformation extends AnalyzeInformation {
 	public String toString() {
 		return "FormInformation [reagentName=" + reagentName + ", formID=" + formID + ", date=" + date + ", themeName="
 				+ themeName + ", analyzeTitle=" + analyzeTitle + ", comments=" + comments + ", analyzeID=" + analyzeID
-				+ ", studentID=" + studentID + "]";
+				+ ", studentID=" + studentID + ", condition=" + condition + "]";
 	}
+
+
 
 }

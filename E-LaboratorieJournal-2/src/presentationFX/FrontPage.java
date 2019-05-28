@@ -338,6 +338,21 @@ public class FrontPage extends Application {
 		System.out.println("??");
 		return formTable;
 	}
+	
+	public String selectForm() {
+		formTable.setRowFactory(tv -> {
+			TableRow<FormPresentation> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+					rowData = row.getItem().getAnalyzeID();
+					rowDatastring = Integer.toString(rowData);
+					readChemForm2();
+				}
+			});
+			return row ;
+		});
+		return rowDatastring;
+	}
 
 	public void updateList() {
 

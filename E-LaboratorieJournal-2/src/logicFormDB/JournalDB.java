@@ -23,7 +23,7 @@ public class JournalDB {
 //				String coworker, String traceability, String results, String calculations, String image)
 
 		String sql = "INSERT INTO analyzeInformation (" + "dateCreated," + "themeName," + "analyzeTitle,"
-				+ "comment) VALUES (?, ?, ?, ?)";
+				+ "comment," + "condition) VALUES (?, ?, ?, ?, ?)";
 
 		try (PreparedStatement add = connection.getConnection().prepareStatement(sql,
 				Statement.RETURN_GENERATED_KEYS)) {
@@ -33,6 +33,7 @@ public class JournalDB {
 			add.setString(2, journal.getThemeName());
 			add.setString(3, journal.getAnalyzeTitle());
 			add.setString(4, journal.getComments());
+			add.setString(5, journal.getCondition());
 
 			System.out.println(sql);
 			int nRows = add.executeUpdate();
@@ -182,9 +183,10 @@ public class JournalDB {
 				String image = resultSet.getString("image");
 				int journalID = resultSet.getInt("journalID");
 				int formID = resultSet.getInt("formID");
+				String condition = resultSet.getString("condition");
 
 				Journal journal = new Journal(LocalDate.now(), themeName, analyzeTitle, comments, studentID, analyzeID,
-						coworker, traceability, results, calculations, image, journalID, formID);
+						coworker, traceability, results, calculations, image, journalID, formID, condition);
 
 				list.add(journal);
 

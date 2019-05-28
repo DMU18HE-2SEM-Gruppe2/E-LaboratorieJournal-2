@@ -10,7 +10,6 @@ import java.util.List;
 
 import data.DBConnection;
 import logic.ChemReagentForm;
-import logic.FormPresentation;
 import logic.Student;
 
 public class ChemReagentDB {
@@ -20,7 +19,7 @@ public class ChemReagentDB {
 	private boolean addAnalyzeInfo(ChemReagentForm chemReagentForm) {
 
 		String sql = "INSERT INTO analyzeInformation (" + "dateCreated," + "themeName," + "analyzeTitle,"
-				+ "comment) VALUES (?, ?, ?, ?)";
+				+ "comment," + "condition) VALUES (?, ?, ?, ?, ?)";
 
 		try (PreparedStatement add = connection.getConnection().prepareStatement(sql,
 				Statement.RETURN_GENERATED_KEYS)) {
@@ -30,6 +29,7 @@ public class ChemReagentDB {
 			add.setString(2, chemReagentForm.getThemeName());
 			add.setString(3, chemReagentForm.getAnalyzeTitle());
 			add.setString(4, chemReagentForm.getComments());
+			add.setString(5, chemReagentForm.getCondition());
 
 			System.out.println(sql);
 			int nRows = add.executeUpdate();
@@ -142,6 +142,69 @@ public class ChemReagentDB {
 			return false;
 		}
 	}
+	
+	public boolean updateAnalyzeInformation(ChemReagentForm chemReagentForm, String whereClause) {
+		String sql = "UPDATE analyzeInformation SET dateCreated = ?, " + "themeName = ?," + "analyzeTitle = ?," + "comment = ?" + "WHERE analyzeID =" + whereClause;
+		try {
+			PreparedStatement update = connection.getConnection().prepareStatement(sql);
+				
+			update.setLong(1, chemReagentForm.getDate().toEpochDay());
+			update.setString(2, chemReagentForm.getThemeName());
+			update.setString(3, chemReagentForm.getAnalyzeTitle());
+			update.setString(4, chemReagentForm.getComments());
+			
+			update.executeUpdate();
+			
+			return true;
+		
+		} catch (SQLException e) {
+			System.out.println("Error executin SQL statement");
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
+	
+	public boolean updateFormInformation(ChemReagentForm chemReagentForm, String whereClause) {
+		String sql = "UPDATE formInformation SET reagentName = ?" + "WHERE analyzeID =" + whereClause;
+		try {
+			PreparedStatement update = connection.getConnection().prepareStatement(sql);
+				
+			update.setString(1, chemReagentForm.getReagentName());
+			
+			update.executeUpdate();
+			
+			return true;
+		
+		} catch (SQLException e) {
+			System.out.println("Error executin SQL statement");
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
+	
+	public boolean updateChemReagentForm(ChemReagentForm chemReagentForm, String whereClause) {
+	
+		updateAnalyzeInformation(chemReagentForm, whereClause);
+		updateFormInformation(chemReagentForm, whereClause);
+		
+		
+		String sql = "UPDATE reagent_Chem SET volume = ?" + "accConcentration = ?" + "lifeTimeF = ?" + "storage = ?" + 
+				"batchNo = ?" + "lotNo = ?" + "supplier = ?" + "scaleNo = ?" + "WHERE analyzeID =" + whereClause;
+		try {
+			PreparedStatement update = connection.getConnection().prepareStatement(sql);
+				
+			update.setString(1, chemReagentForm.getReagentName());
+			
+			update.executeUpdate();
+			
+			return true;
+		
+		} catch (SQLException e) {
+			System.out.println("Error executin SQL statement");
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
 
 	public List<ChemReagentForm> getAllProducts() {
 		return getAllProductsWhere("1=1");
@@ -180,10 +243,11 @@ public class ChemReagentDB {
 				String lotNo = resultSet.getString("lotNo");
 				String supplier = resultSet.getString("supplier");
 				String measured = resultSet.getString("measurements");
+				String condition = resultSet.getString("condition");
 
 				ChemReagentForm CRF = new ChemReagentForm(date, themeName, analyzeTitle, comment, analyzeID, studentID,
 						scaleNo, volume, accConcentration, lifeTimeF, storage, reagentName, formID, batchNo, lotNo,
-						supplier, measured);
+						supplier, measured, condition);
 
 				list.add(CRF);
 			}

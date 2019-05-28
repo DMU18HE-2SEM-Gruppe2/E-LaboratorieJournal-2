@@ -21,7 +21,7 @@ public class BioReagentDB {
 	private boolean addAnalyzeInfo(BioReagentForm bioReagentForm) {
 
 		String sql = "INSERT INTO analyzeInformation (" + "dateCreated," + "themeName," + "analyzeTitle,"
-				+ "comment) VALUES (?, ?, ?, ?)";
+				+ "comment," + "condition) VALUES (?, ?, ?, ?, ?)";
 
 		try (PreparedStatement add = connection.getConnection().prepareStatement(sql,
 				Statement.RETURN_GENERATED_KEYS)) {
@@ -31,6 +31,7 @@ public class BioReagentDB {
 			add.setString(2, bioReagentForm.getThemeName());
 			add.setString(3, bioReagentForm.getAnalyzeTitle());
 			add.setString(4, bioReagentForm.getComments());
+			add.setString(5, bioReagentForm.getCondition());
 
 			System.out.println(sql);
 			int nRows = add.executeUpdate();
@@ -228,10 +229,11 @@ public class BioReagentDB {
 				String lifeTimeF = resultSet.getString("lifeTimeF");
 				String storage = resultSet.getString("storage");
 				String fluidAd = resultSet.getString("fluidAd");
+				String condition = resultSet.getString("condition");
 
 				BioReagentForm brf = new BioReagentForm(date, themeName, analyzeTitle, comment, analyzeID, studentID,
 						reagentName, formID, batchNo, lotNo, supplier, chemical, productNo, weighed, measured, scaleNo,
-						pipetteNo, endConcentration, adjustpH, furtherTreatment, labeling, lifeTimeF, storage, fluidAd);
+						pipetteNo, endConcentration, adjustpH, furtherTreatment, labeling, lifeTimeF, storage, fluidAd, condition);
 
 				list.add(brf);
 

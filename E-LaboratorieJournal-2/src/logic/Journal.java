@@ -14,9 +14,9 @@ public class Journal extends AnalyzeInformation {
 
 	public Journal(LocalDate date, String themeName, String analyzeTitle, String comments, int studentID, int analyzeID,
 			String coworker, String traceability, String results, String calculations, String image, int journalID,
-			int formID) {
+			int formID, String condition) {
 
-		super(date, themeName, analyzeTitle, comments, analyzeID, studentID);
+		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, condition);
 
 		this.coworker = coworker;
 		this.traceability = traceability;
@@ -86,9 +86,12 @@ public class Journal extends AnalyzeInformation {
 	@Override
 	public String toString() {
 		return "Journal [coworker=" + coworker + ", traceability=" + traceability + ", results=" + results
-				+ ", calculations=" + calculations + ", image=" + image + ", journalID=" + journalID + ", date=" + date
-				+ ", themeName=" + themeName + ", analyzeTitle=" + analyzeTitle + ", comments=" + comments
-				+ ", analyzeID=" + analyzeID + ", studentID=" + studentID + "]";
+				+ ", calculations=" + calculations + ", image=" + image + ", journalID=" + journalID + ", formID="
+				+ formID + ", date=" + date + ", themeName=" + themeName + ", analyzeTitle=" + analyzeTitle
+				+ ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID + ", condition="
+				+ condition + "]";
 	}
+
+
 
 }

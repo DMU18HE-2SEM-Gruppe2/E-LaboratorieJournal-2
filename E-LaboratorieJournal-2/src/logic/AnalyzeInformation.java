@@ -10,14 +10,16 @@ public class AnalyzeInformation {
 	protected String comments;
 	protected int analyzeID;
 	protected int studentID;
+	protected String condition;
 
-	public AnalyzeInformation(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID, int studentID) {
+	public AnalyzeInformation(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID, int studentID, String condition) {
 		this.date = date;
 		this.themeName = themeName;
 		this.analyzeTitle = analyzeTitle;
 		this.comments = comments;
 		this.analyzeID = analyzeID;
 		this.studentID = studentID;
+		this.condition = condition;
 	}
 
 	public LocalDate getDate() {
@@ -72,14 +74,20 @@ public class AnalyzeInformation {
 		this.studentID = studentID;
 	}
 
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+
 	@Override
 	public String toString() {
 		return "AnalyzeInformation [date=" + date + ", themeName=" + themeName + ", analyzeTitle=" + analyzeTitle
-				+ ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID + "]";
+				+ ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID + ", condition="
+				+ condition + "]";
 	}
-	
-
-
 
 
 }
