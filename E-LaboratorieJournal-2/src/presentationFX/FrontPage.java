@@ -95,7 +95,7 @@ public class FrontPage extends Application {
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
 					rowData = row.getItem().getAnalyzeID();
 					rowDatastring = Integer.toString(rowData);
-					readChemForm2();
+					readChemForm();
 				}
 			});
 			return row;
@@ -253,21 +253,6 @@ public class FrontPage extends Application {
 		form.start();
 	}
 
-//	public void readChemForm() {
-////		System.out.println(rowData);
-//		
-//		ArrayList l = new ArrayList();
-//		l.add(implDB.getAllChemReagentWhere("analyzeInformation.analyzeID=" + rowDatastring));
-//		for(int i = 0; i < l.size(); i++) {
-//			Object s = l.get(i);
-//			System.out.println(l.get(i));
-//			System.out.println(s);
-//		}
-//		
-//		
-////		chemForm.start();
-//		
-//	}
 	public ChemReagentForm readChemToPrint() {
 		int id = 0, analyzeIDForSearch = 0;
 
@@ -346,9 +331,9 @@ public class FrontPage extends Application {
 		return cmr;
 	}
 
-	public void readChemForm2() {
+	public void readChemForm() {
 		List<ChemReagentForm> crf = implDB.getAllChemReagentWhere("analyzeInformation.analyzeID=" + rowDatastring);
-
+		
 		String date = "";
 		String themeName = "";
 		String analyzeTitle = "";
@@ -366,7 +351,8 @@ public class FrontPage extends Application {
 		String lotNo = "";
 		String supplier = "";
 		String measurements = "";
-
+		String condition = "";
+		
 		for (int i = 0; i < crf.size(); i++) {
 			ChemReagentForm l = crf.get(i);
 			date = l.getDate().toString();
@@ -386,11 +372,30 @@ public class FrontPage extends Application {
 			lotNo = l.getLotNo().toString();
 			supplier = l.getSupplier().toString();
 			measurements = l.getMeasured().toString();
+			condition = l.getCondition().toString();
 			System.out.println("hej");
+			
 		}
-
+		
 		chemForm.start();
-
+		
+		if (condition.equals("Låst")) {
+			System.out.println("Låst test");
+			chemForm.tfDate.setDisable(true);
+			chemForm.tfTheme.setDisable(true);
+			chemForm.tfAnalyzeTitle.setDisable(true);
+			chemForm.tfScaleNo.setDisable(true);
+			chemForm.tfVolume.setDisable(true);
+			chemForm.tfConcentration.setDisable(true);
+			chemForm.tfShelfLife.setDisable(true);
+			chemForm.tfStorage.setDisable(true);
+			chemForm.tfReagentName.setDisable(true);
+			chemForm.tfBatchNo.setDisable(true);
+			chemForm.tfLotNo.setDisable(true);
+			chemForm.tfSupplier.setDisable(true);
+			chemForm.tfMeasurements.setDisable(true);
+		}
+		
 		chemForm.tfDate.setText(date);
 		chemForm.tfTheme.setText(themeName);
 		chemForm.tfAnalyzeTitle.setText(analyzeTitle);
@@ -405,27 +410,27 @@ public class FrontPage extends Application {
 		chemForm.tfLotNo.setText(lotNo);
 		chemForm.tfSupplier.setText(supplier);
 		chemForm.tfMeasurements.setText(measurements);
-
+		
 		chemForm.tfVolume.setDisable(true);
-		chemForm.tfMeasurements.setDisable(true);
+		chemForm.tfMeasurements.setDisable(true);		
 	}
 
 	public TableView<FormPresentation> getTable() {
 		System.out.println("??");
 		return formTable;
 	}
-
+	
 	public String selectForm() {
 		formTable.setRowFactory(tv -> {
 			TableRow<FormPresentation> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
-				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
 					rowData = row.getItem().getAnalyzeID();
 					rowDatastring = Integer.toString(rowData);
-					readChemForm2();
+					readChemForm();
 				}
 			});
-			return row;
+			return row ;
 		});
 		return rowDatastring;
 	}
