@@ -112,7 +112,7 @@ public class ChemReagentDB {
 		System.out.println("StudentForm");
 
 		String sql = "INSERT INTO reagent_Chem (" + "analyzeID," + "volume," + "accConcentration," + "lifeTimeF,"
-				+ "storage," + "batchNo," + "lotNo," + "supplier," + "scaleNo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "storage," + "batchNo," + "lotNo," + "supplier," + "scaleNo," + "measurements) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		System.out.println(sql);
 
 		try {
@@ -127,6 +127,7 @@ public class ChemReagentDB {
 			add.setString(7, chemReagentForm.getLotNo());
 			add.setString(8, chemReagentForm.getSupplier());
 			add.setString(9, chemReagentForm.getScaleNo());
+			add.setString(10, chemReagentForm.getMeasured());
 
 			int nRows = add.executeUpdate();
 			System.out.println(chemReagentForm);
@@ -178,10 +179,11 @@ public class ChemReagentDB {
 				String batchNo = resultSet.getString("batchNo");
 				String lotNo = resultSet.getString("lotNo");
 				String supplier = resultSet.getString("supplier");
+				String measured = resultSet.getString("measurements");
 
 				ChemReagentForm CRF = new ChemReagentForm(date, themeName, analyzeTitle, comment, analyzeID, studentID,
 						scaleNo, volume, accConcentration, lifeTimeF, storage, reagentName, formID, batchNo, lotNo,
-						supplier);
+						supplier, measured);
 
 				list.add(CRF);
 			}
@@ -200,7 +202,7 @@ public class ChemReagentDB {
 		System.out.println("StudentForm");
 
 		String sql = "INSERT INTO reagent_Chem (" + "analyzeID," + "volume," + "accConcentration," + "lifeTimeF,"
-				+ "storage," + "batchNo," + "lotNo," + "supplier," + "scaleNo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "storage," + "batchNo," + "lotNo," + "supplier," + "scaleNo" + "measurements) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		System.out.println(sql);
 
 		try {
@@ -215,6 +217,7 @@ public class ChemReagentDB {
 			add.setString(7, chemReagentForm.getLotNo());
 			add.setString(8, chemReagentForm.getSupplier());
 			add.setString(9, chemReagentForm.getScaleNo());
+			add.setString(10, chemReagentForm.getMeasured());
 
 			int nRows = add.executeUpdate();
 			System.out.println(chemReagentForm);

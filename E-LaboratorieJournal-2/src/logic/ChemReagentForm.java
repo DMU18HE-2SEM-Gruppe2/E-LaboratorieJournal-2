@@ -12,10 +12,12 @@ public class ChemReagentForm extends FormInformation {
 	private String batchNo;
 	private String lotNo;
 	private String supplier;
+	private String measured;
 
 	public ChemReagentForm(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
 			int studentID, String scaleNo, String manufacturedVolume, String concentration, String lifeTimeF,
-			String storage, String reagentName, int formID, String batchNo, String lotNo, String supplier) {
+			String storage, String reagentName, int formID, String batchNo, String lotNo, String supplier,
+			String measured) {
 
 		super(date, themeName, analyzeTitle, comments, analyzeID, studentID, reagentName, formID);
 		this.scaleNo = scaleNo;
@@ -26,6 +28,7 @@ public class ChemReagentForm extends FormInformation {
 		this.batchNo = batchNo;
 		this.lotNo = lotNo;
 		this.supplier = supplier;
+		this.measured = measured;
 
 	}
 
@@ -93,13 +96,23 @@ public class ChemReagentForm extends FormInformation {
 		this.supplier = supplier;
 	}
 
+	public String getMeasured() {
+		return measured;
+	}
+
+	public void setMeasured(String measured) {
+		this.measured = measured;
+	}
+
 	@Override
 	public String toString() {
 		return "ChemReagentForm [scaleNo=" + scaleNo + ", volume=" + volume + ", concentration=" + concentration
 				+ ", lifeTimeF=" + lifeTimeF + ", storage=" + storage + ", batchNo=" + batchNo + ", lotNo=" + lotNo
-				+ ", supplier=" + supplier + ", reagentName=" + reagentName + ", formID=" + formID + ", date=" + date
-				+ ", themeName=" + themeName + ", analyzeTitle=" + analyzeTitle + ", comments=" + comments
-				+ ", analyzeID=" + analyzeID + ", studentID=" + studentID + "]";
+				+ ", supplier=" + supplier + ", measured=" + measured + ", reagentName=" + reagentName + ", formID="
+				+ formID + ", date=" + date + ", themeName=" + themeName + ", analyzeTitle=" + analyzeTitle
+				+ ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID + "]";
 	}
+
+	
 
 }

@@ -327,7 +327,6 @@ public class ChemReagentFormFX {
 		FrontPage frontpage = new FrontPage();
 		if (cancelAlert.getResult() == yesButton) {
 			chemReagentStage.close();
-			frontpage.btnForm.setText("HEJ");
 		}
 	}
 	
@@ -362,7 +361,7 @@ public class ChemReagentFormFX {
 		ChemReagentForm crf = new ChemReagentForm(LocalDate.now(), tfTheme.getText(), tfAnalyzeTitle.getText(),
 				tfComment.getText(), analyzeID, studentID, tfScaleNo.getText(), tfVolume.getText(),
 				tfConcentration.getText(), tfShelfLife.getText(), tfStorage.getText(), tfReagentName.getText(), formID,
-				tfBatchNo.getText(), tfLotNo.getText(), tfSupplier.getText());
+				tfBatchNo.getText(), tfLotNo.getText(), tfSupplier.getText(), tfMeasurements.getText());
 
 		FormPresentation fp = new FormPresentation(tfAnalyzeTitle.getText(), LocalDate.now(), fullName,
 				tfTheme.getText(), tfReagentName.getText(), analyzeID);

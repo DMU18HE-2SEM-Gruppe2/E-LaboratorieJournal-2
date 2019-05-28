@@ -1,8 +1,12 @@
 package presentationFX;
 
+
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import data.DBConnection;
+import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,9 +16,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -23,11 +29,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import logic.ChemReagentForm;
 import logic.FormPresentation;
 import logic.JournalPresentation;
 import logicFormDB.DBFactory;
+import logicFormDB.ImplDB;
 
-public class FrontPage {
+public class FrontPage extends Application {
 	Scene mainScene;
 	public Label lStatus;
 	public Button btnForm;
@@ -35,7 +43,12 @@ public class FrontPage {
 	DBConnection connection = new DBConnection();
 
 	DBFactory dbf = new DBFactory();
-
+	int rowData;
+	String rowDatastring;
+	ChooseFormFX form = new ChooseFormFX();
+	ChemReagentFormFX chemForm = new ChemReagentFormFX();
+	ImplDB implDB = new ImplDB();
+	
 	ObservableList<FormPresentation> formList;
 
 	public TableView<JournalPresentation> journalTable = new TableView();
@@ -72,7 +85,34 @@ public class FrontPage {
 		tabs.getTabs().addAll(journalTab, formTab, invalidTab);
 
 		// Table view
-
+		journalTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		formTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+	
+			// Formtable Register Double Click on row
+		formTable.setRowFactory(tv -> {
+			TableRow<FormPresentation> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+					rowData = row.getItem().getAnalyzeID();
+					rowDatastring = Integer.toString(rowData);
+					readChemForm2();
+				}
+			});
+			return row ;
+		});
+	
+//			// Journaltable Register Double Click on row
+//		journalTable.setRowFactory(tv -> {
+//			TableRow<JournalPresentation> row = new TableRow<>();
+//			row.setOnMouseClicked(event -> {
+//				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+//					JournalPresentation rowData = row.getItem();
+//					System.out.println("Double click on: " + rowData.getClass());
+//				}
+//			});
+//			return row ;
+//		});
+	
 		// Logo Imag
 		Image image = new Image("EAMV_Logo.png");
 		ImageView imageView = new ImageView(image);
@@ -210,8 +250,85 @@ public class FrontPage {
 	}
 
 	public void createForm() {
-		ChooseFormFX form = new ChooseFormFX();
+		form = new ChooseFormFX();
 		form.start();
+	}
+	
+//	public void readChemForm() {
+////		System.out.println(rowData);
+//		
+//		ArrayList l = new ArrayList();
+//		l.add(implDB.getAllChemReagentWhere("analyzeInformation.analyzeID=" + rowDatastring));
+//		for(int i = 0; i < l.size(); i++) {
+//			Object s = l.get(i);
+//			System.out.println(l.get(i));
+//			System.out.println(s);
+//		}
+//		
+//		
+////		chemForm.start();
+//		
+//	}
+	
+	public void readChemForm2() {
+		List<ChemReagentForm> crf = implDB.getAllChemReagentWhere("analyzeInformation.analyzeID=" + rowDatastring);
+		
+		String date = "";
+		String themeName = "";
+		String analyzeTitle = "";
+		String comments = "";
+		String analyzeID = "";
+		String studentID = "";
+		String scaleNo = "";
+		String volume = "";
+		String concentration = "";
+		String lifeTimeF = "";
+		String storage = "";
+		String reagentName = "";
+		String formID = "";
+		String batchNo = "";
+		String lotNo = "";
+		String supplier = "";
+		String measurements = "";
+		
+		for (int i = 0; i < crf.size(); i++) {
+			ChemReagentForm l = crf.get(i);
+			date = l.getDate().toString();
+			themeName = l.getThemeName().toString();
+			analyzeTitle = l.getAnalyzeTitle().toString();
+			comments = l.getComments().toString();
+			analyzeID = Integer.toString(l.getAnalyzeID());
+			studentID = Integer.toString(l.getStudentID());
+			scaleNo = l.getScaleNo().toString();
+			volume = l.getVolume().toString();
+			concentration = l.getConcentration().toString();
+			lifeTimeF = l.getLifeTimeF().toString();
+			storage = l.getStorage().toString();
+			reagentName = l.getReagentName().toString();
+			formID = Integer.toString(l.getFormID());
+			batchNo = l.getBatchNo().toString();
+			lotNo = l.getLotNo().toString();
+			supplier = l.getSupplier().toString();
+			measurements = l.getMeasured().toString();
+		}
+		
+		chemForm.start();
+		
+		chemForm.tfDate.setText(date);
+		chemForm.tfTheme.setText(themeName);
+		chemForm.tfAnalyzeTitle.setText(analyzeTitle);
+		chemForm.tfComment.setText(comments);
+		chemForm.tfScaleNo.setText(scaleNo);
+		chemForm.tfVolume.setText(volume);
+		chemForm.tfConcentration.setText(concentration);
+		chemForm.tfShelfLife.setText(lifeTimeF);
+		chemForm.tfStorage.setText(storage);
+		chemForm.tfReagentName.setText(reagentName);
+		chemForm.tfBatchNo.setText(batchNo);
+		chemForm.tfLotNo.setText(lotNo);
+		chemForm.tfSupplier.setText(supplier);
+		chemForm.tfMeasurements.setText(measurements);
+		
 	}
 
 	public TableView<FormPresentation> getTable() {

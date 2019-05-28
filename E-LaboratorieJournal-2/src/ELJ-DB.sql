@@ -119,6 +119,7 @@ batchNo nvarchar(max) NOT NULL,
 lotNo nvarchar(max) NOT NULL,
 supplier nvarchar(max) NOT NULL,
 scaleNo nvarchar(max) NOT NULL,
+measurements nvarchar(max) NOT NULL,
 
 primary key(formTypeID),
 
