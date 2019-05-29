@@ -18,8 +18,8 @@ public class ChemReagentDB {
 
 	private boolean addAnalyzeInfo(ChemReagentForm chemReagentForm) {
 
-		String sql = "INSERT INTO analyzeInformation (" + "dateCreated," + "themeName," + "analyzeTitle,"
-				+ "comment," + "condition) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO analyzeInformation (" + "dateCreated," + "themeName," + "analyzeTitle," + "comment,"
+				+ "condition) VALUES (?, ?, ?, ?, ?)";
 
 		try (PreparedStatement add = connection.getConnection().prepareStatement(sql,
 				Statement.RETURN_GENERATED_KEYS)) {
@@ -112,7 +112,8 @@ public class ChemReagentDB {
 		System.out.println("StudentForm");
 
 		String sql = "INSERT INTO reagent_Chem (" + "analyzeID," + "volume," + "accConcentration," + "lifeTimeF,"
-				+ "storage," + "batchNo," + "lotNo," + "supplier," + "scaleNo," + "measurements) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "storage," + "batchNo," + "lotNo," + "supplier," + "scaleNo,"
+				+ "measurements) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		System.out.println(sql);
 
 		try {
@@ -142,78 +143,78 @@ public class ChemReagentDB {
 			return false;
 		}
 	}
-	
+
 	public boolean updateAnalyzeInformation(ChemReagentForm chemReagentForm, String whereClause) {
-		String sql = "UPDATE analyzeInformation SET dateCreated = ?, " + "themeName = ?," + "analyzeTitle = ?," + "comment = ?" + "WHERE analyzeID =" + whereClause;
+		String sql = "UPDATE analyzeInformation SET dateCreated = ?, " + "themeName = ?," + "analyzeTitle = ?,"
+				+ "comment = ?" + "WHERE analyzeID =" + whereClause;
 		try {
 			PreparedStatement update = connection.getConnection().prepareStatement(sql);
-				
+
 			update.setLong(1, chemReagentForm.getDate().toEpochDay());
 			update.setString(2, chemReagentForm.getThemeName());
 			update.setString(3, chemReagentForm.getAnalyzeTitle());
 			update.setString(4, chemReagentForm.getComments());
-			
+
 			update.executeUpdate();
-			
+
 			return true;
-		
+
 		} catch (SQLException e) {
 			System.out.println("Error executin SQL statement");
 			System.out.println(e.getMessage());
 		}
 		return false;
 	}
-	
+
 	public boolean updateFormInformation(ChemReagentForm chemReagentForm, String whereClause) {
 		String sql = "UPDATE formInformation SET reagentName = ?" + "WHERE analyzeID =" + whereClause;
 		try {
 			PreparedStatement update = connection.getConnection().prepareStatement(sql);
-				
+
 			update.setString(1, chemReagentForm.getReagentName());
-			
+
 			update.executeUpdate();
-			
+
 			return true;
-		
+
 		} catch (SQLException e) {
 			System.out.println("Error executin SQL statement");
 			System.out.println(e.getMessage());
 		}
 		return false;
 	}
-	
+
 	public boolean updateChemReagentForm(ChemReagentForm chemReagentForm, String whereClause) {
-	
+
 		updateAnalyzeInformation(chemReagentForm, whereClause);
 		updateFormInformation(chemReagentForm, whereClause);
-		
-		
-		String sql = "UPDATE reagent_Chem SET volume = ?" + "accConcentration = ?" + "lifeTimeF = ?" + "storage = ?" + 
-				"batchNo = ?" + "lotNo = ?" + "supplier = ?" + "scaleNo = ?" + "WHERE analyzeID =" + whereClause;
+
+		String sql = "UPDATE reagent_Chem SET volume = ?" + "accConcentration = ?" + "lifeTimeF = ?" + "storage = ?"
+				+ "batchNo = ?" + "lotNo = ?" + "supplier = ?" + "scaleNo = ?" + "WHERE analyzeID =" + whereClause;
 		try {
 			PreparedStatement update = connection.getConnection().prepareStatement(sql);
-				
+
 			update.setString(1, chemReagentForm.getReagentName());
-			
+
 			update.executeUpdate();
-			
+
 			return true;
-		
+
 		} catch (SQLException e) {
 			System.out.println("Error executin SQL statement");
 			System.out.println(e.getMessage());
 		}
 		return false;
 	}
-	
+
 	public boolean deleteAnalyzeInformation(ChemReagentForm chemReagentForm, String whereClause) {
 		String sql = "DELETE * FROM analyzeInformation WHERE analyzeID=" + whereClause + "";
-		
+
 		try {
 			PreparedStatement delete = connection.getConnection().prepareStatement(sql);
-			
-			delete.ex
-		} catch(SQLException e ) {
+			return trueM
+
+		} catch (SQLException e) {
 			System.out.println("Error executing SQL statement");
 			System.out.println(e.getMessage());
 			return false;
@@ -280,7 +281,8 @@ public class ChemReagentDB {
 		System.out.println("StudentForm");
 
 		String sql = "INSERT INTO reagent_Chem (" + "analyzeID," + "volume," + "accConcentration," + "lifeTimeF,"
-				+ "storage," + "batchNo," + "lotNo," + "supplier," + "scaleNo" + "measurements) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "storage," + "batchNo," + "lotNo," + "supplier," + "scaleNo"
+				+ "measurements) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		System.out.println(sql);
 
 		try {
