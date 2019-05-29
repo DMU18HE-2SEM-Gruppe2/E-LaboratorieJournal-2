@@ -86,4 +86,7 @@ public interface DBInterface {
 
 	List<JournalPresentation> getAllJournalsToPresentation();
 
+
+	boolean deleteChemReagentForm(String whereClause, ChemReagentForm chemReagentForm);
+
 }

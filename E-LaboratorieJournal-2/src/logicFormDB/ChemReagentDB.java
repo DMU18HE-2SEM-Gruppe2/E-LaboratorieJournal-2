@@ -207,11 +207,85 @@ public class ChemReagentDB {
 		return false;
 	}
 
-	public boolean deleteAnalyzeInformation(ChemReagentForm chemReagentForm, String whereClause) {
-		String sql = "DELETE * FROM analyzeInformation WHERE analyzeID=" + whereClause + "";
+	public boolean deleteAnalyzeInformation(String whereClause, ChemReagentForm chemReagentForm) {
+		String sql = "DELETE FROM analyzeInformation, formInformation, student_analyzeInformation, reagent_Chem WHERE analyzeID= ?";
+		
+//		String sql = "DELETE analyzeInformation.*, formInformation.*, reagent_Chem.* FROM analyzeInformation WHERE analyzeID=" + whereClause;
 
 		try {
 			PreparedStatement delete = connection.getConnection().prepareStatement(sql);
+			delete.setInt(1, chemReagentForm.getAnalyzeID());
+//			delete.setLong(2, chemReagentForm.getDate().toEpochDay());
+//			delete.setString(3, chemReagentForm.getThemeName());
+//			delete.setString(4, chemReagentForm.getAnalyzeTitle());
+//			delete.setString(5, chemReagentForm.getComments());
+//			delete.setString(6, chemReagentForm.getCondition());
+			int nRows = delete.executeUpdate();
+
+			return (nRows == 1);
+		} catch (SQLException e) {
+			System.out.println("Could not delete ChemReagent: " + chemReagentForm);
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+
+	private boolean deleteFormInformation(String whereClause, ChemReagentForm chemReagentForm) {
+		String sql = "DELETE * FROM formInformation WHERE analyzeID=" + whereClause;
+
+		try {
+			PreparedStatement delete = connection.getConnection().prepareStatement(sql);
+//			delete.setInt(1, chemReagentForm.getAnalyzeID());
+//			delete.setString(2, chemReagentForm.getReagentName());
+			delete.executeUpdate(sql);
+			System.out.println(sql);
+			return true;
+
+		} catch (SQLException e) {
+			System.out.println("Error executing SQL statement");
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+
+	private boolean deleteStudentForm(String whereClause, ChemReagentForm chemReagentForm) {
+		String sql = "DELETE * FROM student_analyzeInformation WHERE analyzeID=" + whereClause;
+
+		try {
+			PreparedStatement delete = connection.getConnection().prepareStatement(sql);
+//			delete.setInt(1, chemReagentForm.getStudentID());
+//			delete.setInt(1, chemReagentForm.getAnalyzeID());
+			delete.executeUpdate(sql);
+			System.out.println(sql);
+			return true;
+
+		} catch (SQLException e) {
+			System.out.println("Error executing SQL statement");
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+
+	public boolean deleteChemReagentForm(String whereClause, ChemReagentForm chemReagentForm) {
+		deleteAnalyzeInformation(whereClause, chemReagentForm);
+		deleteFormInformation(whereClause, chemReagentForm);
+		deleteStudentForm(whereClause, chemReagentForm);
+		String sql = "DELETE * FROM reagent_Chem WHERE analyzeID="  + whereClause;
+
+		try {
+			PreparedStatement delete = connection.getConnection().prepareStatement(sql);
+//			delete.setInt(1, chemReagentForm.getAnalyzeID());
+//			delete.setString(2, chemReagentForm.getVolume());
+//			delete.setString(3, chemReagentForm.getConcentration());
+//			delete.setString(4, chemReagentForm.getLifeTimeF());
+//			delete.setString(5, chemReagentForm.getStorage());
+//			delete.setString(6, chemReagentForm.getBatchNo());
+//			delete.setString(7, chemReagentForm.getLotNo());
+//			delete.setString(8, chemReagentForm.getSupplier());
+//			delete.setString(9, chemReagentForm.getScaleNo());
+//			delete.setString(10, chemReagentForm.getMeasured());
+			System.out.println(sql);
+			delete.executeUpdate(sql);
 			return true;
 
 		} catch (SQLException e) {

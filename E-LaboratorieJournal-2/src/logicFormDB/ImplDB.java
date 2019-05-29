@@ -77,6 +77,11 @@ public class ImplDB implements DBInterface {
 	public List<ChemReagentForm> getAllChemReagentWhere(String whereClause) {
 		return crDB.getAllProductsWhere(whereClause);
 	}
+	
+	@Override
+	public boolean deleteChemReagentForm(String whereClause, ChemReagentForm chemReagentForm) {
+		return crDB.deleteChemReagentForm(whereClause, chemReagentForm);
+	}
 
 	// Bio Reagent Form
 

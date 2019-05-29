@@ -32,6 +32,7 @@ import logic.ChemReagentForm;
 import logic.DocumentChemReagent;
 import logic.FormPresentation;
 import logic.JournalPresentation;
+import logicFormDB.ChemReagentDB;
 import logicFormDB.DBFactory;
 import logicFormDB.ImplDB;
 
@@ -303,6 +304,7 @@ public class FrontPage extends Application {
 		btnJournal.setOnAction(e -> createJournal());
 		btnForm.setOnAction(e -> createForm());
 		btnPrint.setOnAction(e -> printForm());
+		btnDelete.setOnAction(e -> deleteForm());
 
 		mainStage.setScene(mainScene);
 		mainStage.show();
@@ -316,6 +318,19 @@ public class FrontPage extends Application {
 	public void createForm() {
 		form = new ChooseFormFX();
 		form.start();
+	}
+	
+	public void deleteForm() {
+		ChemReagentForm crf = readChemToPrint();
+		
+		ChemReagentDB crDB = new ChemReagentDB();
+		
+		String analyzeID = Integer.toString(crf.getAnalyzeID());
+		System.out.println();
+		System.out.println();
+		System.out.println(crf);
+		crDB.deleteAnalyzeInformation(analyzeID, crf);
+//		implDB.deleteChemReagentForm(analyzeID, crf);
 	}
 
 	public ChemReagentForm readChemToPrint() {
@@ -525,6 +540,9 @@ public class FrontPage extends Application {
 		System.out.println(crf.getThemeName());
 		System.out.println(crf);
 
+		JavaWorldPrint jwp = new JavaWorldPrint();
+
+		jwp.JavaWorldPrint();
 		Thread thread = new Thread(new JavaWorldPrint());
 		thread.start();
 	}
