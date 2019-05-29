@@ -1,6 +1,7 @@
 package presentationFX;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -26,9 +27,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.ChemReagentForm;
+import logic.DocumentChemReagent;
 import logic.FormPresentation;
 import logic.Student;
 import logicFormDB.DBFactory;
+import logicFormDB.ImplDB;
 
 public class ChemReagentFormFX {
 	Scene chemReagentScene;
@@ -48,7 +51,7 @@ public class ChemReagentFormFX {
 	
 	DBFactory dbf = new DBFactory();
 	ChemReagentForm chemReagentForm;
-	JavaWorldPrint jvPrint = new JavaWorldPrint();
+	ImplDB implDB = new ImplDB();
 	
 	public void start() {
 		chemReagentStage = new Stage();
@@ -397,7 +400,30 @@ public class ChemReagentFormFX {
 	
 	public void print() {
 		createForm();
+		int id = 0, analyzeIDForSearch = 0;
+		List<ChemReagentForm> list = implDB.getAllChemReagent();
+		ChemReagentForm crf = list.get(list.size()-1);
+//		analyzeIDForSearch = crf.getAnalyzeID();
+//		id = crf.getAnalyzeID();
+//		analyzeIDForSearch = implDB.getAnalyzeIDByID(id);
+		DocumentChemReagent dcr = new DocumentChemReagent();
+		dcr.hash_Set.add(crf.getThemeName());
+		dcr.setThemeName(crf.getThemeName().trim());
+		dcr.setAnalyzeTitle(crf.getAnalyzeTitle().trim());
+		dcr.setComments(crf.getComments());
+		dcr.setScaleNo(crf.getScaleNo());
+		dcr.setVolume(crf.getVolume());
+		dcr.setConcentration(crf.getConcentration());
+		dcr.setLifeTimeF(crf.getLifeTimeF());
+		dcr.setStorage(crf.getStorage());
+		dcr.setReagentName(crf.getReagentName());
+		dcr.setBatchNo(crf.getBatchNo());
+		dcr.setLotNo(crf.getLotNo());
+		dcr.setSupplier(crf.getSupplier());
+		dcr.setMeasured(crf.getMeasured());
+		dcr.setCondition(crf.getCondition());
 		
+		JavaWorldPrint jvPrint = new JavaWorldPrint();
 		jvPrint.JavaWorldPrint();
 	}
 	
