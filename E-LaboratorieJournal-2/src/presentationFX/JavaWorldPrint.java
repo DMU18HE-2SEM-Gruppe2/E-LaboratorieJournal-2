@@ -9,7 +9,7 @@ import java.awt.print.PrinterJob;
 
 import logic.DocumentChemReagent;
 
-public class JavaWorldPrint implements Printable {
+public class JavaWorldPrint implements Printable, Runnable {
 
 
 //    JavaWorldPrintExample1 example1 = new JavaWorldPrintExample1();
@@ -44,6 +44,11 @@ public class JavaWorldPrint implements Printable {
       }
     }
 
+  }
+  @Override
+  public void run() {
+	  JavaWorldPrint();
+	  
   }
 
   /**
@@ -95,5 +100,6 @@ public class JavaWorldPrint implements Printable {
     } else
       return (NO_SUCH_PAGE);
   }
+
 
 } //Example1

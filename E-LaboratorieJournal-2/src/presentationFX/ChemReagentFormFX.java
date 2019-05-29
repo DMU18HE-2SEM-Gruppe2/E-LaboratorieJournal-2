@@ -423,8 +423,8 @@ public class ChemReagentFormFX {
 		dcr.setMeasured(crf.getMeasured());
 		dcr.setCondition(crf.getCondition());
 		
-		JavaWorldPrint jvPrint = new JavaWorldPrint();
-		jvPrint.JavaWorldPrint();
+		Thread thread = new Thread(new JavaWorldPrint());
+		thread.start();
 	}
 	
 }

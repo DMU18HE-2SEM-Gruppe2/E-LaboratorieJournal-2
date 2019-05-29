@@ -525,9 +525,8 @@ public class FrontPage extends Application {
 		System.out.println(crf.getThemeName());
 		System.out.println(crf);
 
-		JavaWorldPrint jwp = new JavaWorldPrint();
-
-		jwp.JavaWorldPrint();
+		Thread thread = new Thread(new JavaWorldPrint());
+		thread.start();
 	}
 
 	public void updateList() {
