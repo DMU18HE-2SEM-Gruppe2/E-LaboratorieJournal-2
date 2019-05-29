@@ -49,6 +49,7 @@ public class FrontPage extends Application {
 	ChemReagentFormFX chemForm = new ChemReagentFormFX();
 	ImplDB implDB = new ImplDB();
 
+	
 	ObservableList<FormPresentation> formList;
 	ObservableList<JournalPresentation> journalList;
 

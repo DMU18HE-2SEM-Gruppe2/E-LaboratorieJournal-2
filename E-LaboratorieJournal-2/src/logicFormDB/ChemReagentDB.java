@@ -212,7 +212,7 @@ public class ChemReagentDB {
 
 		try {
 			PreparedStatement delete = connection.getConnection().prepareStatement(sql);
-			return trueM
+			return true;
 
 		} catch (SQLException e) {
 			System.out.println("Error executing SQL statement");
