@@ -10,6 +10,7 @@ import logic.ChemReagentForm;
 import logic.Course;
 import logic.FormPresentation;
 import logic.Journal;
+import logic.JournalPresentation;
 import logic.Student;
 
 public class ImplDB implements DBInterface {
@@ -123,8 +124,23 @@ public class ImplDB implements DBInterface {
 	}
 
 	@Override
-	public boolean addJournalForm(Journal journal, Student student) {
-		return jDB.addJournalForm(journal, student);
+	public boolean addStudentForm(Student student, Journal journal) {
+		return jDB.addStudentForm(student, journal);
+	}
+
+	@Override
+	public boolean addJournalForm(int whereClause) {
+		return jDB.addJournalForm(whereClause);
+	}
+
+	@Override
+	public List<JournalPresentation> getAllJournalsWhereToPresentation(String whereClause) {
+		return jDB.getAllJournalsWhereToPresentation(whereClause);
+	}
+
+	@Override
+	public List<JournalPresentation> getAllJournalsToPresentation() {
+		return jDB.getAllJournalsToPresentation();
 	}
 
 	// Read all forms and add to list

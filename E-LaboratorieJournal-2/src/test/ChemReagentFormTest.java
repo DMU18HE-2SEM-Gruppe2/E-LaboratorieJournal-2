@@ -8,41 +8,53 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import data.DBConnection;
 import logic.ChemReagentForm;
+import logicFormDB.ImplDB;
 
 public class ChemReagentFormTest {
-//	ChemReagentForm crfTest;
-//
-//	@Before
-//	public void setUp() {
-//		ChemReagentForm crfTest = new ChemReagentForm(LocalDate.now(), "Sæbe", "Brun Sæbe test", "", "Grisefedt",
-//				"1a2b3c", "", "GH Kemi", "FJERN SIGNATURE", "Sæbe test", "vægt med udluft nr. 3", "300mL", "20%",
-//				"2 dage", "Køleskab");
-//	}
-//	
-//	@After
-//	public void tearDown() {
-//		ChemReagentForm crfTest = new ChemReagentForm(LocalDate.now(), "Sæbe", "Brun Sæbe test", "", "Grisefedt",
-//				"1a2b3c", "", "GH Kemi", "FJERN SIGNATURE", "Sæbe test", "vægt med udluft nr. 3", "300mL", "20%",
-//				"2 dage", "Køleskab");
-//	}
-	@Test
-	public void chemReagentFormConstructor() {
-		ChemReagentForm crfTest = new ChemReagentForm(LocalDate.now(), "Sæbe", "Brun Sæbe test", "", "Grisefedt",
-				"1a2b3c", "", "GH Kemi", "FJERN SIGNATURE", "Sæbe test", "vægt med udluft nr. 3", "300mL", "20%",
-				"2 dage", "Køleskab");
-		assertEquals(
-				"[exerciseName=Sæbe test, weightNo=vægt med udluft nr. 3, manufacturedVolume=300mL, concentration=20%, "
-						+ "lifeTimeF=2 dage, storage=Køleskab, reagentName=Grisefedt, batchNo=1a2b3c, lotNo=, supplier=GH Kemi, "
-						+ "signature=FJERN SIGNATURE, date=2019-05-15, themeName=Sæbe, analyzeTitle=Brun Sæbe test, comments=]",
-				crfTest.toString());
+
+	ChemReagentForm crf;
+	
+	DBConnection connection = new DBConnection();
+	ImplDB implDB = new ImplDB();
+
+//	public ChemReagentForm(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
+//			int studentID, String scaleNo,C String manufacturedVolume, String concentration, String lifeTimeF,
+//			String storage, String reagentName, int formID, String batchNo, String lotNo, String supplier,
+//			String measured, String condition) {
+
+	@Before
+	public void setUp() {
+		crf = new ChemReagentForm(LocalDate.now(), "Sukker", "pH måling", "Der var mange fejl", 0, 0,
+				"Vægt 4 udluftning", "4", "2 mol", "2 uger", "I skabet", "P20h", 0, "23-291-499586", "", "G.H Kemi",
+				"Ja", "Gemt");
+	}
+
+	@After
+	public void tearDown() {
+		crf = new ChemReagentForm(LocalDate.now(), "Sukker", "pH måling", "Der var mange fejl", 0, 0,
+				"Vægt 4 udluftning", "4", "2 mol", "2 uger", "I skabet", "P20h", 0, "23-291-499586", "", "G.H Kemi",
+				"Ja", "Gemt");
 	}
 
 	@Test
-	public void chemReagentFormDate() {
-		ChemReagentForm crfTest = new ChemReagentForm(LocalDate.now(), "Sæbe", "Brun Sæbe test", "", "Grisefedt",
-				"1a2b3c", "", "GH Kemi", "FJERN SIGNATURE", "Sæbe test", "vægt med udluft nr. 3", "300mL", "20%",
-				"2 dage", "Køleskab");
-		assertEquals(LocalDate.now(), crfTest.getDate());
+	public void ToString() {
+		assertEquals(
+				"ChemReagentForm [scaleNo=Vægt 4 udluftning, volume=4, concentration=2 mol, lifeTimeF=2 uger, storage=I skabet, batchNo=23-291-499586, lotNo=, supplier=G.H Kemi, measured=Ja, reagentName=P20h, formID=0, date=" + LocalDate.now() + ", " + "themeName=Sukker, analyzeTitle=pH måling, comments=Der var mange fejl, analyzeID=0, studentID=0, condition=Gemt]",
+				crf.toString());
 	}
+
+	@Test
+	public void getThemeName() {
+		assertEquals("Sukker", crf.getThemeName());
+		System.out.println(crf.toString());
+	}
+	
+	@Test
+	public void setThemeName() {
+		crf.setThemeName("Druesukker");
+		assertEquals("Druesukker", crf.getThemeName());
+	}
+
 }

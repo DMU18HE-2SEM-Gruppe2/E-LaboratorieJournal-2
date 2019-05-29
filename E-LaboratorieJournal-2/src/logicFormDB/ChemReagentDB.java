@@ -205,6 +205,20 @@ public class ChemReagentDB {
 		}
 		return false;
 	}
+	
+	public boolean deleteAnalyzeInformation(ChemReagentForm chemReagentForm, String whereClause) {
+		String sql = "DELETE * FROM analyzeInformation WHERE analyzeID=" + whereClause + "";
+		
+		try {
+			PreparedStatement delete = connection.getConnection().prepareStatement(sql);
+			
+//			delete.ex
+		} catch(SQLException e ) {
+			System.out.println("Error executing SQL statement");
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
 
 	public List<ChemReagentForm> getAllProducts() {
 		return getAllProductsWhere("1=1");

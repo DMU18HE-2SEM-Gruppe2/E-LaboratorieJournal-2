@@ -15,21 +15,20 @@ public class DBOthers {
 	DBConnection connection = new DBConnection();
 
 	public boolean addStudent(Student student, Course course) {
-		String query = "INSERT INTO student (" + "firstname," + "lastname," + "courseID"
-				+ ") VALUES (?, ?, ?)";
+		String query = "INSERT INTO student (" + "firstname," + "lastname," + "courseID" + ") VALUES (?, ?, ?)";
 		// CRUD Student
 		// Create Student
-		
+
 		try (PreparedStatement add = connection.getConnection().prepareStatement(query,
 				Statement.RETURN_GENERATED_KEYS)) {
 			add.setString(1, student.getFirstName());
 			add.setString(2, student.getLastName());
 			add.setInt(3, course.getCourseID());
-			
+
 			int nRows = add.executeUpdate();
 
 			student.setCourseID(course.getCourseID());
-			
+
 			if (nRows > 0) {
 				try (ResultSet rs = add.getGeneratedKeys()) {
 					if (rs.next()) {
@@ -46,55 +45,6 @@ public class DBOthers {
 		return true;
 	}
 
-
-//	public boolean addStudent(Student student, Course course) {
-//
-//		String select = "SELECT courseID FROM course WHERE " + "courseName=" + "'" + course.getName() + "'";
-//		String query = "INSERT INTO student (" + "studentID," + "firstname," + "lastname," + "courseID"
-//				+ ") VALUES (?, ?, ?, ?)";
-//
-//		try {
-//
-//			PreparedStatement g = connection.getConnection().prepareStatement(select, Statement.RETURN_GENERATED_KEYS);
-//
-//			PreparedStatement add = connection.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-//
-//			System.out.println(query);
-//			System.out.println(select);
-//
-//			g.executeUpdate();
-//			int nRows = add.executeUpdate();
-//
-//			ResultSet generatedKeys = add.getGeneratedKeys();
-//			ResultSet generatedCourseID = g.getGeneratedKeys();
-//
-//			if (generatedCourseID.next()) {
-//				course.setCourseID(generatedCourseID.getInt(1));
-//			}
-//
-//			if (generatedKeys.next()) {
-//				student.setStudentID(generatedKeys.getInt(1));
-//			}
-//
-//			add.setInt(1, student.getStudentID());
-//			add.setString(2, student.getFirstName());
-//			add.setString(3, student.getLastName());
-//			add.setInt(4, course.getCourseID());
-//
-//			if (nRows != 1) {
-//				System.out.println("Fejl1");
-//				return false;
-//			}
-//			return true;
-//		} catch (SQLException e) {
-//			System.out.println("Fejl2");
-//			System.out.println("Failed to add: " + student);
-//			System.out.println(e.getMessage());
-//			return false;
-//
-//		}
-//	}
-
 	public int getStudentById(int id) {
 		int studentID = 0;
 		try {
@@ -107,8 +57,7 @@ public class DBOthers {
 			while (resultSet.next()) { // rykker pilen i resultset fra "before first" ned på næste række.
 
 				studentID = resultSet.getInt("studentID");
-				
-				
+
 			}
 		} catch (SQLException e) {
 			System.out.println("Error running SQL statement");
@@ -118,6 +67,7 @@ public class DBOthers {
 		return studentID;
 
 	}
+
 	// Read All Students
 	public List<Student> getAllStudents() {
 		return getStudentsWhere("1=1");

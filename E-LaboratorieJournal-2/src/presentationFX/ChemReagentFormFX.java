@@ -335,8 +335,39 @@ public class ChemReagentFormFX {
 	public void lockForm() {
 		saveAndLockAlert.showAndWait();
 		if (saveAndLockAlert.getResult() == yesButton) {
-			createForm();
-			chemReagentStage.close();
+			FrontPage front = new FrontPage();
+			
+			int analyzeID = 0, studentID = 0, courseID = 0, formID = 0, id = 0;
+
+			String firstName = "", lastName = "";
+
+			String fullName = "";
+
+			int selectedIndex = cbStudent.getSelectionModel().getSelectedIndex();
+			if (selectedIndex >= 0) {
+				Student student = (Student) cbStudent.getSelectionModel().getSelectedItem();
+				id = student.getStudentID();
+				firstName = student.getFirstName();
+				lastName = student.getLastName();
+				fullName = firstName + " " + lastName;
+				System.out.println("id: " + id);
+				studentID = dbf.makeInterfaceDB().getStudentById(id);
+
+			}
+
+			ChemReagentForm crf = new ChemReagentForm(LocalDate.now(), tfTheme.getText(), tfAnalyzeTitle.getText(),
+					tfComment.getText(), analyzeID, studentID, tfScaleNo.getText(), tfVolume.getText(),
+					tfConcentration.getText(), tfShelfLife.getText(), tfStorage.getText(), tfReagentName.getText(), formID,
+					tfBatchNo.getText(), tfLotNo.getText(), tfSupplier.getText(), tfMeasurements.getText(), "Låst");
+
+			FormPresentation fp = new FormPresentation(tfAnalyzeTitle.getText(), LocalDate.now(), fullName,
+					tfTheme.getText(), tfReagentName.getText(), analyzeID, "Låst");
+
+			Student student = new Student(firstName, lastName, courseID, studentID);
+
+			dbf.makeInterfaceDB().createChemReagent(crf, student);
+			
+			front.updateList();
 		}
 	}
 	
@@ -368,7 +399,7 @@ public class ChemReagentFormFX {
 				tfBatchNo.getText(), tfLotNo.getText(), tfSupplier.getText(), tfMeasurements.getText(), "Gemt");
 
 		FormPresentation fp = new FormPresentation(tfAnalyzeTitle.getText(), LocalDate.now(), fullName,
-				tfTheme.getText(), tfReagentName.getText(), analyzeID);
+				tfTheme.getText(), tfReagentName.getText(), analyzeID, "Gemt");
 
 		Student student = new Student(firstName, lastName, courseID, studentID);
 

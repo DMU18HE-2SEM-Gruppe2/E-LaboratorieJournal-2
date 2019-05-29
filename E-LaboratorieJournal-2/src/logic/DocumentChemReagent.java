@@ -41,6 +41,11 @@ public class DocumentChemReagent implements Printable {
 				g2Print.setFont(font);
 				g2Print.setColor(Color.black);
 
+//				static String date, themeName, analyzeTitle, comments, scaleNo, volume, concentration, lifeTimeF, storage,
+//				reagentName, batchNo, lotNo, supplier, measured, condition;
+
+				
+				
 //        FontMetrics fontMetrics = g2d.getFontMetrics();
 //        double titleX = (pageFormat.getImageableWidth() / 2)
 //            - (fontMetrics.stringWidth(titleText) / 2);
@@ -48,18 +53,18 @@ public class DocumentChemReagent implements Printable {
 
 //        for (int i=0; i<500; i+=12)
 //          g2Print.drawString("(" + i + ", " + i + ")", i, i);
-				g2Print.drawString(getThemeName(), 84, 84);
-				g2Print.drawString(getAnalyzeTitle(), 84, 96);
-				g2Print.drawString("hej", 84, 108);
-				g2Print.drawString("hej", 84, 120);
-				g2Print.drawString("hej", 84, 132);
-				g2Print.drawString("hej", 84, 144);
-				g2Print.drawString("hej", 84, 156);
-				g2Print.drawString("hej", 84, 168);
-				g2Print.drawString("hej", 84, 180);
-				g2Print.drawString("hej", 84, 192);
-				g2Print.drawString("hej", 84, 204);
-				System.out.println(getAnalyzeTitle());
+				g2Print.drawString(getThemeName(), 400, 50);
+				g2Print.drawString(getAnalyzeTitle(), 400, 100);
+				g2Print.drawString(getComments(), 400, 150);
+				g2Print.drawString(getScaleNo(), 400, 200);
+				g2Print.drawString(getVolume(), 400, 250);
+				g2Print.drawString(getConcentration(), 400, 300);
+				g2Print.drawString(getLifeTimeF(), 400, 350);
+				g2Print.drawString(getStorage(), 400, 400);
+				g2Print.drawString(getReagentName(), 400, 450);
+				g2Print.drawString(getBatchNo(), 400, 500);
+				g2Print.drawString(getLotNo(), 400, 550);
+				
 
 //        g2Print.drawString(cr.analyzeTitle	, 84, 108);
 

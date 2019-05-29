@@ -48,7 +48,7 @@ public class ReferenceTable {
 		mainBox.setMaxHeight(500);
 		btnBox = factory.hBoxFactory(50, 0, 0, 0, 0, Pos.CENTER);
 
-		btnAdd = factory.buttonFactory("Tilføj", 90, 14, true);
+		btnAdd = factory.buttonFactory("Tilføj", 90, 14, false);
 		btnCancel = factory.buttonFactory("Tilbage", 90, 14, false);
 
 		tfSearch = factory.textFieldFactory("Søg...", 200, 14);
@@ -144,10 +144,18 @@ public class ReferenceTable {
 
 		// Actions
 		btnCancel.setOnAction(e -> cancelRefTable());
+		btnAdd.setOnAction(e -> addForms());
 
 		scene = new Scene(mainBox);
 		stage.setScene(scene);
 		stage.show();
+	}
+
+	public void addForms() {
+		
+		int formID = getFormReference();
+		dbf.makeInterfaceDB().addJournalForm(formID);
+
 	}
 
 	public int getFormReference() {
@@ -163,7 +171,7 @@ public class ReferenceTable {
 		}
 		return formID;
 	}
-	
+
 	public int getAnalyzeReference() {
 		int analyzeID = 0, id = 0;
 

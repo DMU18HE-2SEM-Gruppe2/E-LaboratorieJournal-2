@@ -10,15 +10,17 @@ public class FormPresentation {
 	private String themeName;
 	private String reagentName;
 	private int analyzeID;
+	private String condition;
 
 	public FormPresentation(String title, LocalDate date, String studentName, String themeName, String reagentName,
-			int analyzeID) {
+			int analyzeID, String condition) {
 		this.title = title;
 		this.date = date;
 		this.studentName = studentName;
 		this.themeName = themeName;
 		this.reagentName = reagentName;
 		this.analyzeID = analyzeID;
+		this.condition = condition;
 	}
 
 	public String getTitle() {
@@ -69,10 +71,19 @@ public class FormPresentation {
 		this.analyzeID = analyzeID;
 	}
 
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+
 	@Override
 	public String toString() {
 		return "FormPresentation [title=" + title + ", date=" + date + ", studentName=" + studentName + ", themeName="
-				+ themeName + ", reagentName=" + reagentName + ", analyzeID=" + analyzeID + "]";
+				+ themeName + ", reagentName=" + reagentName + ", analyzeID=" + analyzeID + ", condition=" + condition
+				+ "]";
 	}
 
 }

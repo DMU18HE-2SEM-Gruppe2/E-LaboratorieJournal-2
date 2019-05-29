@@ -13,7 +13,7 @@ import logic.FormPresentation;
 public class MutualDB {
 
 	DBConnection connection = new DBConnection();
-	
+
 	public List<FormPresentation> getAllProductsToPresentation() {
 		return getAllProductsWhereToPresentation("1=1");
 	}
@@ -21,7 +21,7 @@ public class MutualDB {
 	public List<FormPresentation> getAllProductsWhereToPresentation(String whereClause) {
 		List<FormPresentation> list = new ArrayList<>();
 		try {
-			String sql = "SELECT analyzeInformation.analyzeID, analyzeInformation.dateCreated, analyzeInformation.themeName, analyzeInformation.analyzeTitle, formInformation.reagentName, student.firstname, student.lastname"
+			String sql = "SELECT analyzeInformation.condition, analyzeInformation.analyzeID, analyzeInformation.dateCreated, analyzeInformation.themeName, analyzeInformation.analyzeTitle, formInformation.reagentName, student.firstname, student.lastname"
 					+ " FROM course JOIN student ON student.courseID = course.courseID "
 					+ "JOIN student_analyzeInformation ON student_analyzeInformation.studentID = student.studentID "
 					+ "JOIN analyzeInformation ON student_analyzeInformation.analyzeID = analyzeInformation.analyzeID "
@@ -40,10 +40,11 @@ public class MutualDB {
 				String firstName = resultSet.getString("firstname");
 				String lastName = resultSet.getString("lastname");
 				int analyzeID = resultSet.getInt("analyzeID");
+				String condition = resultSet.getString("condition");
 				String fullName = firstName + " " + lastName;
 
 				FormPresentation fp = new FormPresentation(analyzeTitle, date, fullName, themeName, reagentName,
-						analyzeID);
+						analyzeID, condition);
 
 				list.add(fp);
 			}
@@ -77,8 +78,7 @@ public class MutualDB {
 		return analyzeID;
 
 	}
-	
-	
+
 	public int getFormIDByID(int id) {
 		int formID = 0;
 		try {
@@ -100,5 +100,5 @@ public class MutualDB {
 
 		return formID;
 	}
-	
+
 }

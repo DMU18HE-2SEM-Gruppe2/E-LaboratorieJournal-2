@@ -50,6 +50,7 @@ public class FrontPage extends Application {
 	ImplDB implDB = new ImplDB();
 
 	ObservableList<FormPresentation> formList;
+	ObservableList<JournalPresentation> journalList;
 
 	public TableView<JournalPresentation> journalTable = new TableView();
 	public TableView<FormPresentation> formTable = new TableView();
@@ -95,7 +96,18 @@ public class FrontPage extends Application {
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
 					rowData = row.getItem().getAnalyzeID();
 					rowDatastring = Integer.toString(rowData);
-					readChemForm2();
+					readChemForm();
+				}
+			});
+			return row;
+		});
+		journalTable.setRowFactory(tv -> {
+			TableRow<JournalPresentation> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					rowData = row.getItem().getAnalyzeID();
+					rowDatastring = Integer.toString(rowData);
+					readChemForm();
 				}
 			});
 			return row;
@@ -150,39 +162,91 @@ public class FrontPage extends Application {
 		mainPane.setLeft(vBoxMenu);
 		mainPane.setCenter(stackPane);
 
-		// Table columns
-		TableColumn<FormPresentation, String> analyzeTitle = new TableColumn<FormPresentation, String>("Titel");
-		TableColumn<FormPresentation, String> themeName = new TableColumn<FormPresentation, String>("Tema");
-		TableColumn<FormPresentation, String> formName = new TableColumn<FormPresentation, String>("Blanket navn");
-		TableColumn<FormPresentation, String> studentName = new TableColumn<FormPresentation, String>("Studerende");
-		TableColumn<FormPresentation, String> date = new TableColumn<FormPresentation, String>("Dato");
+//		public JournalPresentation(LocalDate date, String themeName, String analyzeTitle, String studentNames,
+//				String traceability, String condition, int analyzeID) {
 
-		analyzeTitle.setCellValueFactory(e -> {
+		TableColumn<JournalPresentation, String> analyzeTitleJ = new TableColumn<JournalPresentation, String>("Titel");
+		TableColumn<JournalPresentation, String> themeNameJ = new TableColumn<JournalPresentation, String>("Tema");
+		TableColumn<JournalPresentation, String> traceability = new TableColumn<JournalPresentation, String>(
+				"Blanket navn");
+		TableColumn<JournalPresentation, String> studentNameJ = new TableColumn<JournalPresentation, String>(
+				"Studerende");
+		TableColumn<JournalPresentation, String> dateJ = new TableColumn<JournalPresentation, String>("Dato");
+		TableColumn<JournalPresentation, String> conditionJ = new TableColumn<JournalPresentation, String>("Status");
+
+		analyzeTitleJ.setCellValueFactory(e -> {
+			JournalPresentation jp = e.getValue();
+			return new SimpleStringProperty(jp.getAnalyzeTitle());
+		});
+
+		themeNameJ.setCellValueFactory(e -> {
+			JournalPresentation jp = e.getValue();
+			return new SimpleStringProperty(jp.getThemeName());
+		});
+
+		traceability.setCellValueFactory(e -> {
+			JournalPresentation jp = e.getValue();
+			return new SimpleStringProperty(jp.getTraceability());
+		});
+
+		studentNameJ.setCellValueFactory(e -> {
+			JournalPresentation jp = e.getValue();
+			return new SimpleStringProperty(jp.getStudentNames());
+		});
+
+		dateJ.setCellValueFactory(e -> {
+			JournalPresentation fp = e.getValue();
+			return new SimpleStringProperty(fp.getDate().format(DateTimeFormatter.ofPattern("dd MMMM - yyyy")));
+		});
+
+		conditionJ.setCellValueFactory(e -> {
+			JournalPresentation fp = e.getValue();
+			return new SimpleStringProperty(fp.getCondition());
+		});
+
+		journalTable.getColumns().addAll(analyzeTitleJ, themeNameJ, traceability, studentNameJ, dateJ, conditionJ);
+
+		journalList = FXCollections.observableList(dbf.makeInterfaceDB().getAllJournalsToPresentation());
+		journalTable.setItems(journalList);
+
+		// Table columns for FormPresentation
+		TableColumn<FormPresentation, String> analyzeTitleF = new TableColumn<FormPresentation, String>("Titel");
+		TableColumn<FormPresentation, String> themeNameF = new TableColumn<FormPresentation, String>("Tema");
+		TableColumn<FormPresentation, String> formNameF = new TableColumn<FormPresentation, String>("Blanket navn");
+		TableColumn<FormPresentation, String> studentNameF = new TableColumn<FormPresentation, String>("Studerende");
+		TableColumn<FormPresentation, String> dateF = new TableColumn<FormPresentation, String>("Dato");
+		TableColumn<FormPresentation, String> conditionF = new TableColumn<FormPresentation, String>("Status");
+
+		analyzeTitleF.setCellValueFactory(e -> {
 			FormPresentation fp = e.getValue();
 			return new SimpleStringProperty(fp.getTitle());
 		});
 
-		themeName.setCellValueFactory(e -> {
+		themeNameF.setCellValueFactory(e -> {
 			FormPresentation fp = e.getValue();
 			return new SimpleStringProperty(fp.getThemeName());
 		});
 
-		formName.setCellValueFactory(e -> {
+		formNameF.setCellValueFactory(e -> {
 			FormPresentation fp = e.getValue();
 			return new SimpleStringProperty(fp.getReagentName());
 		});
 
-		studentName.setCellValueFactory(e -> {
+		studentNameF.setCellValueFactory(e -> {
 			FormPresentation fp = e.getValue();
 			return new SimpleStringProperty(fp.getStudentName());
 		});
 
-		date.setCellValueFactory(e -> {
+		dateF.setCellValueFactory(e -> {
 			FormPresentation fp = e.getValue();
 			return new SimpleStringProperty(fp.getDate().format(DateTimeFormatter.ofPattern("dd MMMM - yyyy")));
 		});
+		conditionF.setCellValueFactory(e -> {
+			FormPresentation fp = e.getValue();
+			return new SimpleStringProperty(fp.getCondition());
+		});
 
-		formTable.getColumns().addAll(analyzeTitle, themeName, formName, studentName, date);
+		formTable.getColumns().addAll(analyzeTitleF, themeNameF, formNameF, studentNameF, dateF, conditionF);
 		formTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		journalTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -253,21 +317,6 @@ public class FrontPage extends Application {
 		form.start();
 	}
 
-//	public void readChemForm() {
-////		System.out.println(rowData);
-//		
-//		ArrayList l = new ArrayList();
-//		l.add(implDB.getAllChemReagentWhere("analyzeInformation.analyzeID=" + rowDatastring));
-//		for(int i = 0; i < l.size(); i++) {
-//			Object s = l.get(i);
-//			System.out.println(l.get(i));
-//			System.out.println(s);
-//		}
-//		
-//		
-////		chemForm.start();
-//		
-//	}
 	public ChemReagentForm readChemToPrint() {
 		int id = 0, analyzeIDForSearch = 0;
 
@@ -346,9 +395,9 @@ public class FrontPage extends Application {
 		return cmr;
 	}
 
-	public void readChemForm2() {
+	public void readChemForm() {
 		List<ChemReagentForm> crf = implDB.getAllChemReagentWhere("analyzeInformation.analyzeID=" + rowDatastring);
-
+		
 		String date = "";
 		String themeName = "";
 		String analyzeTitle = "";
@@ -366,7 +415,8 @@ public class FrontPage extends Application {
 		String lotNo = "";
 		String supplier = "";
 		String measurements = "";
-
+		String condition = "";
+		
 		for (int i = 0; i < crf.size(); i++) {
 			ChemReagentForm l = crf.get(i);
 			date = l.getDate().toString();
@@ -386,11 +436,30 @@ public class FrontPage extends Application {
 			lotNo = l.getLotNo().toString();
 			supplier = l.getSupplier().toString();
 			measurements = l.getMeasured().toString();
+			condition = l.getCondition().toString();
 			System.out.println("hej");
+			
 		}
-
+		
 		chemForm.start();
-
+		
+		if (condition.equals("Låst")) {
+			System.out.println("Låst test");
+			chemForm.tfDate.setDisable(true);
+			chemForm.tfTheme.setDisable(true);
+			chemForm.tfAnalyzeTitle.setDisable(true);
+			chemForm.tfScaleNo.setDisable(true);
+			chemForm.tfVolume.setDisable(true);
+			chemForm.tfConcentration.setDisable(true);
+			chemForm.tfShelfLife.setDisable(true);
+			chemForm.tfStorage.setDisable(true);
+			chemForm.tfReagentName.setDisable(true);
+			chemForm.tfBatchNo.setDisable(true);
+			chemForm.tfLotNo.setDisable(true);
+			chemForm.tfSupplier.setDisable(true);
+			chemForm.tfMeasurements.setDisable(true);
+		}
+		
 		chemForm.tfDate.setText(date);
 		chemForm.tfTheme.setText(themeName);
 		chemForm.tfAnalyzeTitle.setText(analyzeTitle);
@@ -405,9 +474,9 @@ public class FrontPage extends Application {
 		chemForm.tfLotNo.setText(lotNo);
 		chemForm.tfSupplier.setText(supplier);
 		chemForm.tfMeasurements.setText(measurements);
-
+		
 		chemForm.tfVolume.setDisable(true);
-		chemForm.tfMeasurements.setDisable(true);
+		chemForm.tfMeasurements.setDisable(true);		
 	}
 
 	public TableView<FormPresentation> getTable() {
@@ -422,7 +491,7 @@ public class FrontPage extends Application {
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
 					rowData = row.getItem().getAnalyzeID();
 					rowDatastring = Integer.toString(rowData);
-					readChemForm2();
+					readChemForm();
 				}
 			});
 			return row;

@@ -49,12 +49,11 @@ foreign key (courseID) REFERENCES course(courseID)
 create table journal(
 journalID int identity(1,1) NOT NULL,
 analyzeID int NOT NULL,
-formID int NOT NULL,
 coworker nvarchar(max) NOT NULL,
 traceability nvarchar(max) NOT NULL,
 results nvarchar(max) NOT NULL,
 calculations nvarchar(max) NOT NULL,
-calcImage image NOT NULL,
+calcImage nvarchar(max) NOT NULL,
 
 primary key(journalID),
 

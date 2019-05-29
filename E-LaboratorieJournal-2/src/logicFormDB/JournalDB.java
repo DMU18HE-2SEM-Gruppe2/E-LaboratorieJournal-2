@@ -9,21 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.DBConnection;
-import logic.ChemReagentForm;
+import logic.FormPresentation;
 import logic.Journal;
+import logic.JournalPresentation;
 import logic.Student;
-import presentationFX.ReferenceTable;
 
 public class JournalDB {
-	private DBConnection connection;
+	private DBConnection connection = new DBConnection();
 
 	public boolean addAnalyzeInfo(Journal journal) {
 
 //		public Journal(LocalDate date, String themeName, String analyzeTitle, String comments, int studentID, int analyzeID,
 //				String coworker, String traceability, String results, String calculations, String image)
 
-		String sql = "INSERT INTO analyzeInformation (" + "dateCreated," + "themeName," + "analyzeTitle,"
-				+ "comment," + "condition) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO analyzeInformation (" + "dateCreated," + "themeName," + "analyzeTitle," + "comment,"
+				+ "condition) VALUES (?, ?, ?, ?, ?)";
 
 		try (PreparedStatement add = connection.getConnection().prepareStatement(sql,
 				Statement.RETURN_GENERATED_KEYS)) {
@@ -57,9 +57,8 @@ public class JournalDB {
 	}
 
 	public boolean addJournal(Journal journal) {
-		addAnalyzeInfo(journal);
-		String sql = "INSERT INTO journal (" + "analyzeID," + "coworker," + "traceability," + "results" + "calculations"
-				+ "calcImage) VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO journal (" + "analyzeID," + "coworker," + "traceability," + "results,"
+				+ "calculations," + "calcImage) VALUES (?, ?, ?, ?, ?, ?)";
 
 		try (PreparedStatement add = connection.getConnection().prepareStatement(sql,
 				Statement.RETURN_GENERATED_KEYS)) {
@@ -92,10 +91,11 @@ public class JournalDB {
 			return false;
 		}
 	}
-	
-	public boolean addStudentForm(Student student, Journal journal) {
 
-		
+	public boolean addStudentForm(Student student, Journal journal) {
+		addAnalyzeInfo(journal);
+		addJournal(journal);
+
 		String sql = "INSERT INTO student_analyzeInformation (" + "studentID," + "analyzeID) VALUES (?, ?)";
 		System.out.println(sql);
 
@@ -121,24 +121,20 @@ public class JournalDB {
 
 	}
 
-	public boolean addJournalForm(Journal journal, Student student) {
-		addAnalyzeInfo(journal);
-		addJournal(journal);
-		addStudentForm(student, journal);
+	public boolean addJournalForm(int whereClause) {
 
-		ReferenceTable rt = new ReferenceTable();
-		int formID = rt.getFormReference();
+		List<Journal> list = readAllJournals();
+
+		Journal j = list.get(list.size() - 1);
 
 		String sql = "INSERT INTO journalForm (" + "journalID," + "formID) VALUES (?, ?)";
 
 		try {
-			Statement statement = connection.getConnection().createStatement();
-			ResultSet resultSet = statement.executeQuery(sql);
 			System.out.println(sql);
 			PreparedStatement add = connection.getConnection().prepareStatement(sql);
 
-			add.setInt(1, journal.getJournalID());
-			add.setInt(2, formID);
+			add.setInt(1, j.getJournalID());
+			add.setInt(2, whereClause);
 
 			int nRows = add.executeUpdate();
 
@@ -147,11 +143,105 @@ public class JournalDB {
 			}
 			return true;
 		} catch (SQLException e) {
-			System.out.println("Failed to add: " + journal);
+			System.out.println("Failed to add: " + j);
 			System.out.println(e.getMessage());
 			return false;
 
 		}
+	}
+
+	public List<JournalPresentation> getAllJournalsToPresentation() {
+		return getAllJournalsWhereToPresentation("1=1");
+	}
+
+	public List<JournalPresentation> getAllJournalsWhereToPresentation(String whereClause) {
+		List<JournalPresentation> list = new ArrayList<>();
+		try {
+			String sql = "SELECT analyzeInformation.*, journal.*, student.*"
+					+ " FROM course JOIN student ON student.courseID = course.courseID "
+					+ "JOIN student_analyzeInformation ON student_analyzeInformation.studentID = student.studentID "
+					+ "JOIN analyzeInformation ON student_analyzeInformation.analyzeID = analyzeInformation.analyzeID "
+					+ "JOIN journal ON journal.analyzeID = analyzeInformation.analyzeID WHERE " + whereClause
+					+ "";
+			System.out.println(sql);
+
+			Statement statement = connection.getConnection().createStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
+
+			while (resultSet.next()) {
+				LocalDate date = LocalDate.ofEpochDay(resultSet.getLong("dateCreated"));
+				String themeName = resultSet.getString("themeName");
+				String analyzeTitle = resultSet.getString("analyzeTitle");
+				String firstName = resultSet.getString("firstname");
+				String lastName = resultSet.getString("lastname");
+				String traceability = resultSet.getString("traceability");
+				String condition = resultSet.getString("condition");
+				int analyzeID = resultSet.getInt("analyzeID");
+				String fullName = firstName + " " + lastName;
+
+				JournalPresentation jp = new JournalPresentation(date, themeName, analyzeTitle, fullName, traceability,
+						condition, analyzeID);
+
+				list.add(jp);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Error executin SQL statement");
+			System.out.println(e.getMessage());
+		}
+		return list;
+	}
+
+	public List<Journal> readAllJournals() {
+		return readJournal("1=1");
+	}
+
+	public List<Journal> readJournal(String whereClause) {
+		
+		
+		DBFactory dbf = new DBFactory();
+		
+		List<Journal> list = new ArrayList<>();
+		try {
+			String sql = "SELECT analyzeInformation.*, journal.*, student.*, formInformation.*"
+					+ " FROM course JOIN student ON student.courseID = course.courseID "
+					+ "JOIN student_analyzeInformation ON student_analyzeInformation.studentID = student.studentID "
+					+ "JOIN analyzeInformation ON student_analyzeInformation.analyzeID = analyzeInformation.analyzeID "
+					+ "JOIN journal ON journal.analyzeID = student_analyzeInformation.analyzeID WHERE " + whereClause
+					+ "";
+			System.out.println(sql);
+
+			Statement statement = connection.getConnection().createStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
+
+			while (resultSet.next()) {
+				LocalDate date = LocalDate.ofEpochDay(resultSet.getLong("dateCreated"));
+				String themeName = resultSet.getString("themeName");
+				String analyzeTitle = resultSet.getString("analyzeTitle");
+				String comments = resultSet.getString("comment");
+				int studentID = resultSet.getInt("studentID");
+				int analyzeID = resultSet.getInt("analyzeID");
+				String coworker = resultSet.getString("coworker");
+				String traceability = resultSet.getString("traceability");
+				String results = resultSet.getString("results");
+				String calculations = resultSet.getString("calculations");
+				String image = resultSet.getString("calcImage");
+				int journalID = resultSet.getInt("journalID");
+				int formID = resultSet.getInt("formID");
+				String condition = resultSet.getString("condition");
+
+				Journal journal = new Journal(LocalDate.now(), themeName, analyzeTitle, comments, studentID, analyzeID,
+						coworker, traceability, results, calculations, image, journalID, formID, condition);
+
+				list.add(journal);
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Error executing the SQL statement");
+			System.out.println(e.getMessage());
+		}
+		return list;
 	}
 
 	public List<Journal> readFormToJournalWhere(String whereClause) {
