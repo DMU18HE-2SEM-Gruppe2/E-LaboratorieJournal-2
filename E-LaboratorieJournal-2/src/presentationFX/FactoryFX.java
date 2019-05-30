@@ -19,7 +19,7 @@ public class FactoryFX {
 		template.setDisable(disable);
 		return template;
 	}
-	
+
 	public TextField textFieldFactory(String text, int width, int fontSize) {
 		TextField template = new TextField();
 		template.setPromptText(text);
@@ -28,7 +28,7 @@ public class FactoryFX {
 
 		return template;
 	}
-	
+
 	public TextArea textAreaFactory(int height, int width, int fontsize, boolean monospace) {
 		TextArea template = new TextArea();
 		template.setPrefHeight(height);
@@ -39,7 +39,7 @@ public class FactoryFX {
 		}
 		return template;
 	}
-	
+
 	public Label labelFactory(String text, int t, int r, int b, int l, int fontSize, boolean bold) {
 		Label template = new Label(text);
 		template.setPadding(new Insets(t, r, b, l));
@@ -49,7 +49,7 @@ public class FactoryFX {
 		}
 		return template;
 	}
-	
+
 	public VBox vBoxFactory(int spacing, int t, int r, int b, int l, Pos alignment) {
 		VBox template = new VBox(spacing);
 		template.setPadding(new Insets(t, r, b, l));

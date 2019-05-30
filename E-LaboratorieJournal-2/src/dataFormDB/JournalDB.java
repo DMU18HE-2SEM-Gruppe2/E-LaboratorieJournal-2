@@ -1,4 +1,4 @@
-package logicFormDB;
+package dataFormDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.DBConnection;
-import logic.FormPresentation;
 import logic.Journal;
 import logic.JournalPresentation;
 import logic.Student;
@@ -19,14 +18,12 @@ public class JournalDB {
 
 	public boolean addAnalyzeInfo(Journal journal) {
 
-//		public Journal(LocalDate date, String themeName, String analyzeTitle, String comments, int studentID, int analyzeID,
-//				String coworker, String traceability, String results, String calculations, String image)
-
 		String sql = "INSERT INTO analyzeInformation (" + "dateCreated," + "themeName," + "analyzeTitle," + "comment,"
 				+ "condition) VALUES (?, ?, ?, ?, ?)";
 
 		try (PreparedStatement add = connection.getConnection().prepareStatement(sql,
 				Statement.RETURN_GENERATED_KEYS)) {
+
 			System.out.println(sql);
 
 			add.setLong(1, journal.getDate().toEpochDay());
@@ -34,8 +31,8 @@ public class JournalDB {
 			add.setString(3, journal.getAnalyzeTitle());
 			add.setString(4, journal.getComments());
 			add.setString(5, journal.getCondition());
-
 			System.out.println(sql);
+
 			int nRows = add.executeUpdate();
 
 			if (nRows > 0) {
@@ -62,6 +59,7 @@ public class JournalDB {
 
 		try (PreparedStatement add = connection.getConnection().prepareStatement(sql,
 				Statement.RETURN_GENERATED_KEYS)) {
+
 			System.out.println(sql);
 
 			add.setInt(1, journal.getAnalyzeID());
@@ -71,7 +69,6 @@ public class JournalDB {
 			add.setString(5, journal.getCalculations());
 			add.setString(6, journal.getImage());
 
-			System.out.println(sql);
 			int nRows = add.executeUpdate();
 
 			if (nRows > 0) {
@@ -161,8 +158,7 @@ public class JournalDB {
 					+ " FROM course JOIN student ON student.courseID = course.courseID "
 					+ "JOIN student_analyzeInformation ON student_analyzeInformation.studentID = student.studentID "
 					+ "JOIN analyzeInformation ON student_analyzeInformation.analyzeID = analyzeInformation.analyzeID "
-					+ "JOIN journal ON journal.analyzeID = analyzeInformation.analyzeID WHERE " + whereClause
-					+ "";
+					+ "JOIN journal ON journal.analyzeID = analyzeInformation.analyzeID WHERE " + whereClause + "";
 			System.out.println(sql);
 
 			Statement statement = connection.getConnection().createStatement();
@@ -197,10 +193,7 @@ public class JournalDB {
 	}
 
 	public List<Journal> readJournal(String whereClause) {
-		
-		
-		DBFactory dbf = new DBFactory();
-		
+
 		List<Journal> list = new ArrayList<>();
 		try {
 			String sql = "SELECT analyzeInformation.*, journal.*, student.*, formInformation.*"
@@ -230,8 +223,8 @@ public class JournalDB {
 				int formID = resultSet.getInt("formID");
 				String condition = resultSet.getString("condition");
 
-				Journal journal = new Journal(LocalDate.now(), themeName, analyzeTitle, comments, studentID, analyzeID,
-						coworker, traceability, results, calculations, image, journalID, formID, condition);
+				Journal journal = new Journal(date, themeName, analyzeTitle, comments, studentID, analyzeID, coworker,
+						traceability, results, calculations, image, journalID, formID, condition);
 
 				list.add(journal);
 
@@ -275,8 +268,8 @@ public class JournalDB {
 				int formID = resultSet.getInt("formID");
 				String condition = resultSet.getString("condition");
 
-				Journal journal = new Journal(LocalDate.now(), themeName, analyzeTitle, comments, studentID, analyzeID,
-						coworker, traceability, results, calculations, image, journalID, formID, condition);
+				Journal journal = new Journal(date, themeName, analyzeTitle, comments, studentID, analyzeID, coworker,
+						traceability, results, calculations, image, journalID, formID, condition);
 
 				list.add(journal);
 
@@ -297,8 +290,8 @@ public class JournalDB {
 
 			Statement statement = connection.getConnection().createStatement();
 			ResultSet resultSet = statement.executeQuery(query);
-			// gennemløbe resultset
-			while (resultSet.next()) { // rykker pilen i resultset fra "before first" ned på næste række.
+			
+			while (resultSet.next()) {
 
 				formID = resultSet.getInt("formID");
 

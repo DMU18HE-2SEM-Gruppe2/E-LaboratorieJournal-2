@@ -2,12 +2,8 @@ package logic;
 
 public class Student {
 
-	private String firstName;
-	private String lastName;
-	private int courseID;
-	private int studentID;
-
-	// ID for student
+	private String firstName, lastName;
+	private int courseID, studentID;
 
 	public Student(String firstName, String lastName, int courseID, int studentID) {
 

@@ -1,10 +1,7 @@
-package logicFormDB;
+package dataFormDB;
 
 import java.util.List;
 
-import data.BioReagentContainer;
-import data.BioSubstrateContainer;
-import data.ChemReagentContainer;
 import logic.BioReagentForm;
 import logic.BioSubstrateForm;
 import logic.ChemReagentForm;
@@ -24,6 +21,10 @@ public interface DBInterface {
 
 	List<FormPresentation> getAllFormsToPresentation();
 
+	public List<FormPresentation> getAllFormsWhere(String whereClause);
+
+	public List<FormPresentation> getAllForms();
+
 	// Chem Reagent
 
 	public boolean createChemReagent(ChemReagentForm chemRegentForm, Student student);
@@ -31,6 +32,8 @@ public interface DBInterface {
 	List<ChemReagentForm> getAllChemReagent();
 
 	List<ChemReagentForm> getAllChemReagentWhere(String whereClause);
+
+	boolean deleteChemReagentForm(String whereClause, ChemReagentForm chemReagentForm);
 
 	// Bio Reagent
 
@@ -47,12 +50,6 @@ public interface DBInterface {
 	List<BioSubstrateForm> getAllBioSubstrateWhere(String whereClause);
 
 	List<BioSubstrateForm> getAllBioSubstrate();
-
-	// All forms to presentation
-
-	public List<FormPresentation> getAllFormsWhere(String whereClause);
-
-	public List<FormPresentation> getAllForms();
 
 	// School (Student & Course)
 
@@ -85,8 +82,5 @@ public interface DBInterface {
 	List<JournalPresentation> getAllJournalsWhereToPresentation(String whereClause);
 
 	List<JournalPresentation> getAllJournalsToPresentation();
-
-
-	boolean deleteChemReagentForm(String whereClause, ChemReagentForm chemReagentForm);
 
 }

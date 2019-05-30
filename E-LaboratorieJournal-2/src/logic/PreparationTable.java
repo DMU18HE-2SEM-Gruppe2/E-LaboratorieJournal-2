@@ -4,17 +4,8 @@ import java.time.LocalDate;
 
 public class PreparationTable extends FormInformation {
 
-	protected String chemical;
-	protected String casNo;
-	protected String productNo;
-	protected String weighed;
-	protected String measured;
-	protected String scaleNo;
-	protected String pipetteNo;
-	protected String endConcentration;
-	protected String batchNo;
-	protected String lotNo;
-	protected String supplier;
+	protected String chemical, casNo, productNo, weighed, measured, scaleNo, pipetteNo, endConcentration, batchNo,
+			lotNo, supplier;
 
 	public PreparationTable(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
 			int studentID, String reagentName, int formID, String chemical, String casNo, String productNo,
@@ -133,7 +124,5 @@ public class PreparationTable extends FormInformation {
 				+ themeName + ", analyzeTitle=" + analyzeTitle + ", comments=" + comments + ", analyzeID=" + analyzeID
 				+ ", studentID=" + studentID + ", condition=" + condition + "]";
 	}
-
-
 
 }

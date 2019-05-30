@@ -1,4 +1,4 @@
-package logicFormDB;
+package dataFormDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,10 +8,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.BioSubstrateContainer;
 import data.DBConnection;
 import logic.BioSubstrateForm;
-import logic.FormPresentation;
 import logic.Student;
 
 public class BioSubstrateDB {
@@ -20,8 +18,8 @@ public class BioSubstrateDB {
 
 	private boolean addAnalyzeInfo(BioSubstrateForm bioSubstrateForm) {
 
-		String sql = "INSERT INTO analyzeInformation (" + "dateCreated," + "themeName," + "analyzeTitle,"
-				+ "comment," + "condition) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO analyzeInformation (" + "dateCreated," + "themeName," + "analyzeTitle," + "comment,"
+				+ "condition) VALUES (?, ?, ?, ?, ?)";
 
 		try (PreparedStatement add = connection.getConnection().prepareStatement(sql,
 				Statement.RETURN_GENERATED_KEYS)) {
@@ -153,7 +151,6 @@ public class BioSubstrateDB {
 		addFormInformation(bioSubstrateForm);
 		addPreparation(bioSubstrateForm);
 		addStudentForm(student, bioSubstrateForm);
-		System.out.println("StudentForm");
 
 		String sql = "INSERT INTO substrate_Bio (" + "analyzeID," + "pHSubstrate," + "pHSterialized,"
 				+ "sterializeTime," + "sterializeC," + "addAftSterialize," + "pHAftSterialize," + "sterile,"
@@ -242,9 +239,10 @@ public class BioSubstrateDB {
 				String condition = resultSet.getString("condition");
 
 				BioSubstrateForm BSF = new BioSubstrateForm(date, themeName, analyzeTitle, comments, analyzeID,
-						studentID, reagentName, formID, batchNo, lotNo, supplier, chemical, casNo, productNo, weighed, measured,
-						scaleNo, pipetteNo, endConcentration, pHSubstrate, pHSterialized, sterializeTime, sterializeC,
-						addAftSterialize, pHAftSterialize, sterile, posControle, negControle, fluidAd, condition);
+						studentID, reagentName, formID, batchNo, lotNo, supplier, chemical, casNo, productNo, weighed,
+						measured, scaleNo, pipetteNo, endConcentration, pHSubstrate, pHSterialized, sterializeTime,
+						sterializeC, addAftSterialize, pHAftSterialize, sterile, posControle, negControle, fluidAd,
+						condition);
 
 				list.add(BSF);
 

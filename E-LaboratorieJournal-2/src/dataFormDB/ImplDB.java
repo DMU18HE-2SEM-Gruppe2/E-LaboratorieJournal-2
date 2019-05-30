@@ -1,4 +1,4 @@
-package logicFormDB;
+package dataFormDB;
 
 import java.util.List;
 

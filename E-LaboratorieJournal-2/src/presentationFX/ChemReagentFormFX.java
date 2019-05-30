@@ -3,6 +3,8 @@ package presentationFX;
 import java.time.LocalDate;
 import java.util.List;
 
+import dataFormDB.DBFactory;
+import dataFormDB.ImplDB;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -30,8 +32,6 @@ import logic.ChemReagentForm;
 import logic.DocumentChemReagent;
 import logic.FormPresentation;
 import logic.Student;
-import logicFormDB.DBFactory;
-import logicFormDB.ImplDB;
 
 public class ChemReagentFormFX {
 	Scene chemReagentScene;
@@ -403,11 +403,7 @@ public class ChemReagentFormFX {
 		int id = 0, analyzeIDForSearch = 0;
 		List<ChemReagentForm> list = implDB.getAllChemReagent();
 		ChemReagentForm crf = list.get(list.size()-1);
-//		analyzeIDForSearch = crf.getAnalyzeID();
-//		id = crf.getAnalyzeID();
-//		analyzeIDForSearch = implDB.getAnalyzeIDByID(id);
 		DocumentChemReagent dcr = new DocumentChemReagent();
-		dcr.hash_Set.add(crf.getThemeName());
 		dcr.setThemeName(crf.getThemeName().trim());
 		dcr.setAnalyzeTitle(crf.getAnalyzeTitle().trim());
 		dcr.setComments(crf.getComments());

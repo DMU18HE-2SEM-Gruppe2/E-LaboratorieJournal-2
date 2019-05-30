@@ -3,6 +3,7 @@ package presentationFX;
 import java.time.LocalDate;
 
 import data.DBConnection;
+import dataFormDB.DBFactory;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -24,21 +25,21 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import logic.Course;
+import logic.FormPresentation;
 import logic.Journal;
 import logic.Student;
-import logicFormDB.DBFactory;
 
 public class JournalFX {
 	private Scene journalScene;
 	private Stage journalStage;
-	private ComboBox cbStudent, cbCourse;
-	
+	private ComboBox<Student> cbStudent;
+	private ComboBox<Course> cbCourse;
+
 	DBConnection connection = new DBConnection();
 
 	DBFactory dbf = new DBFactory();
 
-	private TextField tfName;
-	private TextField tfCourse;
 	private TextField tfDate;
 	private TextField tfTheme;
 	private TextField tfAnalyzeTitle;
@@ -75,10 +76,6 @@ public class JournalFX {
 
 		journalScene = new Scene(scrollPane);
 
-		// HBox
-		HBox calcImgBox = new HBox();
-		HBox obsImgBox = new HBox();
-
 		HBox btnBox = new HBox(15);
 		HBox btnRightBox = new HBox(15);
 		btnRightBox.setAlignment(Pos.CENTER_RIGHT);
@@ -99,7 +96,7 @@ public class JournalFX {
 		nameGrid.getColumnConstraints().add(new ColumnConstraints(500));
 
 		// Tableview
-		TableView refTable = new TableView();
+		TableView<FormPresentation> refTable = new TableView<FormPresentation>();
 		refTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		refTable.setPrefHeight(150);
 		refTable.setMaxWidth(775);
@@ -110,8 +107,8 @@ public class JournalFX {
 		imageView.setImage(image);
 		imageView.setFitHeight(90);
 		imageView.setFitWidth(420);
-		topGrid.setHalignment(imageView, HPos.RIGHT);
-		topGrid.setValignment(imageView, VPos.TOP);
+		GridPane.setHalignment(imageView, HPos.RIGHT);
+		GridPane.setValignment(imageView, VPos.TOP);
 
 		// Labels
 		Label lName = factory.labelFactory("Navn", 0, 0, 0, 0, 14, false);
@@ -127,8 +124,6 @@ public class JournalFX {
 		Label lCoworker = factory.labelFactory("Observationer og Bemærkninger", 0, 0, 0, 0, 14, false);
 
 		// Textfields
-		tfName = factory.textFieldFactory("", 500, 14);
-		tfCourse = factory.textFieldFactory("", 500, 14);
 		tfDate = factory.textFieldFactory("", 500, 14);
 		tfTheme = factory.textFieldFactory("", 500, 14);
 		tfAnalyzeTitle = factory.textFieldFactory("", 500, 14);
@@ -152,10 +147,10 @@ public class JournalFX {
 		Button save = factory.buttonFactory("Gem", 90, 14, false);
 
 		// ChoiceBox
-		cbStudent = new ComboBox();
+		cbStudent = new ComboBox<Student>();
 		cbStudent.setPrefWidth(350);
 		cbStudent.getItems().setAll(dbf.makeInterfaceDB().getAllStudents());
-		cbCourse = new ComboBox();
+		cbCourse = new ComboBox<Course>();
 		cbCourse.setPrefWidth(350);
 		cbCourse.getItems().setAll(dbf.makeInterfaceDB().getAllCourses());
 
@@ -163,7 +158,6 @@ public class JournalFX {
 		Separator sepTop = new Separator();
 		Separator sepInfo = new Separator();
 		Separator sepName = new Separator();
-		Separator sepResult = new Separator();
 		Separator sepCal = new Separator();
 		Separator sepObs = new Separator();
 		Separator sepButton = new Separator();
@@ -204,13 +198,10 @@ public class JournalFX {
 	}
 
 	public void openReferenceTable() {
-//		public Journal(LocalDate date, String themeName, String analyzeTitle, String comments, int studentID, int analyzeID,
-//				String coworker, String traceability, String results, String calculations, String image, int journalID,
-//				int formID, String condition)
 
-		int studentID = 0, courseID = 0, formID = 0, id = 0;
+		int studentID = 0, courseID = 0, id = 0;
 
-		String firstName = "", lastName = "", fullName = "";
+		String firstName = "", lastName = "";
 
 		int selectedIndex = cbStudent.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
@@ -218,16 +209,15 @@ public class JournalFX {
 			id = student.getStudentID();
 			firstName = student.getFirstName();
 			lastName = student.getLastName();
-			fullName = firstName + " " + lastName;
-			System.out.println("id: " + id);
 			studentID = dbf.makeInterfaceDB().getStudentById(id);
 
 		}
-		Journal journal = new Journal(LocalDate.now(), tfTheme.getText(), tfAnalyzeTitle.getText(), taObs.getText(), studentID,
-				0, tfCoworker.getText(), tfTraceability.getText(), taResults.getText(), taCal.getText(), taResultTabel.getText(), 0, 0, "Gemt");
-		
+		Journal journal = new Journal(LocalDate.now(), tfTheme.getText(), tfAnalyzeTitle.getText(), taObs.getText(),
+				studentID, 0, tfCoworker.getText(), tfTraceability.getText(), taResults.getText(), taCal.getText(),
+				taResultTabel.getText(), 0, 0, "Gemt");
+
 		Student student = new Student(firstName, lastName, courseID, studentID);
-		
+
 		dbf.makeInterfaceDB().addStudentForm(student, journal);
 		ReferenceTable rt = new ReferenceTable();
 		rt.Start();

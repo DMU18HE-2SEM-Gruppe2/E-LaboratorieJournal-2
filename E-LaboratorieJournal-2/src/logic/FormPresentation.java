@@ -4,13 +4,9 @@ import java.time.LocalDate;
 
 public class FormPresentation {
 
-	private String title;
+	private String title, studentName, themeName, reagentName, condition;
 	private LocalDate date;
-	private String studentName;
-	private String themeName;
-	private String reagentName;
 	private int analyzeID;
-	private String condition;
 
 	public FormPresentation(String title, LocalDate date, String studentName, String themeName, String reagentName,
 			int analyzeID, String condition) {

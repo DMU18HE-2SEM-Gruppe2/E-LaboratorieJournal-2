@@ -3,9 +3,6 @@ package logic;
 import java.time.LocalDate;
 
 public class JournalPresentation {
-//	public Journal(LocalDate date, String themeName, String analyzeTitle, String comments, int studentID, int analyzeID,
-//			String coworker, String traceability, String results, String calculations, String image, int journalID,
-//			int formID, String condition) {
 
 	LocalDate date;
 	String themeName, analyzeTitle, studentNames, traceability, condition;
@@ -84,7 +81,5 @@ public class JournalPresentation {
 				+ ", studentNames=" + studentNames + ", traceability=" + traceability + ", condition=" + condition
 				+ ", analyzeID=" + analyzeID + "]";
 	}
-
-
 
 }

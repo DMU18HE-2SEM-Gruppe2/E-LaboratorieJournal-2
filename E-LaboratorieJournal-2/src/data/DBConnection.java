@@ -21,11 +21,8 @@ public class DBConnection {
 	// Loading the JDBC Driver
 	private static boolean loadJDBCDriver() {
 		try {
-			System.out.println("Loading JDBC Driver...");
 
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-			System.out.println("JDBC Driver loaded");
 
 			return true;
 
@@ -47,11 +44,8 @@ public class DBConnection {
 
 		connection = null;
 		try {
-			System.out.println("Connection to Database...");
 
 			connection = DriverManager.getConnection(connectionString);
-
-			System.out.println("Connected to Database");
 
 			return true;
 

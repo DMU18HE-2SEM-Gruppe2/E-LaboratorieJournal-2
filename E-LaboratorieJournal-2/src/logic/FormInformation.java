@@ -39,6 +39,4 @@ public class FormInformation extends AnalyzeInformation {
 				+ ", studentID=" + studentID + ", condition=" + condition + "]";
 	}
 
-
-
 }

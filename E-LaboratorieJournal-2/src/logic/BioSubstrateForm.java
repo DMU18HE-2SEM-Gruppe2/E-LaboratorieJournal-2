@@ -4,16 +4,9 @@ import java.time.LocalDate;
 
 public class BioSubstrateForm extends PreparationTable {
 
-	private String pHSubstrate;
-	private String pHSterialized;
-	private String sterializeTime;
-	private String sterializeC;
-	private String addAftSterialize;
-	private String pHAftSterialize;
+	private String pHSubstrate, pHSterialized, sterializeTime, sterializeC, addAftSterialize, pHAftSterialize,
+			posControl, negControl, fluidAd;
 	private boolean sterile = false;
-	private String posControl;
-	private String negControl;
-	private String fluidAd;
 
 	public BioSubstrateForm(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
 			int studentID, String reagentName, int formID, String batchNo, String lotNo, String supplier,
@@ -131,6 +124,5 @@ public class BioSubstrateForm extends PreparationTable {
 				+ ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID + ", condition="
 				+ condition + "]";
 	}
-
 
 }

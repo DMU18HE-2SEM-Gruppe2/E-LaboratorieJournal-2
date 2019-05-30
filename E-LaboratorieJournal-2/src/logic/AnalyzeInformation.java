@@ -5,14 +5,11 @@ import java.time.LocalDate;
 public class AnalyzeInformation {
 
 	protected LocalDate date;
-	protected String themeName;
-	protected String analyzeTitle;
-	protected String comments;
-	protected int analyzeID;
-	protected int studentID;
-	protected String condition;
+	protected String themeName, analyzeTitle, comments, condition;
+	protected int analyzeID, studentID;
 
-	public AnalyzeInformation(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID, int studentID, String condition) {
+	public AnalyzeInformation(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
+			int studentID, String condition) {
 		this.date = date;
 		this.themeName = themeName;
 		this.analyzeTitle = analyzeTitle;
@@ -88,6 +85,5 @@ public class AnalyzeInformation {
 				+ ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID + ", condition="
 				+ condition + "]";
 	}
-
 
 }

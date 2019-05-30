@@ -1,4 +1,4 @@
-package logicFormDB;
+package dataFormDB;
 
 public class DBFactory {
 	public DBInterface makeInterfaceDB() {

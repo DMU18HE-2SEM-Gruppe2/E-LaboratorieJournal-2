@@ -4,13 +4,8 @@ import java.time.LocalDate;
 
 public class Journal extends AnalyzeInformation {
 
-	private String coworker;
-	private String traceability;
-	private String results;
-	private String calculations;
-	private String image;
-	private int journalID;
-	private int formID;
+	private String coworker, traceability, results, calculations, image;
+	private int journalID, formID;
 
 	public Journal(LocalDate date, String themeName, String analyzeTitle, String comments, int studentID, int analyzeID,
 			String coworker, String traceability, String results, String calculations, String image, int journalID,
@@ -91,7 +86,5 @@ public class Journal extends AnalyzeInformation {
 				+ ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID + ", condition="
 				+ condition + "]";
 	}
-
-
 
 }

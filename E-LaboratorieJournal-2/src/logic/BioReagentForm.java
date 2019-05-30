@@ -4,12 +4,7 @@ import java.time.LocalDate;
 
 public class BioReagentForm extends PreparationTable {
 
-	private String adjustpH;
-	private String furtherTreatment;
-	private String labeling;
-	private String lifeTimeF;
-	private String storage;
-	private String fluidAd;
+	private String adjustpH, furtherTreatment, labeling, lifeTimeF, storage, fluidAd;
 
 	public BioReagentForm(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
 			int studentID, String reagentName, int formID, String batchNo, String lotNo, String supplier,
@@ -87,7 +82,5 @@ public class BioReagentForm extends PreparationTable {
 				+ ", analyzeTitle=" + analyzeTitle + ", comments=" + comments + ", analyzeID=" + analyzeID
 				+ ", studentID=" + studentID + ", condition=" + condition + "]";
 	}
-
-
 
 }

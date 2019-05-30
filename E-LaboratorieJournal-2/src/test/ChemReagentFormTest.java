@@ -9,20 +9,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import data.DBConnection;
+import dataFormDB.ImplDB;
 import logic.ChemReagentForm;
-import logicFormDB.ImplDB;
 
 public class ChemReagentFormTest {
 
 	ChemReagentForm crf;
-	
+
 	DBConnection connection = new DBConnection();
 	ImplDB implDB = new ImplDB();
-
-//	public ChemReagentForm(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
-//			int studentID, String scaleNo,C String manufacturedVolume, String concentration, String lifeTimeF,
-//			String storage, String reagentName, int formID, String batchNo, String lotNo, String supplier,
-//			String measured, String condition) {
 
 	@Before
 	public void setUp() {
@@ -41,7 +36,9 @@ public class ChemReagentFormTest {
 	@Test
 	public void ToString() {
 		assertEquals(
-				"ChemReagentForm [scaleNo=Vægt 4 udluftning, volume=4, concentration=2 mol, lifeTimeF=2 uger, storage=I skabet, batchNo=23-291-499586, lotNo=, supplier=G.H Kemi, measured=Ja, reagentName=P20h, formID=0, date=" + LocalDate.now() + ", " + "themeName=Sukker, analyzeTitle=pH måling, comments=Der var mange fejl, analyzeID=0, studentID=0, condition=Gemt]",
+				"ChemReagentForm [scaleNo=Vægt 4 udluftning, volume=4, concentration=2 mol, lifeTimeF=2 uger, storage=I skabet, batchNo=23-291-499586, lotNo=, supplier=G.H Kemi, measured=Ja, reagentName=P20h, formID=0, date="
+						+ LocalDate.now() + ", "
+						+ "themeName=Sukker, analyzeTitle=pH måling, comments=Der var mange fejl, analyzeID=0, studentID=0, condition=Gemt]",
 				crf.toString());
 	}
 
@@ -50,7 +47,7 @@ public class ChemReagentFormTest {
 		assertEquals("Sukker", crf.getThemeName());
 		System.out.println(crf.toString());
 	}
-	
+
 	@Test
 	public void setThemeName() {
 		crf.setThemeName("Druesukker");

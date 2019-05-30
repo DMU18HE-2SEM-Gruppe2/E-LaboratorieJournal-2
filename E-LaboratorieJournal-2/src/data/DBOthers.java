@@ -16,8 +16,6 @@ public class DBOthers {
 
 	public boolean addStudent(Student student, Course course) {
 		String query = "INSERT INTO student (" + "firstname," + "lastname," + "courseID" + ") VALUES (?, ?, ?)";
-		// CRUD Student
-		// Create Student
 
 		try (PreparedStatement add = connection.getConnection().prepareStatement(query,
 				Statement.RETURN_GENERATED_KEYS)) {
@@ -53,8 +51,7 @@ public class DBOthers {
 
 			Statement statement = connection.getConnection().createStatement();
 			ResultSet resultSet = statement.executeQuery(query);
-			// gennemløbe resultset
-			while (resultSet.next()) { // rykker pilen i resultset fra "before first" ned på næste række.
+			while (resultSet.next()) {
 
 				studentID = resultSet.getInt("studentID");
 
@@ -73,19 +70,17 @@ public class DBOthers {
 		return getStudentsWhere("1=1");
 	}
 
-	// Read Some Students
+	// Read Student where
 	public List<Student> getStudentsWhere(String whereClause) {
 		ArrayList<Student> list = new ArrayList<Student>();
 		System.out.println("før try");
-		// henter resultset med alle studerende
 		try {
 			String query = "SELECT * FROM student WHERE " + whereClause;
 			System.out.println(query);
 
 			Statement statement = connection.getConnection().createStatement();
 			ResultSet resultSet = statement.executeQuery(query);
-			// gennemløbe resultset
-			while (resultSet.next()) { // rykker pilen i resultset fra "before first" ned på næste række.
+			while (resultSet.next()) {
 
 				String firstName = resultSet.getString("firstname");
 
@@ -109,8 +104,6 @@ public class DBOthers {
 
 	}
 
-	// CRUD Courses
-	// Create Course
 	public boolean addCourse(Course course) {
 		String query = "INSERT INTO course (" + "courseName" + ") VALUES (?)";
 
@@ -142,15 +135,13 @@ public class DBOthers {
 	// Read Course
 	public List<Course> getCoursesWhere(String whereClause) {
 		ArrayList<Course> list = new ArrayList<Course>();
-		// henter resultset med alle courses
 		try {
 			String query = "SELECT * FROM course WHERE " + whereClause;
 			System.out.println(query);
 
 			Statement statement = connection.getConnection().createStatement();
 			ResultSet resultSet = statement.executeQuery(query);
-			// gennemløbe resultset
-			while (resultSet.next()) { // rykker pilen i resultset fra "before first" ned på næste række.
+			while (resultSet.next()) {
 
 				String courseName = resultSet.getString("courseName");
 

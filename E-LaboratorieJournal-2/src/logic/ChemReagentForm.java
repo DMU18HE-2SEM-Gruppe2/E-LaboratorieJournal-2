@@ -4,15 +4,7 @@ import java.time.LocalDate;
 
 public class ChemReagentForm extends FormInformation {
 
-	private String scaleNo;
-	private String volume;
-	private String concentration;
-	private String lifeTimeF;
-	private String storage;
-	private String batchNo;
-	private String lotNo;
-	private String supplier;
-	private String measured;
+	private String scaleNo, volume, concentration, lifeTimeF, storage, batchNo, lotNo, supplier, measured;
 
 	public ChemReagentForm(LocalDate date, String themeName, String analyzeTitle, String comments, int analyzeID,
 			int studentID, String scaleNo, String manufacturedVolume, String concentration, String lifeTimeF,
@@ -113,6 +105,5 @@ public class ChemReagentForm extends FormInformation {
 				+ ", comments=" + comments + ", analyzeID=" + analyzeID + ", studentID=" + studentID + ", condition="
 				+ condition + "]";
 	}
-
 
 }

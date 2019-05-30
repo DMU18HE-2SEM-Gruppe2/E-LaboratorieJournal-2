@@ -1,4 +1,4 @@
-package logicFormDB;
+package dataFormDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,10 +8,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.BioReagentContainer;
 import data.DBConnection;
 import logic.BioReagentForm;
-import logic.FormPresentation;
 import logic.Student;
 
 public class BioReagentDB {
@@ -20,8 +18,8 @@ public class BioReagentDB {
 
 	private boolean addAnalyzeInfo(BioReagentForm bioReagentForm) {
 
-		String sql = "INSERT INTO analyzeInformation (" + "dateCreated," + "themeName," + "analyzeTitle,"
-				+ "comment," + "condition) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO analyzeInformation (" + "dateCreated," + "themeName," + "analyzeTitle," + "comment,"
+				+ "condition) VALUES (?, ?, ?, ?, ?)";
 
 		try (PreparedStatement add = connection.getConnection().prepareStatement(sql,
 				Statement.RETURN_GENERATED_KEYS)) {
@@ -153,7 +151,6 @@ public class BioReagentDB {
 		addFormInformation(bioReagentForm);
 		addPreparation(bioReagentForm);
 		addStudentForm(student, bioReagentForm);
-		System.out.println("StudentForm");
 
 		String sql = "INSERT INTO reagent_Bio (" + "analyzeID," + "phSetting," + "treatment," + "tag," + "lifeTimeF,"
 				+ "storage," + "fluidAd) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -233,7 +230,8 @@ public class BioReagentDB {
 
 				BioReagentForm brf = new BioReagentForm(date, themeName, analyzeTitle, comment, analyzeID, studentID,
 						reagentName, formID, batchNo, lotNo, supplier, chemical, productNo, weighed, measured, scaleNo,
-						pipetteNo, endConcentration, adjustpH, furtherTreatment, labeling, lifeTimeF, storage, fluidAd, condition);
+						pipetteNo, endConcentration, adjustpH, furtherTreatment, labeling, lifeTimeF, storage, fluidAd,
+						condition);
 
 				list.add(brf);
 

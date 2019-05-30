@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import data.DBConnection;
+import dataFormDB.ChemReagentDB;
+import dataFormDB.DBFactory;
+import dataFormDB.ImplDB;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -32,9 +35,6 @@ import logic.ChemReagentForm;
 import logic.DocumentChemReagent;
 import logic.FormPresentation;
 import logic.JournalPresentation;
-import logicFormDB.ChemReagentDB;
-import logicFormDB.DBFactory;
-import logicFormDB.ImplDB;
 
 public class FrontPage extends Application {
 	Scene mainScene;
@@ -50,13 +50,13 @@ public class FrontPage extends Application {
 	ChemReagentFormFX chemForm = new ChemReagentFormFX();
 	ImplDB implDB = new ImplDB();
 
-	
 	ObservableList<FormPresentation> formList;
 	ObservableList<JournalPresentation> journalList;
 
-	public TableView<JournalPresentation> journalTable = new TableView();
-	public TableView<FormPresentation> formTable = new TableView();
+	public TableView<JournalPresentation> journalTable = new TableView<JournalPresentation>();
+	public TableView<FormPresentation> formTable = new TableView<FormPresentation>();
 
+	@SuppressWarnings("unchecked")
 	public void start(Stage mainStage) {
 		mainStage.setTitle("ELJ v.1");
 
@@ -68,7 +68,7 @@ public class FrontPage extends Application {
 		mainScene = new Scene(mainPane);
 
 		StackPane stackPane = new StackPane();
-		stackPane.setAlignment(lStatus, Pos.TOP_RIGHT);
+		StackPane.setAlignment(lStatus, Pos.TOP_RIGHT);
 
 		VBox vBoxMenu = factory.vBoxFactory(15, 15, 15, 15, 15, Pos.TOP_CENTER);
 		vBoxMenu.setMinWidth(200);
@@ -115,26 +115,14 @@ public class FrontPage extends Application {
 			return row;
 		});
 
-//			// Journaltable Register Double Click on row
-//		journalTable.setRowFactory(tv -> {
-//			TableRow<JournalPresentation> row = new TableRow<>();
-//			row.setOnMouseClicked(event -> {
-//				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-//					JournalPresentation rowData = row.getItem();
-//					System.out.println("Double click on: " + rowData.getClass());
-//				}
-//			});
-//			return row ;
-//		});
-
-		// Logo Imag
+		// Logo Image
 		Image image = new Image("EAMV_Logo.png");
 		ImageView imageView = new ImageView(image);
 		imageView.setImage(image);
 		imageView.setFitHeight(45);
 		imageView.setFitWidth(200);
 
-		// Searchbar¨
+		// Searchbar
 		TextField tfSearch = factory.textFieldFactory("Søg...", 100, 14);
 
 		// Buttons
@@ -163,9 +151,6 @@ public class FrontPage extends Application {
 
 		mainPane.setLeft(vBoxMenu);
 		mainPane.setCenter(stackPane);
-
-//		public JournalPresentation(LocalDate date, String themeName, String analyzeTitle, String studentNames,
-//				String traceability, String condition, int analyzeID) {
 
 		TableColumn<JournalPresentation, String> analyzeTitleJ = new TableColumn<JournalPresentation, String>("Titel");
 		TableColumn<JournalPresentation, String> themeNameJ = new TableColumn<JournalPresentation, String>("Tema");
@@ -297,6 +282,7 @@ public class FrontPage extends Application {
 		// Connect the SortedList comparator to the TableView comparator
 		// 'The comparator that denotes the order of this SortedList'
 		sortedData.comparatorProperty().bind(formTable.comparatorProperty());
+
 		// Tilføjer sorteret og filtreret data til vores TableView
 		formTable.setItems(sortedData);
 
@@ -319,18 +305,14 @@ public class FrontPage extends Application {
 		form = new ChooseFormFX();
 		form.start();
 	}
-	
+
 	public void deleteForm() {
 		ChemReagentForm crf = readChemToPrint();
-		
+
 		ChemReagentDB crDB = new ChemReagentDB();
-		
+
 		String analyzeID = Integer.toString(crf.getAnalyzeID());
-		System.out.println();
-		System.out.println();
-		System.out.println(crf);
 		crDB.deleteAnalyzeInformation(analyzeID, crf);
-//		implDB.deleteChemReagentForm(analyzeID, crf);
 	}
 
 	public ChemReagentForm readChemToPrint() {
@@ -384,7 +366,6 @@ public class FrontPage extends Application {
 			supplier = l.getSupplier().toString();
 			measurements = l.getMeasured().toString();
 			condition = l.getCondition().toString();
-			System.out.println("hej");
 
 			cmr.setDate(date);
 			cmr.setThemeName(themeName);
@@ -405,7 +386,6 @@ public class FrontPage extends Application {
 			cmr.setMeasured(measurements);
 			cmr.setCondition(condition);
 
-			System.out.println(cmr.toString());
 		}
 
 		return cmr;
@@ -413,54 +393,46 @@ public class FrontPage extends Application {
 
 	public void readChemForm() {
 		List<ChemReagentForm> crf = implDB.getAllChemReagentWhere("analyzeInformation.analyzeID=" + rowDatastring);
-		
+
 		String date = "";
 		String themeName = "";
 		String analyzeTitle = "";
 		String comments = "";
-		String analyzeID = "";
-		String studentID = "";
 		String scaleNo = "";
 		String volume = "";
 		String concentration = "";
 		String lifeTimeF = "";
 		String storage = "";
 		String reagentName = "";
-		String formID = "";
 		String batchNo = "";
 		String lotNo = "";
 		String supplier = "";
 		String measurements = "";
 		String condition = "";
-		
+
 		for (int i = 0; i < crf.size(); i++) {
 			ChemReagentForm l = crf.get(i);
 			date = l.getDate().toString();
 			themeName = l.getThemeName().toString();
 			analyzeTitle = l.getAnalyzeTitle().toString();
 			comments = l.getComments().toString();
-			analyzeID = Integer.toString(l.getAnalyzeID());
-			studentID = Integer.toString(l.getStudentID());
 			scaleNo = l.getScaleNo().toString();
 			volume = l.getVolume().toString();
 			concentration = l.getConcentration().toString();
 			lifeTimeF = l.getLifeTimeF().toString();
 			storage = l.getStorage().toString();
 			reagentName = l.getReagentName().toString();
-			formID = Integer.toString(l.getFormID());
 			batchNo = l.getBatchNo().toString();
 			lotNo = l.getLotNo().toString();
 			supplier = l.getSupplier().toString();
 			measurements = l.getMeasured().toString();
 			condition = l.getCondition().toString();
-			System.out.println("hej");
-			
+
 		}
-		
+
 		chemForm.start();
-		
+
 		if (condition.equals("Låst")) {
-			System.out.println("Låst test");
 			chemForm.tfDate.setDisable(true);
 			chemForm.tfTheme.setDisable(true);
 			chemForm.tfAnalyzeTitle.setDisable(true);
@@ -475,7 +447,7 @@ public class FrontPage extends Application {
 			chemForm.tfSupplier.setDisable(true);
 			chemForm.tfMeasurements.setDisable(true);
 		}
-		
+
 		chemForm.tfDate.setText(date);
 		chemForm.tfTheme.setText(themeName);
 		chemForm.tfAnalyzeTitle.setText(analyzeTitle);
@@ -490,13 +462,12 @@ public class FrontPage extends Application {
 		chemForm.tfLotNo.setText(lotNo);
 		chemForm.tfSupplier.setText(supplier);
 		chemForm.tfMeasurements.setText(measurements);
-		
+
 		chemForm.tfVolume.setDisable(true);
-		chemForm.tfMeasurements.setDisable(true);		
+		chemForm.tfMeasurements.setDisable(true);
 	}
 
 	public TableView<FormPresentation> getTable() {
-		System.out.println("??");
 		return formTable;
 	}
 
@@ -520,7 +491,6 @@ public class FrontPage extends Application {
 		ChemReagentForm crf = readChemToPrint();
 
 		DocumentChemReagent dcr = new DocumentChemReagent();
-		dcr.hash_Set.add(crf.getThemeName());
 		dcr.setThemeName(crf.getThemeName().trim());
 		dcr.setAnalyzeTitle(crf.getAnalyzeTitle().trim());
 		dcr.setComments(crf.getComments());
@@ -535,10 +505,6 @@ public class FrontPage extends Application {
 		dcr.setSupplier(crf.getSupplier());
 		dcr.setMeasured(crf.getMeasured());
 		dcr.setCondition(crf.getCondition());
-		System.out.println();
-		System.out.println();
-		System.out.println(crf.getThemeName());
-		System.out.println(crf);
 
 		JavaWorldPrint jwp = new JavaWorldPrint();
 
@@ -550,10 +516,6 @@ public class FrontPage extends Application {
 	public void updateList() {
 
 		formTable.refresh();
-
-//		formList = FXCollections.observableList(dbf.makeInterfaceDB().getAllFormsToPresentation());
-//		formList.removeAll(formList);
-//		formTable.setItems(formList);
 
 	}
 }

@@ -15,26 +15,26 @@ import javafx.stage.Stage;
 public class PreparationForm {
 	private Stage stage;
 	private Scene scene;
-	
+
 	public void Start() {
 		stage = new Stage();
 		stage.setTitle("Resultat Tabel");
 		stage.setResizable(false);
-		
+
 		FactoryFX factory = new FactoryFX();
-		
+
 		VBox mainBox = new VBox(15);
 		mainBox.setPadding(new Insets(15, 15, 15, 15));
 		mainBox.setAlignment(Pos.CENTER);
 		mainBox.setPrefWidth(350);
 		mainBox.setPrefHeight(400);
 		HBox btnBox = factory.hBoxFactory(100, 0, 0, 0, 0, Pos.CENTER);
-		
+
 		GridPane mainGrid = new GridPane();
 		mainGrid.setVgap(15);
 		mainGrid.getColumnConstraints().add(new ColumnConstraints(150));
 		mainGrid.getColumnConstraints().add(new ColumnConstraints(200));
-		
+
 		// Labels
 		Label lCemical = factory.labelFactory("Kemikalie", 0, 0, 0, 0, 14, false);
 		Label lCasNo = factory.labelFactory("Cas Nr.", 0, 0, 0, 0, 14, false);
@@ -60,11 +60,11 @@ public class PreparationForm {
 		TextField tfScaleNo = factory.textFieldFactory("", 200, 14);
 		TextField tfPipetteNo = factory.textFieldFactory("", 200, 14);
 		TextField tfEndConcentration = factory.textFieldFactory("", 200, 14);
-		
+
 		// Buttons
 		Button btnAdd = factory.buttonFactory("Tilføj", 90, 14, false);
 		Button btnCancel = factory.buttonFactory("Annuller", 90, 14, false);
-		
+
 		// Setup
 		mainGrid.add(lCemical, 0, 0);
 		mainGrid.add(tfChemical, 1, 0);
@@ -88,18 +88,18 @@ public class PreparationForm {
 		mainGrid.add(tfPipetteNo, 1, 9);
 		mainGrid.add(lEndConcentration, 0, 10);
 		mainGrid.add(tfEndConcentration, 1, 10);
-		
+
 		btnBox.getChildren().addAll(btnCancel, btnAdd);
 		mainBox.getChildren().addAll(mainGrid, btnBox);
-		
+
 		// Action
 		btnCancel.setOnAction(e -> cancelPreparation());
-		
+
 		scene = new Scene(mainBox);
 		stage.setScene(scene);
 		stage.show();
 	}
-	
+
 	public void cancelPreparation() {
 		stage.close();
 	}

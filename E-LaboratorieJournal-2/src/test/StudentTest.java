@@ -48,30 +48,29 @@ public class StudentTest {
 		student.setLastName("Cena");
 		assertEquals("Cena", student.getLastName());
 	}
-	
+
 	@Test
 	public void GetID() {
 		assertEquals(1, student.getStudentID());
 	}
-	
+
 	@Test
 	public void GetCourseID() {
 		assertEquals(1, student.getCourseID());
 	}
-	
+
 	@Test
 	public void SetID() {
 		student.setStudentID(99);
 		assertEquals(99, student.getStudentID());
 	}
-	
 
 	@Test
 	public void SetCourseID() {
 		student.setCourseID(69);
 		assertEquals(69, student.getCourseID());
 	}
-	
+
 	@Test
 	public void ToString() {
 		assertEquals("Jon Snow", student.toString());

@@ -9,8 +9,9 @@ public class MainFX extends Application {
 		launch(args);
 
 	}
-		public void start(Stage testStage) throws Exception {			
-			FrontPage test = new FrontPage();
-			test.start(testStage);
-		}
+
+	public void start(Stage testStage) throws Exception {
+		FrontPage test = new FrontPage();
+		test.start(testStage);
+	}
 }

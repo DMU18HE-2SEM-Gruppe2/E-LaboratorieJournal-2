@@ -1,8 +1,8 @@
 package presentationFX;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import dataFormDB.DBFactory;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,10 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import logic.ChemReagentForm;
 import logic.FormPresentation;
-import logic.Student;
-import logicFormDB.DBFactory;
 
 public class ReferenceTable {
 	private Stage stage;
@@ -34,7 +31,7 @@ public class ReferenceTable {
 
 	ObservableList<FormPresentation> formList;
 
-	TableView<FormPresentation> formTable = new TableView();
+	TableView<FormPresentation> formTable = new TableView<FormPresentation>();
 
 	FactoryFX factory = new FactoryFX();
 
@@ -52,8 +49,6 @@ public class ReferenceTable {
 		btnCancel = factory.buttonFactory("Tilbage", 90, 14, false);
 
 		tfSearch = factory.textFieldFactory("Søg...", 200, 14);
-
-		// TableView
 
 		// Table columns
 		TableColumn<FormPresentation, String> analyzeTitle = new TableColumn<FormPresentation, String>("Titel");
@@ -134,7 +129,8 @@ public class ReferenceTable {
 		// Connect the SortedList comparator to the TableView comparator
 		// 'The comparator that denotes the order of this SortedList'
 		sortedData.comparatorProperty().bind(formTable.comparatorProperty());
-		// Tilføjer sorteret og filtreret data til vores TableView
+
+		// Add sorted and filtered data to the TableView
 		formTable.setItems(sortedData);
 
 		formTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -152,7 +148,7 @@ public class ReferenceTable {
 	}
 
 	public void addForms() {
-		
+
 		int formID = getFormReference();
 		dbf.makeInterfaceDB().addJournalForm(formID);
 

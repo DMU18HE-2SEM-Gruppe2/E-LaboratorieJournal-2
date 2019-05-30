@@ -1,4 +1,4 @@
-package logicFormDB;
+package dataFormDB;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,8 +64,8 @@ public class MutualDB {
 
 			Statement statement = connection.getConnection().createStatement();
 			ResultSet resultSet = statement.executeQuery(query);
-			// gennemløbe resultset
-			while (resultSet.next()) { // rykker pilen i resultset fra "before first" ned på næste række.
+			
+			while (resultSet.next()) { 
 
 				analyzeID = resultSet.getInt("analyzeID");
 
@@ -87,11 +87,9 @@ public class MutualDB {
 
 			Statement statement = connection.getConnection().createStatement();
 			ResultSet resultSet = statement.executeQuery(query);
-			// gennemløbe resultset
-			while (resultSet.next()) { // rykker pilen i resultset fra "before first" ned på næste række.
 
+			while (resultSet.next()) {
 				formID = resultSet.getInt("formID");
-
 			}
 		} catch (SQLException e) {
 			System.out.println("Error running SQL statement");

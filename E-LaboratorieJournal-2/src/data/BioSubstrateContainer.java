@@ -13,17 +13,17 @@ public class BioSubstrateContainer {
 	public void addElement(BioSubstrateForm bioSubstrateForm) {
 		list.add(bioSubstrateForm);
 	}
-	
+
 	// Delete a Bio Substrate Form from the list
 	public void deleteElement(BioSubstrateForm bioSubstrateFormToDelete) {
 		list.remove(bioSubstrateFormToDelete);
 	}
-	
+
 	// Get a specific Bio Substrate Form from the list
 	public BioSubstrateForm getElement(int index) {
 		return list.get(index);
 	}
-	
+
 	// Get the size of the list
 	public int getSize() {
 		return list.size();
