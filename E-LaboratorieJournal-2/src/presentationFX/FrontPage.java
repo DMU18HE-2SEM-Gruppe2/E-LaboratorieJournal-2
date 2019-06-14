@@ -30,6 +30,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import logic.ChemReagentForm;
 import logic.DocumentChemReagent;
@@ -59,13 +60,14 @@ public class FrontPage extends Application {
 	@SuppressWarnings("unchecked")
 	public void start(Stage mainStage) {
 		mainStage.setTitle("ELJ v.1");
-
+		
 		FactoryFX factory = new FactoryFX();
 
 		lStatus = factory.labelFactory("", 6, 6, 6, 6, 12, false);
 
 		BorderPane mainPane = new BorderPane();
 		mainScene = new Scene(mainPane);
+		mainPane.setStyle("-fx-background-color: rgba(132, 132, 132, 0.4);");
 
 		StackPane stackPane = new StackPane();
 		StackPane.setAlignment(lStatus, Pos.TOP_RIGHT);
@@ -86,6 +88,7 @@ public class FrontPage extends Application {
 		formTab.setClosable(false);
 		invalidTab.setClosable(false);
 		tabs.getTabs().addAll(journalTab, formTab, invalidTab);
+		tabs.setStyle("-fx-tab-header-background: rgba(155, 0, 0, 1);");
 
 		// Table view
 		journalTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);

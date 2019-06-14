@@ -24,6 +24,7 @@ public class ChooseFormFX {
 		mainBox.setPrefWidth(250);
 		mainBox.setPrefHeight(300);
 		mainBox.setAlignment(Pos.CENTER);
+		mainBox.setStyle("-fx-background-color: rgba(132, 132, 132, 0.4);");
 
 		// Labels
 		Label title = new Label("Hvilken type blanket skal du bruge?");

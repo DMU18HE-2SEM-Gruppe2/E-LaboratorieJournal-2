@@ -57,6 +57,7 @@ public class BioSubstrateFormFX {
 		mainBox.setPrefHeight(950);
 		mainBox.setPadding(new Insets(15, 15, 15, 15));
 		mainBox.setSpacing(15);
+		mainBox.setStyle("-fx-background-color: rgba(132, 132, 132, 0.4);");
 
 		bioSubstrateScene = new Scene(scrollPane);
 

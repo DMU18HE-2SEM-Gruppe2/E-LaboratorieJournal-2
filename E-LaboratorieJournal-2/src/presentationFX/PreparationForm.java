@@ -29,6 +29,7 @@ public class PreparationForm {
 		mainBox.setPrefWidth(350);
 		mainBox.setPrefHeight(400);
 		HBox btnBox = factory.hBoxFactory(100, 0, 0, 0, 0, Pos.CENTER);
+		mainBox.setStyle("-fx-background-color: rgba(132, 132, 132, 0.4);");
 
 		GridPane mainGrid = new GridPane();
 		mainGrid.setVgap(15);

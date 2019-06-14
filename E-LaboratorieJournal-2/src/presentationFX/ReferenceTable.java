@@ -44,6 +44,7 @@ public class ReferenceTable {
 		mainBox.setMaxWidth(500);
 		mainBox.setMaxHeight(500);
 		btnBox = factory.hBoxFactory(50, 0, 0, 0, 0, Pos.CENTER);
+		mainBox.setStyle("-fx-background-color: rgba(132, 132, 132, 0.4);");
 
 		btnAdd = factory.buttonFactory("Tilføj", 90, 14, false);
 		btnCancel = factory.buttonFactory("Tilbage", 90, 14, false);

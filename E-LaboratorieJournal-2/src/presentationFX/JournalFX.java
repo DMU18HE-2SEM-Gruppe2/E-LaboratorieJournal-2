@@ -24,6 +24,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import logic.Course;
 import logic.FormPresentation;
@@ -73,6 +74,7 @@ public class JournalFX {
 		mainBox.setPadding(new Insets(15, 15, 15, 15));
 		mainBox.setSpacing(15);
 		mainBox.setMaxWidth(820);
+		mainBox.setStyle("-fx-background-color: rgba(132, 132, 132, 0.4);");
 
 		journalScene = new Scene(scrollPane);
 
@@ -131,15 +133,15 @@ public class JournalFX {
 		tfCoworker = factory.textFieldFactory("", 500, 14);
 
 		// TextAreas
-		taResults = factory.textAreaFactory(100, 800, 14, false);
+		taResults = factory.textAreaFactory(100, 800, 14, true);
 		taResultTabel = factory.textAreaFactory(100, 800, 14, true);
 		taCal = factory.textAreaFactory(100, 800, 14, false);
 		taObs = factory.textAreaFactory(100, 800, 14, false);
 
 		// Buttons
 		Button addForm = factory.buttonFactory("Tilføj", 90, 14, false);
-		Button addCalcPics = factory.buttonFactory("Tilføj billed", 90, 14, false);
-		Button addObsPics = factory.buttonFactory("Tilføj billed", 90, 14, false);
+		Button addCalcPics = factory.buttonFactory("Tilføj billede", 90, 14, false);
+		Button addObsPics = factory.buttonFactory("Tilføj billede", 90, 14, false);
 		Button cancel = factory.buttonFactory("Annuller", 90, 14, false);
 		Button invalid = factory.buttonFactory("Ugyldiggør", 90, 14, false);
 		Button print = factory.buttonFactory("Print", 90, 14, false);
@@ -195,6 +197,11 @@ public class JournalFX {
 
 		journalStage.setScene(journalScene);
 		journalStage.show();
+	}
+
+	private void journalScene(Color darkgray) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public void openReferenceTable() {
